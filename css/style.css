@@ -1,8 +1,29 @@
 * {
 	font-family: "Helvetica";
+	/*box-sizing: border-box;*/
+}
+
+.game-area {
+	background: gray;
+	padding: 20px;
+	border-radius: 20px;
+}
+
+.header {
+	background: lightgray;
+	margin-bottom: 20px;
+}
+
+.card-area{
+	background: lightblue;
+	padding: 20px;
+	display: grid;
+	grid-gap: 20px;
 }
 
 .memory-card {
-	background: lightblue;
-	border-color: black;
+	background: steelblue;
+	border-radius: 5px;
 }
+
+

@@ -11,7 +11,15 @@ function runAfterDOMIsBuild(){
 	var cardSize = (bodyWidth - totalGapSizeInRow) / cardsPerRow;
 	console.log("cardSize = " + cardSize);
 
-	body.append('<div class="memory-card">Some extra text</div>');
+	for (var row = 1; row <= cardsPerRow; row++) {
+		for (var column = 1; column <= cardsPerColumn; column++) {
+			$(".card-area").append('<div class="memory-card">Some extra text</div>');
+			$(".memory-card").last().css("grid-row", String(row));
+			$(".memory-card").last().css("grid-column", String(column));
+		}
+	}
+	// $(".memory-card").css("width","100px");
+
 }
 
 // This is running the DOM manipulation after the DOM is initially created.
