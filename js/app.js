@@ -1,25 +1,18 @@
 var cardsPerRow = 4;
 var cardsPerColumn = 4;
-var gapSizeBetweenCards = 10;
 
 function runAfterDOMIsBuild(){
-	var body = $("body");
-	var bodyWidth = body.width();
-	console.log(bodyWidth);
-	var totalGapSizeInRow = (cardsPerRow + 1) * gapSizeBetweenCards;
-	console.log(totalGapSizeInRow);
-	var cardSize = (bodyWidth - totalGapSizeInRow) / cardsPerRow;
-	console.log("cardSize = " + cardSize);
+	var lastCardCreated;
 
 	for (var row = 1; row <= cardsPerRow; row++) {
 		for (var column = 1; column <= cardsPerColumn; column++) {
-			$(".card-area").append('<div class="memory-card">Some extra text</div>');
-			$(".memory-card").last().css("grid-row", String(row));
-			$(".memory-card").last().css("grid-column", String(column));
+			// $(".card-area").append('<div class="memory-card"><img src="https://icon-icons.com/icons2/614/PNG/512/wifi-symbol-inside-a-circle_icon-icons.com_56445.png" width=100%></div>');
+			$(".card-area").append('<div class="memory-card">content</div>');
+			lastCardCreated = $('.memory-card').last();
+			lastCardCreated.css('grid-row', String(row));
+			lastCardCreated.css('grid-column', String(column));
 		}
 	}
-	// $(".memory-card").css("width","100px");
-
 }
 
 // This is running the DOM manipulation after the DOM is initially created.
