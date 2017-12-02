@@ -51,11 +51,19 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	background: steelblue;
 	border-radius: 20px;
 	border: solid;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .card-content:hover {
     background-color: steelblue;
     box-shadow: 2px 2px 15px 5px #2a7189;
+}
+
+.card-symbol {
+	font-size: 1000%;
+	line-height: 0;
 }
 
 .card-image {
