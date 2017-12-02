@@ -6,7 +6,7 @@
 .game-area {
 	background: gray;
 	padding: 20px;
-	border-radius: 40px;
+	border-radius: 60px;
 }
 
 .header {
@@ -17,7 +17,7 @@
 .card-area{
 	background: lightblue;
 	padding: 20px;
-	border-radius: 30px;
+	border-radius: 40px;
 	display: grid;
   	grid-template-columns: 1fr 1fr 1fr 1fr;
   	grid-auto-flow: dense;
