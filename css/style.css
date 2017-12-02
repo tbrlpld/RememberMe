@@ -23,47 +23,39 @@
 	grid-gap: 20px;
 }
 
-.memory-card {
-	/*display: table-cell;
-	vertical-align: middle;
-	text-align: center;*/
-  	background: steelblue;
-  	line-height: 0;
-	border-radius: 5px;
-	border: solid;
+.card-spacer {
 	width: 100%;
+	position: relative;
 }
 
 /*
 Pseudo element to create square cards.
 Sources:
-https://css-tricks.com/aspect-ratios-grid-items/
-https://codepen.io/chriscoyier/full/xPGzWo/
+http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 */
-.memory-card::before {
-  	content: "";
-  	display: inline-block;
-  	padding-bottom: 100%;
-  	/*border: solid;*/
+.card-spacer::before {
+	content:"";
+	display: block;
+	padding-bottom: 100%;
+	border-color: red;
+	/*border: solid;*/
 }
 
-
 .card-content {
-  	position: absolute;
-  	top: 0;
-  	bottom: 0;
-  	left: 0;
-  	right: 0;
-	/*display: table-cell;
-	vertical-align: middle;
-	text-align: center;*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: steelblue;
+	border-radius: 20px;
 	border: solid;
-	border-color: red;
 }
 
 .card-image {
-	display: block;
-	margin: auto;
-	width: 20%;
+	width: 80%;
 	border: solid;
+	position: absolute;
+	top: 10%;
+	left: 10%;
 }
