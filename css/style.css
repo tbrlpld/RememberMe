@@ -24,9 +24,14 @@
 }
 
 .memory-card {
+	/*display: table-cell;
+	vertical-align: middle;
+	text-align: center;*/
   	background: steelblue;
   	line-height: 0;
 	border-radius: 5px;
+	border: solid;
+	width: 100%;
 }
 
 /*
@@ -36,8 +41,29 @@ https://css-tricks.com/aspect-ratios-grid-items/
 https://codepen.io/chriscoyier/full/xPGzWo/
 */
 .memory-card::before {
-  content: "";
-  display: inline-block;
-  padding-bottom: 100%;
+  	content: "";
+  	display: inline-block;
+  	padding-bottom: 100%;
+  	/*border: solid;*/
 }
 
+
+.card-content {
+  	position: absolute;
+  	top: 0;
+  	bottom: 0;
+  	left: 0;
+  	right: 0;
+	/*display: table-cell;
+	vertical-align: middle;
+	text-align: center;*/
+	border: solid;
+	border-color: red;
+}
+
+.card-image {
+	display: block;
+	margin: auto;
+	width: 20%;
+	border: solid;
+}

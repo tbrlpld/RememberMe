@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.box {
+				position: relative;
+				width: 50%;
+				border: solid;
+				/*line-height: 0;*/
+			}
+			.box::before{
+				content:"";
+				display: block;
+				padding-bottom: 100%;
+				border: solid;
+				border-color: red;
+			}
+			.content {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: gray;
+				border-radius: 20px;
+			}
+			.card-image {
+				width: 80%;
+				border: solid;
+				position: absolute;
+				top: 10%;
+				left: 10%;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- This is the body. -->
+		<div class="box">
+			<div class="content">
+				<img src="https://icon-icons.com/icons2/614/PNG/512/wifi-symbol-inside-a-circle_icon-icons.com_56445.png" class="card-image">
+			</div>
+		</div>
+	</body>
+</html>
