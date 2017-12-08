@@ -76,12 +76,12 @@ function getRandomSymbolArray(){
 
 //-------------------------------------------------------------------------------------------------
 //
-// MAIN
+// Create Cards
 //
 //-------------------------------------------------------------------------------------------------
 
-function runAfterDOMIsBuild(){
 
+function createCards(){
 	var symbols = getRandomSymbolArray();
 	// console.log(symbols)
 
@@ -103,6 +103,16 @@ function runAfterDOMIsBuild(){
 			lastCardCreated.css('grid-column', String(column));
 		}
 	}
+}
+
+//-------------------------------------------------------------------------------------------------
+//
+// MAIN
+//
+//-------------------------------------------------------------------------------------------------
+
+function runAfterDOMIsBuild(){
+	createCards();
 }
 
 // This is running the DOM manipulation after the DOM is initially created.
