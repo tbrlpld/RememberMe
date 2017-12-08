@@ -57,7 +57,6 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 }
 
 .card-content:hover {
-    background-color: steelblue;
     box-shadow: 2px 2px 15px 5px #2a7189;
 }
 
@@ -74,4 +73,12 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	position: absolute;
 	top: 10%;
 	left: 10%;
+}
+
+.selected {
+	background-color: yellow;
+}
+
+.matched {
+	background-color: green;
 }
