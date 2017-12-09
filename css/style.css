@@ -54,6 +54,7 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 }
 
 .card-content:hover {
