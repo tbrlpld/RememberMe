@@ -82,3 +82,10 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 .matched {
 	background-color: green;
 }
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

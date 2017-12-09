@@ -97,7 +97,7 @@ function createCards(){
 			// console.log('symbolIndex = ' + symbolIndex)
 			currentSymbol = symbols[symbolIndex];
 			// console.log('Card ' + currentCardNumber + ' --> ' + currentSymbol);
-			$(".card-area").append('<div class="card-spacer"><div class="card-content"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
+			$(".card-area").append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
 			lastCardCreated = $('.memory-card').last();
 			lastCardCreated.css('grid-row', String(row));
 			lastCardCreated.css('grid-column', String(column));
