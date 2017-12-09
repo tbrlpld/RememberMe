@@ -150,7 +150,8 @@ function runAfterDOMIsBuild(){
 		// Once two cards are selected, they need to be check for equality
 		if ($(".selected").length == 2){
 			// The reaction will be done with a time offset to allow for animation etc.
-			setTimeout(function(){
+			// setTimeout(function(){ -- trying to use the timeout seems to create an issue with quick user inputs.
+				//
 				var firstSymbol = $(".selected").first().contents().html();
 				console.log("First symbol = " + firstSymbol);
 				var secondSymbol = $(".selected").last().contents().html();
@@ -164,12 +165,12 @@ function runAfterDOMIsBuild(){
 
 				// Remove selection
 				$(".selected").removeClass("selected");
-				numberOfSelectedCards = $(".selected").length;
+				numberOfSelectedCards = $(".selecfeted").length;
 				console.log("numberOfSelectedCards = " + numberOfSelectedCards);
 
 				// Check game status
 				checkGameStatus();
-			}, 500);
+			// }, 500);
 		}
 
 	});
