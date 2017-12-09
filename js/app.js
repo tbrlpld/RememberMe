@@ -129,31 +129,31 @@ function checkGameStatus() {
 function runAfterDOMIsBuild(){
 	createCards();
 	// Select cards event listener
-	var cardsSelected = 0;
-	var selectedCardsSymbols = [];
+	// var numberOfSelectedCards;
+	// var selectedCardsSymbols = [];
 	$(".card-content").click(function(){
+		// var numberOfSelectedCards = $(".selected").length;
+		// console.log("numberOfSelectedCards = " + numberOfSelectedCards);
+
 		// Only two cards are allowed to be selected at a time.
-		if (cardsSelected < 2){
+		if ($(".selected").length < 2){
 			// A selected card can not be selected again (or be unselected).
 			if ($(this).hasClass("selected") == false && $(this).hasClass("matched") == false){
-				var content = $(this).contents();
-				var symbol = content.html();
+				// var symbol = $(this).contents().html();
 				// console.log("Clicked card contains: " + symbol);
 				$(this).addClass("selected");
-				cardsSelected += 1;
-				// console.log("Cards selected = " + cardsSelected);
-				selectedCardsSymbols.push(symbol);
-				// console.log("Selected cards contain: " + selectedCardsSymbols);
 			}
 		}
 
+		numberOfSelectedCards = $(".selected").length;
+		console.log("numberOfSelectedCards = " + numberOfSelectedCards);
 		// Once two cards are selected, they need to be check for equality
-		if (cardsSelected == 2){
+		if ($(".selected").length == 2){
 			// The reaction will be done with a time offset to allow for animation etc.
 			setTimeout(function(){
-				var firstSymbol = selectedCardsSymbols[0];
+				var firstSymbol = $(".selected").first().contents().html();
 				console.log("First symbol = " + firstSymbol);
-				var secondSymbol = selectedCardsSymbols[1];
+				var secondSymbol = $(".selected").last().contents().html();
 				console.log("Second symbol = " + secondSymbol);
 				if (firstSymbol != undefined && firstSymbol === secondSymbol){
 					console.log("Cards are equal!")
@@ -163,14 +163,13 @@ function runAfterDOMIsBuild(){
 				}
 
 				// Remove selection
-				cardsSelected = 0;
-				selectedCardsSymbols = [];
 				$(".selected").removeClass("selected");
+				numberOfSelectedCards = $(".selected").length;
+				console.log("numberOfSelectedCards = " + numberOfSelectedCards);
 
 				// Check game status
 				checkGameStatus();
 			}, 500);
-
 		}
 
 	});
