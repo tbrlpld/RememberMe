@@ -1,5 +1,4 @@
-var cardsPerRow = 4;
-var cardsPerColumn = 4;
+
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -84,6 +83,9 @@ function getRandomSymbolArray(){
 function createCards(){
 	var symbols = getRandomSymbolArray();
 	// console.log(symbols)
+
+	var cardsPerRow = 4;
+	var cardsPerColumn = 4;
 
 	var lastCardCreated;
 	var currentCardNumber = 0;
