@@ -125,7 +125,7 @@ function checkGameStatus() {
 }
 
 function checkSelectedCards() {
-	var selectedCards = $(".selected");
+	var selectedCards = $(".picked");
 	console.log("The selected cards are the following:");
 	console.log(selectedCards);
 
@@ -141,7 +141,7 @@ function checkSelectedCards() {
 
 	if (firstSymbol != undefined && firstSymbol === secondSymbol){
 		console.log("Cards are equal!")
-		$(".selected").addClass("matched");
+		$(".picked").addClass("matched");
 	} else {
 		console.log("Cards are NOT equal!")
 		console.log("Hiding symbols.")
@@ -155,14 +155,14 @@ function checkSelectedCards() {
 
 	// Remove selection
 	console.log("Removing selection!")
-	$(".selected").removeClass("selected");
+	$(".picked").removeClass("picked");
 }
 
 function checksAfterSelection() {
 	console.log("Staring checks.")
-	console.log("numberOfSelectedCards = " + $(".selected").length);
+	console.log("numberOfSelectedCards = " + $(".picked").length);
 	// Once two cards are selected, they need to be check for equality
-	if ($(".selected").length == 2){
+	if ($(".picked").length == 2){
 		console.log("Two are selected. Time to compare them.")
 		checkSelectedCards();
 		// Check game status
@@ -170,7 +170,7 @@ function checksAfterSelection() {
 	} else {
 		console.log("Only one card was selected. Waiting for next input.")
 	}
-	console.log("numberOfSelectedCards = " + $(".selected").length);
+	console.log("numberOfSelectedCards = " + $(".picked").length);
 	console.log("Checks finished.")
 }
 
@@ -187,17 +187,17 @@ function runAfterDOMIsBuild(){
 	// var numberOfSelectedCards;
 	// var selectedCardsSymbols = [];
 	$(".card-content").click(function(){
-		// var numberOfSelectedCards = $(".selected").length;
+		// var numberOfSelectedCards = $(".picked").length;
 		// console.log("numberOfSelectedCards = " + numberOfSelectedCards);
 
 		console.log("Card was clicked.")
 		// Only two cards are allowed to be selected at a time.
-		if ($(".selected").length < 2){
+		if ($(".picked").length < 2){
 			// A selected card can not be selected again (or be unselected).
-			if ($(this).hasClass("selected") == false && $(this).hasClass("matched") == false){
+			if ($(this).hasClass("picked") == false && $(this).hasClass("matched") == false){
 				// var symbol = $(this).contents().html();
 				// console.log("Clicked card contains: " + symbol);
-				$(this).addClass("selected");
+				$(this).addClass("picked");
 				// $(this).first().find(".card-symbol").css("visibility", "visible");
 				// $(this).find(".card-symbol").fadeIn("slow", checksAfterSelection());
 				$(this).find(".card-symbol").fadeIn();
