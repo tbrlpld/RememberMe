@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<style type="text/css">
+			.square {
+				width: 200px;
+				height: 200px;
+				background-color: steelblue;
+				border: solid;
+				display: inline-block;
+			}
+
+			.content {
+				opacity: 0;
+			}
+		</style>
+		<title>Just an Example</title>
+	</head>
+	<body>
+		<div class="square"><div class="content">Content A</div></div>
+		<div class="square"><div class="content">Content B</div></div>
+		<script>
+			function checkOpacity() {
+					console.log("Animation done.")
+
+					firstOpacity = $(".content").first().css("opacity");
+					console.log("firstOpacity = " + firstOpacity);
+					secondOpacity = $(".content").last().css("opacity");
+					console.log("secondOpacity = " + secondOpacity);
+
+					if (firstOpacity == secondOpacity){
+
+						$(".content").fadeTo("fast", 0)
+					}
+
+			}
+
+			$(".square").click(function(){
+				console.log("Square was clicked.")
+				clickedSquareContent = 	$(this).find(".content");
+				clickedSquareContent.fadeTo("slow", 1, function(){
+					checkOpacity();
+				});
+			});
+		</script>
+	</body>
+</html>
