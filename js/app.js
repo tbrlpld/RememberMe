@@ -145,11 +145,14 @@ function checkSelectedCards() {
 	} else {
 		console.log("Cards are NOT equal!")
 		console.log("Hiding symbols.")
-		firstCard.find(".card-symbol").fadeOut("fast",function(){
-			console.log("Symbol of first card hidden.");
-		});
-		secondCard.find(".card-symbol").fadeOut("fast",function(){
-			console.log("Symbol of second card hidden.");
+		// firstCard.find(".card-symbol").fadeOut("fast",function(){
+		// 	console.log("Symbol of first card hidden.");
+		// });
+		// secondCard.find(".card-symbol").fadeOut("fast",function(){
+		// 	console.log("Symbol of second card hidden.");
+		// });
+		$(".picked").find(".card-symbol").fadeOut("fast", function(){
+			console.log("Symbol faded out.")
 		});
 	}
 
@@ -200,8 +203,10 @@ function runAfterDOMIsBuild(){
 				$(this).addClass("picked");
 				// $(this).first().find(".card-symbol").css("visibility", "visible");
 				// $(this).find(".card-symbol").fadeIn("slow", checksAfterSelection());
-				$(this).find(".card-symbol").fadeIn();
-				$(this).find(".card-symbol").queue(checksAfterSelection());
+				$(this).find(".card-symbol").fadeIn(function(){
+					checksAfterSelection();
+				});
+				// $(this).find(".card-symbol").queue(checksAfterSelection());
 			}
 		}
 		console.log("Card click processing is done.");
