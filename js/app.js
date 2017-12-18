@@ -129,6 +129,9 @@ function checkSelectedCards() {
 	console.log("The selected cards are the following:");
 	console.log(selectedCards);
 
+	// Delay to allow user observation of picked symbols
+	$(".picked").find(".card-symbol").delay(800);
+
 	console.log("Comparing selected cards.");
 
 	firstCard = selectedCards.first();
