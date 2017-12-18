@@ -1,4 +1,4 @@
-
+// TODO: the whole code needs some cleaning up!
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -125,6 +125,8 @@ function checkGameStatus() {
 }
 
 function checkSelectedCards() {
+	// TODO: This function needs some cleaning up!
+
 	var selectedCards = $(".picked");
 	console.log("The selected cards are the following:");
 	console.log(selectedCards);
