@@ -114,12 +114,64 @@ function createCards(){
 //-------------------------------------------------------------------------------------------------
 
 
+
 function checkGameStatus() {
+	console.log("Checking game status.")
 	matchedCards = $(".matched").length;
 	console.log("Cards matched: " + matchedCards);
 	if (matchedCards == 16){
 		$('body').append('<div>YOU WIN!</div>');
 	}
+}
+
+function checkSelectedCards() {
+	var selectedCards = $(".selected");
+	console.log("The selected cards are the following:");
+	console.log(selectedCards);
+
+	console.log("Comparing selected cards.");
+
+	firstCard = selectedCards.first();
+	secondCard = selectedCards.last();
+
+	var firstSymbol = firstCard.contents().html();
+	console.log("First symbol = " + firstSymbol);
+	var secondSymbol = secondCard.contents().html();
+	console.log("Second symbol = " + secondSymbol);
+
+	if (firstSymbol != undefined && firstSymbol === secondSymbol){
+		console.log("Cards are equal!")
+		$(".selected").addClass("matched");
+	} else {
+		console.log("Cards are NOT equal!")
+		console.log("Hiding symbols.")
+		firstCard.find(".card-symbol").fadeOut("fast",function(){
+			console.log("Symbol of first card hidden.");
+		});
+		secondCard.find(".card-symbol").fadeOut("fast",function(){
+			console.log("Symbol of second card hidden.");
+		});
+	}
+
+	// Remove selection
+	console.log("Removing selection!")
+	$(".selected").removeClass("selected");
+}
+
+function checksAfterSelection() {
+	console.log("Staring checks.")
+	console.log("numberOfSelectedCards = " + $(".selected").length);
+	// Once two cards are selected, they need to be check for equality
+	if ($(".selected").length == 2){
+		console.log("Two are selected. Time to compare them.")
+		checkSelectedCards();
+		// Check game status
+		checkGameStatus();
+	} else {
+		console.log("Only one card was selected. Waiting for next input.")
+	}
+	console.log("numberOfSelectedCards = " + $(".selected").length);
+	console.log("Checks finished.")
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -130,6 +182,7 @@ function checkGameStatus() {
 
 function runAfterDOMIsBuild(){
 	createCards();
+
 	// Select cards event listener
 	// var numberOfSelectedCards;
 	// var selectedCardsSymbols = [];
@@ -137,6 +190,7 @@ function runAfterDOMIsBuild(){
 		// var numberOfSelectedCards = $(".selected").length;
 		// console.log("numberOfSelectedCards = " + numberOfSelectedCards);
 
+		console.log("Card was clicked.")
 		// Only two cards are allowed to be selected at a time.
 		if ($(".selected").length < 2){
 			// A selected card can not be selected again (or be unselected).
@@ -144,37 +198,13 @@ function runAfterDOMIsBuild(){
 				// var symbol = $(this).contents().html();
 				// console.log("Clicked card contains: " + symbol);
 				$(this).addClass("selected");
+				// $(this).first().find(".card-symbol").css("visibility", "visible");
+				// $(this).find(".card-symbol").fadeIn("slow", checksAfterSelection());
+				$(this).find(".card-symbol").fadeIn();
+				$(this).find(".card-symbol").queue(checksAfterSelection());
 			}
 		}
-
-		numberOfSelectedCards = $(".selected").length;
-		console.log("numberOfSelectedCards = " + numberOfSelectedCards);
-		// Once two cards are selected, they need to be check for equality
-		if ($(".selected").length == 2){
-			// The reaction will be done with a time offset to allow for animation etc.
-			// setTimeout(function(){ -- trying to use the timeout seems to create an issue with quick user inputs.
-				//
-				var firstSymbol = $(".selected").first().contents().html();
-				console.log("First symbol = " + firstSymbol);
-				var secondSymbol = $(".selected").last().contents().html();
-				console.log("Second symbol = " + secondSymbol);
-				if (firstSymbol != undefined && firstSymbol === secondSymbol){
-					console.log("Cards are equal!")
-					$(".selected").addClass("matched");
-				} else {
-					console.log("Cards are NOT equal!")
-				}
-
-				// Remove selection
-				$(".selected").removeClass("selected");
-				numberOfSelectedCards = $(".selecfeted").length;
-				console.log("numberOfSelectedCards = " + numberOfSelectedCards);
-
-				// Check game status
-				checkGameStatus();
-			// }, 500);
-		}
-
+		console.log("Card click processing is done.");
 	});
 }
 

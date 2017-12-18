@@ -55,7 +55,6 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	transform: rotateY(60deg);
 }
 
 .card-content:hover {
@@ -67,6 +66,9 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	/* font size based on container size. (from https://codepen.io/CrocoDillon/pen/fBJxu) */
 	font-size: calc(4vw + 4vh + 2vmin);
 	/*border: solid;*/
+	/*visibility: hidden;*/
+	display: none;
+	/*opacity: 0;*/
 }
 
 .selected {
@@ -83,3 +85,8 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
   -ms-user-select: none;
   user-select: none;
 }
+/*
+@keyframe show {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}*/
