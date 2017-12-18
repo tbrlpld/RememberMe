@@ -159,6 +159,10 @@ function checkSelectedCards() {
 	// Remove selection
 	console.log("Removing selection!")
 	$(".picked").removeClass("picked");
+
+	// Delay on all symbol animations to prevent selection of further cards
+	// before animations are finished.
+	$(".card-symbol").delay(1000);
 }
 
 function checksAfterSelection() {
