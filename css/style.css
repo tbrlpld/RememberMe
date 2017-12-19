@@ -59,8 +59,9 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	right: 0;
 	bottom: 0;
 	background: steelblue;
+	color: white;
 	border-radius: 20px;
-	border: solid;
+	/*border: solid;*/
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -82,7 +83,7 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 }
 
 .picked {
-	background-color: yellow;
+	background-color: yellowgreen;
 }
 
 .matched {
