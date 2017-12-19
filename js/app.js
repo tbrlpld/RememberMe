@@ -24,7 +24,6 @@ function doubleArrayOfSymbols(symbols){
 	symbols.forEach(function(item){
 		symbolsDoubled.push(item);
 		symbolsDoubled.push(item);
-		// console.log(symbolsDoubled)
 	});
 	return symbolsDoubled
 }
@@ -41,23 +40,13 @@ function shuffleArray(array){
 	var currentIndex = 0;
 	var randomIndex = 0;
 	var maxIndex = array.length - 1;
-	// console.log('maxIndex = ' + maxIndex);
 	var tempValue;
 
 	while (currentIndex <= maxIndex){
-		// console.log('currentIndex = ' + currentIndex);
 		randomIndex = getRandomIntInclusive(currentIndex, maxIndex);
-		// console.log('randomIndex = ' + randomIndex);
-		// console.log('Before change:');
-		// console.log('array[currentIndex] = ' + array[currentIndex]);
-		// console.log('array[randomIndex] = ' + array[randomIndex]);
 		tempValue = array[currentIndex];
 		array[currentIndex] = array[randomIndex];
 		array[randomIndex] = tempValue;
-		// console.log('After change:');
-		// console.log('array[currentIndex] = ' + array[currentIndex]);
-		// console.log('array[randomIndex] = ' + array[randomIndex]);
-		// console.log('array = ' + array);
 		currentIndex += 1;
 	}
 	return array
@@ -65,11 +54,8 @@ function shuffleArray(array){
 
 function getRandomSymbolArray(){
 	var symbols = getArrayOfSymbols();
-	// console.log(symbols);
 	var symbolsDoubled = doubleArrayOfSymbols(symbols);
-	// console.log(symbolsDoubled);
 	var symbolsShuffled = shuffleArray(symbolsDoubled);
-	// console.log(symbolsShuffled);
 	return symbolsShuffled
 }
 
@@ -82,7 +68,6 @@ function getRandomSymbolArray(){
 
 function createCards(){
 	var symbols = getRandomSymbolArray();
-	// console.log(symbols)
 
 	var cardsPerRow = 4;
 	var cardsPerColumn = 4;
@@ -90,15 +75,10 @@ function createCards(){
 	var lastCardCreated;
 	var currentCardNumber = 0;
 	for (var row = 1; row <= cardsPerRow; row++) {
-		// console.log('row = ' + row)
-		for (var column = 1; column <= cardsPerColumn; column++) {
-			// console.log('column = ' + column)
+		for (var column = 1; column <= cardsPerColumn; column++)
 			currentCardNumber += 1;
-			// console.log('currentCardNumber = ' + currentCardNumber)
 			symbolIndex = currentCardNumber - 1;
-			// console.log('symbolIndex = ' + symbolIndex)
 			currentSymbol = symbols[symbolIndex];
-			// console.log('Card ' + currentCardNumber + ' --> ' + currentSymbol);
 			$(".card-area").append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
 			lastCardCreated = $('.memory-card').last();
 			lastCardCreated.css('grid-row', String(row));
@@ -150,12 +130,6 @@ function checkSelectedCards() {
 	} else {
 		console.log("Cards are NOT equal!")
 		console.log("Hiding symbols.")
-		// firstCard.find(".card-symbol").fadeOut("fast",function(){
-		// 	console.log("Symbol of first card hidden.");
-		// });
-		// secondCard.find(".card-symbol").fadeOut("fast",function(){
-		// 	console.log("Symbol of second card hidden.");
-		// });
 		$(".picked").find(".card-symbol").fadeOut("fast", function(){
 			console.log("Symbol faded out.")
 		});
@@ -196,26 +170,16 @@ function runAfterDOMIsBuild(){
 	createCards();
 
 	// Select cards event listener
-	// var numberOfSelectedCards;
-	// var selectedCardsSymbols = [];
 	$(".card-content").click(function(){
-		// var numberOfSelectedCards = $(".picked").length;
-		// console.log("numberOfSelectedCards = " + numberOfSelectedCards);
-
 		console.log("Card was clicked.")
 		// Only two cards are allowed to be selected at a time.
 		if ($(".picked").length < 2){
 			// A selected card can not be selected again (or be unselected).
 			if ($(this).hasClass("picked") == false && $(this).hasClass("matched") == false){
-				// var symbol = $(this).contents().html();
-				// console.log("Clicked card contains: " + symbol);
 				$(this).addClass("picked");
-				// $(this).first().find(".card-symbol").css("visibility", "visible");
-				// $(this).find(".card-symbol").fadeIn("slow", checksAfterSelection());
 				$(this).find(".card-symbol").fadeIn(function(){
 					checksAfterSelection();
 				});
-				// $(this).find(".card-symbol").queue(checksAfterSelection());
 			}
 		}
 		console.log("Card click processing is done.");
