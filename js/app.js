@@ -103,7 +103,7 @@ function checkGameStatus() {
 	}
 }
 
-function checkSelectedCards() {
+function checkPickedCards() {
 	// TODO: This function needs some cleaning up!
 
 	const pickedCards = $('.picked');
@@ -143,17 +143,18 @@ function checkSelectedCards() {
 
 function checksAfterCardPick() {
 	console.log('Staring checks.')
+	const targetNumberOfPicksPerMove = 2;
 	let numberOfPickedCards = $('.picked').length;
 	console.log('numberOfPickedCards = ' + numberOfPickedCards);
 	// Once two cards are selected, they need to be check for equality
-	if ($('.picked').length == 2){
+	if (numberOfPickedCards == targetNumberOfPicksPerMove){
 		console.log('Two are selected. Time to compare them.')
 		// Check equility of selected cards and perform according response
-		checkSelectedCards();
+		checkPickedCards();
 		// Check game status
 		checkGameStatus();
 	} else {
-		console.log('Only one card was selected. Waiting for next input.')
+		console.log('Only one card was selected. Waiting for next input.');
 	}
 	// Updating number of picked cards to check if removal has worked.
 	numberOfPickedCards = $('.picked').length;
