@@ -79,9 +79,6 @@ function createCards(){
 			symbolIndex = currentCardNumber - 1;
 			currentSymbol = symbols[symbolIndex];
 			$('.card-area').append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
-			lastCardCreated = $('.memory-card').last();
-			lastCardCreated.css('grid-row', String(row));
-			lastCardCreated.css('grid-column', String(column));
 		}
 	}
 }
