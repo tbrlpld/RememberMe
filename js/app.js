@@ -79,7 +79,7 @@ function createCards(){
 			currentCardNumber += 1;
 			symbolIndex = currentCardNumber - 1;
 			currentSymbol = symbols[symbolIndex];
-			$(".card-area").append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
+			$('.card-area').append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
 			lastCardCreated = $('.memory-card').last();
 			lastCardCreated.css('grid-row', String(row));
 			lastCardCreated.css('grid-column', String(column));
@@ -96,9 +96,9 @@ function createCards(){
 
 
 function checkGameStatus() {
-	console.log("Checking game status.")
-	matchedCards = $(".matched").length;
-	console.log("Cards matched: " + matchedCards);
+	console.log('Checking game status.')
+	matchedCards = $('.matched').length;
+	console.log('Cards matched: ' + matchedCards);
 	if (matchedCards == 16){
 		$('body').append('<div>YOU WIN!</div>');
 	}
@@ -107,57 +107,58 @@ function checkGameStatus() {
 function checkSelectedCards() {
 	// TODO: This function needs some cleaning up!
 
-	var selectedCards = $(".picked");
-	console.log("The selected cards are the following:");
+	var selectedCards = $('.picked');
+	console.log('The selected cards are the following:');
 	console.log(selectedCards);
 
 	// Delay to allow user observation of picked symbols
-	$(".picked").find(".card-symbol").delay(800);
+	$('.picked').find('.card-symbol').delay(800);
 
-	console.log("Comparing selected cards.");
+	console.log('Comparing selected cards.');
 
 	firstCard = selectedCards.first();
 	secondCard = selectedCards.last();
 
 	var firstSymbol = firstCard.contents().html();
-	console.log("First symbol = " + firstSymbol);
+	console.log('First symbol = ' + firstSymbol);
 	var secondSymbol = secondCard.contents().html();
-	console.log("Second symbol = " + secondSymbol);
+	console.log('Second symbol = ' + secondSymbol);
 
 	if (firstSymbol != undefined && firstSymbol === secondSymbol){
-		console.log("Cards are equal!")
-		$(".picked").addClass("matched");
+		console.log('Cards are equal!')
+		$('.picked').addClass('matched');
 	} else {
-		console.log("Cards are NOT equal!")
-		console.log("Hiding symbols.")
-		$(".picked").find(".card-symbol").fadeOut("fast", function(){
-			console.log("Symbol faded out.")
+		console.log('Cards are NOT equal!')
+		console.log('Hiding symbols.')
+		$('.picked').find('.card-symbol').fadeOut('fast', function(){
+			console.log('Symbol faded out.')
 		});
 	}
 
 	// Remove selection
-	console.log("Removing selection!")
-	$(".picked").removeClass("picked");
+	console.log('Removing selection!')
+	$('.picked').removeClass('picked');
 
 	// Delay on all symbol animations to prevent selection of further cards
 	// before animations are finished.
-	$(".card-symbol").delay(1000);
+	$('.card-symbol').delay(1000);
 }
 
 function checksAfterSelection() {
-	console.log("Staring checks.")
-	console.log("numberOfSelectedCards = " + $(".picked").length);
+	console.log('Staring checks.')
+	console.log('numberOfSelectedCards = ' + $('.picked').length);
 	// Once two cards are selected, they need to be check for equality
-	if ($(".picked").length == 2){
-		console.log("Two are selected. Time to compare them.")
+	if ($('.picked').length == 2){
+		console.log('Two are selected. Time to compare them.')
+		// Check equility of selected cards and perform according response
 		checkSelectedCards();
 		// Check game status
 		checkGameStatus();
 	} else {
-		console.log("Only one card was selected. Waiting for next input.")
+		console.log('Only one card was selected. Waiting for next input.')
 	}
-	console.log("numberOfSelectedCards = " + $(".picked").length);
-	console.log("Checks finished.")
+	console.log('numberOfSelectedCards = ' + $('.picked').length);
+	console.log('Checks finished.')
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -170,19 +171,19 @@ function runAfterDOMIsBuild(){
 	createCards();
 
 	// Select cards event listener
-	$(".card-content").click(function(){
-		console.log("Card was clicked.")
+	$('.card-content').click(function(){
+		console.log('Card was clicked.')
 		// Only two cards are allowed to be selected at a time.
-		if ($(".picked").length < 2){
+		if ($('.picked').length < 2){
 			// A selected card can not be selected again (or be unselected).
-			if ($(this).hasClass("picked") == false && $(this).hasClass("matched") == false){
-				$(this).addClass("picked");
-				$(this).find(".card-symbol").fadeIn(function(){
+			if ($(this).hasClass('picked') == false && $(this).hasClass('matched') == false){
+				$(this).addClass('picked');
+				$(this).find('.card-symbol').fadeIn(function(){
 					checksAfterSelection();
 				});
 			}
 		}
-		console.log("Card click processing is done.");
+		console.log('Card click processing is done.');
 	});
 }
 
