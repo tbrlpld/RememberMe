@@ -20,7 +20,7 @@
 .header-table {
 	width: 100%;
 	text-align: center;
-	font-size: calc(0.5vw + 0.5vh + 1.0vmin);;
+	font-size: calc(3vmin);;
 }
 
 .header-table td {
@@ -78,7 +78,7 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 .card-symbol {
 	margin: 0;
 	/* font size based on container size. (from https://codepen.io/CrocoDillon/pen/fBJxu) */
-	font-size: calc(4vw + 4vh + 2vmin);
+	font-size: calc(10vmin);
 	/*border: solid;*/
 	/*visibility: hidden;*/
 	display: none;
