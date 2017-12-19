@@ -85,6 +85,25 @@ function createCards(){
 
 //-------------------------------------------------------------------------------------------------
 //
+// Move Counter
+//
+//-------------------------------------------------------------------------------------------------
+
+function getCurrentMovesCount(){
+	const moves = Number($('.counter-number').text());
+	console.log("Current number of moves = " + moves);
+	return moves
+}
+
+function increaseMovesCount(){
+	let moves = getCurrentMovesCount();
+	moves += 1;
+	$('.counter-number').text(moves);
+	console.log("New number of moves = " + moves);
+}
+
+//-------------------------------------------------------------------------------------------------
+//
 // Card Selection
 //
 //-------------------------------------------------------------------------------------------------
@@ -143,6 +162,7 @@ function checksAfterCardPick() {
 	// Once two cards are selected, they need to be check for equality
 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
 		console.log('Two are selected. Time to compare them.')
+		increaseMovesCount();
 		// Check equility of selected cards and perform according response
 		checkPickedCards();
 		// Check game status
