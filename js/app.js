@@ -88,10 +88,9 @@ function createCards(){
 
 //-------------------------------------------------------------------------------------------------
 //
-// Game Helper
+// Card Selection
 //
 //-------------------------------------------------------------------------------------------------
-
 
 
 function checkGameStatus() {
@@ -104,8 +103,6 @@ function checkGameStatus() {
 }
 
 function checkPickedCards() {
-	// TODO: This function needs some cleaning up!
-
 	const pickedCards = $('.picked');
 	console.log('The picked cards are the following:');
 	console.log(pickedCards);
@@ -162,6 +159,23 @@ function checksAfterCardPick() {
 	console.log('Checks finished.')
 }
 
+function cardPick(card){
+	console.log('Card was clicked.')
+	// Only two cards are allowed to be picked at a time.
+	const maximumNumberOfCardsPicked = 2;
+	let numberOfPickedCards = $('.picked').length;
+	if (numberOfPickedCards < maximumNumberOfCardsPicked){
+		// A picked or matched card can not be selected again (or be unselected).
+		if ($(card).hasClass('picked') == false && $(card).hasClass('matched') == false){
+			$(card).addClass('picked');
+			$(card).find('.card-symbol').fadeIn(function(){
+				checksAfterCardPick();
+			});
+		}
+	}
+	console.log('Card click processing is done.');
+}
+
 //-------------------------------------------------------------------------------------------------
 //
 // MAIN
@@ -173,20 +187,7 @@ function runAfterDOMIsBuild(){
 
 	// Event listener for click on any card.
 	$('.card-content').click(function(){
-		console.log('Card was clicked.')
-		// Only two cards are allowed to be picked at a time.
-		const maximumNumberOfCardsPicked = 2;
-		let numberOfPickedCards = $('.picked').length;
-		if (numberOfPickedCards < maximumNumberOfCardsPicked){
-			// A picked or matched card can not be selected again (or be unselected).
-			if ($(this).hasClass('picked') == false && $(this).hasClass('matched') == false){
-				$(this).addClass('picked');
-				$(this).find('.card-symbol').fadeIn(function(){
-					checksAfterCardPick();
-				});
-			}
-		}
-		console.log('Card click processing is done.');
+		cardPick(this);
 	});
 }
 
