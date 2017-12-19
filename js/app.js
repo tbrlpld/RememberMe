@@ -7,7 +7,7 @@
 //-------------------------------------------------------------------------------------------------
 
 function getArrayOfSymbols(){
-	var symbols = ['&#9728;',
+	const symbols = ['&#9728;',
 				   '&#9729;',
 				   '&#9730;',
 				   '&#9733;',
@@ -75,7 +75,7 @@ function createCards(){
 	var lastCardCreated;
 	var currentCardNumber = 0;
 	for (var row = 1; row <= cardsPerRow; row++) {
-		for (var column = 1; column <= cardsPerColumn; column++)
+		for (var column = 1; column <= cardsPerColumn; column++){
 			currentCardNumber += 1;
 			symbolIndex = currentCardNumber - 1;
 			currentSymbol = symbols[symbolIndex];
