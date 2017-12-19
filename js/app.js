@@ -91,7 +91,7 @@ function createCards(){
 
 function getCurrentMovesCount(){
 	const moves = Number($('.counter-number').text());
-	console.log("Current number of moves = " + moves);
+	console.log('Current number of moves = ' + moves);
 	return moves
 }
 
@@ -99,7 +99,38 @@ function increaseMovesCount(){
 	let moves = getCurrentMovesCount();
 	moves += 1;
 	$('.counter-number').text(moves);
-	console.log("New number of moves = " + moves);
+	console.log('New number of moves = ' + moves);
+}
+
+//-------------------------------------------------------------------------------------------------
+//
+// Star Rating
+//
+//-------------------------------------------------------------------------------------------------
+
+function getCurrentStarRating(){
+	const stars = $('.star-area').find('.star-active').length;
+	console.log('Current star rating = ' + stars + ' stars');
+	return stars
+}
+
+function removeOneStar(){
+	const lastActiveStar = $('.star-area').find('.star-active').last();
+	console.log(lastActiveStar);
+	lastActiveStar.addClass('star-dead');
+	lastActiveStar.removeClass('star-active');
+}
+
+function updateStarRating(){
+	const maxMovesThreeStarRating = 10;
+	const maxMovesTwoStarRating = 20;
+	const currentStarRating = getCurrentStarRating();
+	const currentMovesCount = getCurrentMovesCount();
+
+	if ((currentStarRating == 3 && currentMovesCount == maxMovesThreeStarRating)
+		||(currentStarRating == 2 && currentMovesCount == maxMovesTwoStarRating)) {
+		removeOneStar();
+	};
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -163,6 +194,7 @@ function checksAfterCardPick() {
 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
 		console.log('Two are selected. Time to compare them.')
 		increaseMovesCount();
+		updateStarRating();
 		// Check equility of selected cards and perform according response
 		checkPickedCards();
 		// Check game status

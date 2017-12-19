@@ -95,3 +95,17 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 
 .counter-number {
 }
+
+.star-area {
+	font-weight: bold;
+}
+
+.star-active {
+	color: gold;
+	text-shadow: 0px 0px 2px orangered;
+}
+
+.star-dead {
+	color: gray;
+	text-shadow: 0px 0px 0px gray;
+}
