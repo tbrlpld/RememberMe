@@ -1,5 +1,7 @@
+// TODO: Create doc strings/comments for the functions.
 // TODO: timer.
 // TODO: Congratulations message showing moves, star rating and time.
+// TODO: Vertically center the game in the body/borwser.
 // TODO: function to destroy the card deck.
 // TODO: function to create the card deck.
 // TODO: restart button, which destorys the current deck, builds a new one and resets the counters.
@@ -7,7 +9,7 @@
 // TODO: Welcome message. Shows name of game and a button to start the game.
 // TODO: Add card animations for flipping the card, rejecting and accepting the pair.
 // TODO: Add animations for welcome screen, transition to game view, build of game, build of card deck, destruction of card deck, destruction of game, transition to congratulations message, congratulations message itself.
-// TODO: (Optional) Add option in welcome message to select game size (16, 25, 32)
+// TODO: (Optional) Add option in welcome message to select game size (16, 32)
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -15,6 +17,10 @@
 //
 //-------------------------------------------------------------------------------------------------
 
+/**
+ * @description: Return an array of 8 (unique) html symbol strings.
+ * @returns: Array of 8 (unique) html symbol strings.
+ */
 function getArrayOfSymbols(){
 	const symbols = ['&#9728;',
 				   	 '&#9729;',
@@ -28,6 +34,11 @@ function getArrayOfSymbols(){
 	return symbols
 }
 
+/**
+ * @description: Duplicate every item of an array.
+ * @param: {array} symbols - Array of unique symbols.
+ * @returns: {array} Array with each item occurring twice.
+ */
 function doubleArrayOfSymbols(symbols){
 	let symbolsDoubled = [];
 	symbols.forEach(function(item){
@@ -37,30 +48,44 @@ function doubleArrayOfSymbols(symbols){
 	return symbolsDoubled
 }
 
-// source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+/**
+ * @description: Create random integer in the range defined (range beginning and end are included).
+ * @param: {number} min - beginning of range to create the integer from.
+ * @param: {number} max - end of range to create the integer from.
+ * @see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+ */
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
 
-// Based on Dustenfeld algorithm: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
-function shuffleArray(array){
-	const maxIndex = array.length - 1;
+/**
+ * @description: Shuffle items of array into a random order. Shuffling is based on Dustenfeld algorithm.
+ * @param: {array} inputArray - Array to be shuffled.
+ * @returns: {array} Input array in a randomly shuffled order.
+ * @see: : https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+ */
+function shuffleArray(inputArray){
+	const maxIndex = inputArray.length - 1;
 	let currentIndex = 0;
 	let randomIndex = 0;
 	let tempValue;
 
 	while (currentIndex <= maxIndex){
 		randomIndex = getRandomIntInclusive(currentIndex, maxIndex);
-		tempValue = array[currentIndex];
-		array[currentIndex] = array[randomIndex];
-		array[randomIndex] = tempValue;
+		tempValue = inputArray[currentIndex];
+		inputArray[currentIndex] = inputArray[randomIndex];
+		inputArray[randomIndex] = tempValue;
 		currentIndex += 1;
 	}
-	return array
+	return inputArray
 }
 
+/**
+ * @description: Create an array of 16 symbols in random order. Each symbol occurs twice.
+ * @returns: Array of 16 symbols in random order. Each symbol occurs twice.
+ */
 function getRandomSymbolArray(){
 	const symbols = getArrayOfSymbols();
 	const symbolsDoubled = doubleArrayOfSymbols(symbols);
