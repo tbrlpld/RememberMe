@@ -1,4 +1,13 @@
-// TODO: the whole code needs some cleaning up!
+// TODO: timer.
+// TODO: Congratulations message showing moves, star rating and time.
+// TODO: function to destroy the card deck.
+// TODO: function to create the card deck.
+// TODO: restart button, which destorys the current deck, builds a new one and resets the counters.
+// TODO: Congratulations pop-up. A more obvious way to display the final message. Also includes a restart/play-again button.
+// TODO: Welcome message. Shows name of game and a button to start the game.
+// TODO: Add card animations for flipping the card, rejecting and accepting the pair.
+// TODO: Add animations for welcome screen, transition to game view, build of game, build of card deck, destruction of card deck, destruction of game, transition to congratulations message, congratulations message itself.
+// TODO: (Optional) Add option in welcome message to select game size (16, 25, 32)
 
 //-------------------------------------------------------------------------------------------------
 //
