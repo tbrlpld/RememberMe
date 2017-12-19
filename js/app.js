@@ -8,19 +8,19 @@
 
 function getArrayOfSymbols(){
 	const symbols = ['&#9728;',
-				   '&#9729;',
-				   '&#9730;',
-				   '&#9733;',
-				   '&#9752;',
-				   '&#9774;',
-				   '&#9786;',
-				   '&#9822;'
-				   ];
+				   	 '&#9729;',
+				   	 '&#9730;',
+				   	 '&#9733;',
+				   	 '&#9752;',
+				   	 '&#9774;',
+				   	 '&#9786;',
+				   	 '&#9822;'
+	];
 	return symbols
 }
 
 function doubleArrayOfSymbols(symbols){
-	var symbolsDoubled = [];
+	let symbolsDoubled = [];
 	symbols.forEach(function(item){
 		symbolsDoubled.push(item);
 		symbolsDoubled.push(item);
@@ -37,10 +37,10 @@ function getRandomIntInclusive(min, max) {
 
 // Based on Dustenfeld algorithm: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
 function shuffleArray(array){
-	var currentIndex = 0;
-	var randomIndex = 0;
-	var maxIndex = array.length - 1;
-	var tempValue;
+	const maxIndex = array.length - 1;
+	let currentIndex = 0;
+	let randomIndex = 0;
+	let tempValue;
 
 	while (currentIndex <= maxIndex){
 		randomIndex = getRandomIntInclusive(currentIndex, maxIndex);
@@ -53,9 +53,9 @@ function shuffleArray(array){
 }
 
 function getRandomSymbolArray(){
-	var symbols = getArrayOfSymbols();
-	var symbolsDoubled = doubleArrayOfSymbols(symbols);
-	var symbolsShuffled = shuffleArray(symbolsDoubled);
+	const symbols = getArrayOfSymbols();
+	const symbolsDoubled = doubleArrayOfSymbols(symbols);
+	const symbolsShuffled = shuffleArray(symbolsDoubled);
 	return symbolsShuffled
 }
 
@@ -67,15 +67,14 @@ function getRandomSymbolArray(){
 
 
 function createCards(){
-	var symbols = getRandomSymbolArray();
+	const symbols = getRandomSymbolArray();
+	const cardsPerRow = 4;
+	const cardsPerColumn = 4;
+	let currentCardNumber = 0;
+	let lastCardCreated;
 
-	var cardsPerRow = 4;
-	var cardsPerColumn = 4;
-
-	var lastCardCreated;
-	var currentCardNumber = 0;
-	for (var row = 1; row <= cardsPerRow; row++) {
-		for (var column = 1; column <= cardsPerColumn; column++){
+	for (let row = 1; row <= cardsPerRow; row++) {
+		for (let column = 1; column <= cardsPerColumn; column++){
 			currentCardNumber += 1;
 			symbolIndex = currentCardNumber - 1;
 			currentSymbol = symbols[symbolIndex];
@@ -97,9 +96,9 @@ function createCards(){
 
 function checkGameStatus() {
 	console.log('Checking game status.')
-	matchedCards = $('.matched').length;
-	console.log('Cards matched: ' + matchedCards);
-	if (matchedCards == 16){
+	const numberOfMatchedCards = $('.matched').length;
+	console.log('Cards matched: ' + numberOfMatchedCards);
+	if (numberOfMatchedCards == 16){
 		$('body').append('<div>YOU WIN!</div>');
 	}
 }
@@ -107,46 +106,45 @@ function checkGameStatus() {
 function checkSelectedCards() {
 	// TODO: This function needs some cleaning up!
 
-	var selectedCards = $('.picked');
-	console.log('The selected cards are the following:');
-	console.log(selectedCards);
+	const pickedCards = $('.picked');
+	console.log('The picked cards are the following:');
+	console.log(pickedCards);
 
+	const pickedCardsSymbols = pickedCards.find('.card-symbol');
 	// Delay to allow user observation of picked symbols
-	$('.picked').find('.card-symbol').delay(800);
+	pickedCardsSymbols.delay(800);
 
-	console.log('Comparing selected cards.');
+	console.log('Comparing picked cards.');
 
-	firstCard = selectedCards.first();
-	secondCard = selectedCards.last();
-
-	var firstSymbol = firstCard.contents().html();
+	const firstSymbol = pickedCardsSymbols.first().html();
 	console.log('First symbol = ' + firstSymbol);
-	var secondSymbol = secondCard.contents().html();
+	const secondSymbol = pickedCardsSymbols.last().html();
 	console.log('Second symbol = ' + secondSymbol);
 
 	if (firstSymbol != undefined && firstSymbol === secondSymbol){
 		console.log('Cards are equal!')
-		$('.picked').addClass('matched');
+		pickedCards.addClass('matched');
 	} else {
 		console.log('Cards are NOT equal!')
 		console.log('Hiding symbols.')
-		$('.picked').find('.card-symbol').fadeOut('fast', function(){
+		pickedCardsSymbols.fadeOut('fast', function(){
 			console.log('Symbol faded out.')
 		});
 	}
 
 	// Remove selection
-	console.log('Removing selection!')
-	$('.picked').removeClass('picked');
+	console.log('Removing picks!')
+	pickedCards.removeClass('picked');
 
 	// Delay on all symbol animations to prevent selection of further cards
 	// before animations are finished.
 	$('.card-symbol').delay(1000);
 }
 
-function checksAfterSelection() {
+function checksAfterCardPick() {
 	console.log('Staring checks.')
-	console.log('numberOfSelectedCards = ' + $('.picked').length);
+	let numberOfPickedCards = $('.picked').length;
+	console.log('numberOfPickedCards = ' + numberOfPickedCards);
 	// Once two cards are selected, they need to be check for equality
 	if ($('.picked').length == 2){
 		console.log('Two are selected. Time to compare them.')
@@ -157,7 +155,9 @@ function checksAfterSelection() {
 	} else {
 		console.log('Only one card was selected. Waiting for next input.')
 	}
-	console.log('numberOfSelectedCards = ' + $('.picked').length);
+	// Updating number of picked cards to check if removal has worked.
+	numberOfPickedCards = $('.picked').length;
+	console.log('numberOfPickedCards = ' + numberOfPickedCards);
 	console.log('Checks finished.')
 }
 
@@ -170,16 +170,18 @@ function checksAfterSelection() {
 function runAfterDOMIsBuild(){
 	createCards();
 
-	// Select cards event listener
+	// Event listener for click on any card.
 	$('.card-content').click(function(){
 		console.log('Card was clicked.')
-		// Only two cards are allowed to be selected at a time.
-		if ($('.picked').length < 2){
-			// A selected card can not be selected again (or be unselected).
+		// Only two cards are allowed to be picked at a time.
+		const maximumNumberOfCardsPicked = 2;
+		let numberOfPickedCards = $('.picked').length;
+		if (numberOfPickedCards < maximumNumberOfCardsPicked){
+			// A picked or matched card can not be selected again (or be unselected).
 			if ($(this).hasClass('picked') == false && $(this).hasClass('matched') == false){
 				$(this).addClass('picked');
 				$(this).find('.card-symbol').fadeIn(function(){
-					checksAfterSelection();
+					checksAfterCardPick();
 				});
 			}
 		}
