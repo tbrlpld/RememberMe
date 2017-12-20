@@ -11,3 +11,4 @@ This is a unsorted list of resources (outside of Udacity) I used to create the m
 * Dustenfeld algorithm for shuffling: (https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm)
 * CSS animations: (https://www.w3schools.com/css/css3_animations.asp)
 * Info on custom jQuery queues: (http://cdmckay.org/blog/2010/06/22/how-to-use-custom-jquery-animation-queues/)
+* Example for a js count down (orientation for the timer):  (https://www.w3schools.com/howto/howto_js_countdown.asp)

@@ -192,15 +192,29 @@ function updateStarRating(){
 //-------------------------------------------------------------------------------------------------
 
 /**
- * @description: Check if game is finished (all 16 cards are matched). If so, display congratulations message.
+ * @description: Check if game is won (all 16 cards are matched).
+ * @returns: {boolean} true if all 16 cards are matched, false otherwise.
  */
-function checkGameStatus() {
-	console.log('Checking game status.')
+function gameIsWon() {
+	// TODO: Remove hard coded number of cards. Get number of cards from DOM.
+	// console.log('Checking if game is won.')
 	const numberOfMatchedCards = $('.matched').length;
-	console.log('Cards matched: ' + numberOfMatchedCards);
+	// console.log('Cards matched: ' + numberOfMatchedCards);
 	if (numberOfMatchedCards == 16){
-		$('body').append('<div>YOU WIN!</div>');
+		// $('body').append('<div>YOU WIN!</div>');
+		// console.log('Game is won!!')
+		return true
+	} else {
+		// console.log('Game is not won yet.')
+		return false
 	}
+}
+
+/**
+ * @description: Display congratulations message when game is won.
+ */
+function displayCongratulations(){
+	$('body').append('<div>YOU WIN!</div>');
 }
 
 /**
@@ -258,7 +272,10 @@ function checksAndActionsAfterCardPick() {
 		// Check equality of selected cards and perform according response
 		checkPickedCards();
 		// Check game status
-		checkGameStatus();
+		const win = gameIsWon();
+		if (win){
+			displayCongratulations();
+		}
 	} else {
 		console.log('Only one card was selected. Waiting for next input.');
 	}
@@ -299,6 +316,31 @@ function createCardClickEventListener(){
 	});
 }
 
+
+//-------------------------------------------------------------------------------------------------
+//
+// Timer
+//
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Start a timer and display the time since the timer was started. Timer stops when game is won.
+ */
+function startTimer(){
+	const startTime = Date.now();
+
+	const timer = setInterval(function(){
+		let now = Date.now();
+		let deltaSeconds = Math.floor((now - startTime)/1000);
+		$('.timer').html(deltaSeconds + 's');
+
+		if (gameIsWon()){
+			clearInterval(timer);
+		}
+	}, 1000);
+}
+
+
 //-------------------------------------------------------------------------------------------------
 //
 // MAIN
@@ -310,6 +352,7 @@ function createCardClickEventListener(){
  */
 function main(){
 	createCards();
+	startTimer();
 	createCardClickEventListener();
 }
 
