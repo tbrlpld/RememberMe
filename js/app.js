@@ -174,8 +174,8 @@ function removeOneStar(){
  * @description: Update star rating based on current star rating and number of moves. Removes star if maximum number of moves for that star rating was reached.
  */
 function updateStarRating(){
-	const maxMovesThreeStarRating = 10;
-	const maxMovesTwoStarRating = 20;
+	const maxMovesThreeStarRating = 16;
+	const maxMovesTwoStarRating = 24;
 	const currentStarRating = getCurrentStarRating();
 	const currentMovesCount = getCurrentMovesCount();
 
@@ -192,15 +192,16 @@ function updateStarRating(){
 //-------------------------------------------------------------------------------------------------
 
 /**
- * @description: Check if game is won (all 16 cards are matched).
- * @returns: {boolean} true if all 16 cards are matched, false otherwise.
+ * @description: Check if game is won (all cards are matched).
+ * @returns: {boolean} true if all cards are matched, false otherwise.
  */
 function gameIsWon() {
 	// TODO: Remove hard coded number of cards. Get number of cards from DOM.
 	// console.log('Checking if game is won.')
+	const numberOfCards = $('.card-content').length;
 	const numberOfMatchedCards = $('.matched').length;
 	// console.log('Cards matched: ' + numberOfMatchedCards);
-	if (numberOfMatchedCards == 16){
+	if (numberOfMatchedCards == numberOfCards){
 		// $('body').append('<div>YOU WIN!</div>');
 		// console.log('Game is won!!')
 		return true
