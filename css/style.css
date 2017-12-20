@@ -1,7 +1,3 @@
-/*
- * TODO: Reduce border radii
- *
- */
 
 * {
 	font-family: "Helvetica";
@@ -11,7 +7,7 @@
 .game-area {
 	background: gray;
 	padding: 20px;
-	border-radius: 20px;
+	border-radius: 10px;
 	width: calc(80vmin);
 	min-width: 320px;
 	margin: auto;
@@ -35,7 +31,7 @@
 .card-area{
 	background: lightblue;
 	padding: 20px;
-	border-radius: 20px;
+	border-radius: 10px;
 	display: grid;
   	grid-template-columns: 1fr 1fr 1fr 1fr;
   	grid-auto-flow: dense;
@@ -68,7 +64,7 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	bottom: 0;
 	background: steelblue;
 	color: white;
-	border-radius: 20px;
+	border-radius: 10px;
 	/*border: solid;*/
 	display: flex;
 	align-items: center;
