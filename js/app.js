@@ -332,7 +332,10 @@ function startTimer(){
 	const timer = setInterval(function(){
 		let now = Date.now();
 		let deltaSeconds = Math.floor((now - startTime)/1000);
-		$('.timer').html(deltaSeconds + 's');
+		let displayMinutes = Math.floor(deltaSeconds / 60);
+		let displaySeconds = Math.floor(deltaSeconds % 60);
+
+		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
 
 		if (gameIsWon()){
 			clearInterval(timer);
