@@ -99,7 +99,9 @@ function getRandomSymbolArray(){
 //
 //-------------------------------------------------------------------------------------------------
 
-
+/**
+ * @description: Add 16 cards (8 symbols -- always two cards with same symbol) to card area.
+ */
 function createCards(){
 	const symbols = getRandomSymbolArray();
 	const cardsPerRow = 4;
@@ -123,12 +125,19 @@ function createCards(){
 //
 //-------------------------------------------------------------------------------------------------
 
+/**
+ * @description: Get currently shown number of moves.
+ * @returns: {number} Number of current moves.
+ */
 function getCurrentMovesCount(){
 	const moves = Number($('.counter-number').text());
 	console.log('Current number of moves = ' + moves);
 	return moves
 }
 
+/**
+ * @description: Increase the currently shown number of moves by one.
+ */
 function increaseMovesCount(){
 	let moves = getCurrentMovesCount();
 	moves += 1;
@@ -142,12 +151,19 @@ function increaseMovesCount(){
 //
 //-------------------------------------------------------------------------------------------------
 
+/**
+ * @description: Get currently shown number of stars.
+ * @returns: {number} Number of current stars.
+ */
 function getCurrentStarRating(){
 	const stars = $('.star-area').find('.star-active').length;
 	console.log('Current star rating = ' + stars + ' stars');
 	return stars
 }
 
+/**
+ * @description: Change class of last active star to dead. Dead stars don't count in rating.
+ */
 function removeOneStar(){
 	const lastActiveStar = $('.star-area').find('.star-active').last();
 	console.log(lastActiveStar);
@@ -155,6 +171,9 @@ function removeOneStar(){
 	lastActiveStar.removeClass('star-active');
 }
 
+/**
+ * @description: Update star rating based on current star rating and number of moves. Removes star if maximum number of moves for that star rating was reached.
+ */
 function updateStarRating(){
 	const maxMovesThreeStarRating = 10;
 	const maxMovesTwoStarRating = 20;
@@ -173,7 +192,9 @@ function updateStarRating(){
 //
 //-------------------------------------------------------------------------------------------------
 
-
+/**
+ * @description: Check if game is finished (all 16 cards are matched). If so, display congratulations message.
+ */
 function checkGameStatus() {
 	console.log('Checking game status.')
 	const numberOfMatchedCards = $('.matched').length;
@@ -183,6 +204,9 @@ function checkGameStatus() {
 	}
 }
 
+/**
+ * @description: Check if picked cards match and execute according response.
+ */
 function checkPickedCards() {
 	const pickedCards = $('.picked');
 	console.log('The picked cards are the following:');
@@ -219,7 +243,10 @@ function checkPickedCards() {
 	$('.card-symbol').delay(1000);
 }
 
-function checksAfterCardPick() {
+/**
+ * @description: Run all checks and actions after a card has been picked. If only one card is picked, nothing is done. If two cards are picked, the move counter is increased, the star rating updated, the cards are checked for equality and the game status is checked.
+ */
+function checksAndActionsAfterCardPick() {
 	console.log('Staring checks.')
 	const targetNumberOfPicksPerMove = 2;
 	let numberOfPickedCards = $('.picked').length;
@@ -229,8 +256,9 @@ function checksAfterCardPick() {
 		console.log('Two are selected. Time to compare them.')
 		increaseMovesCount();
 		updateStarRating();
-		// Check equility of selected cards and perform according response
+		// Check equality of selected cards and perform according response
 		checkPickedCards();
+		// TODO: Move check game status into checkPickedCards. Game can only be finished with a successful move.
 		// Check game status
 		checkGameStatus();
 	} else {
@@ -242,22 +270,28 @@ function checksAfterCardPick() {
 	console.log('Checks finished.')
 }
 
+/**
+ * @description: Add picked class and show card if card is allowed to be picked. Only two cards can be picked at a time. Matched and already picked cards can not be picked.
+ * @param: {element} card - Object of the clicked card.
+ */
 function cardPick(card){
 	console.log('Card was clicked.')
 	// Only two cards are allowed to be picked at a time.
 	const maximumNumberOfCardsPicked = 2;
 	let numberOfPickedCards = $('.picked').length;
+
 	if (numberOfPickedCards < maximumNumberOfCardsPicked){
 		// A picked or matched card can not be selected again (or be unselected).
 		if ($(card).hasClass('picked') == false && $(card).hasClass('matched') == false){
 			$(card).addClass('picked');
 			$(card).find('.card-symbol').fadeIn(function(){
-				checksAfterCardPick();
+				checksAndActionsAfterCardPick();
 			});
 		}
 	}
 	console.log('Card click processing is done.');
 }
+
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -265,9 +299,13 @@ function cardPick(card){
 //
 //-------------------------------------------------------------------------------------------------
 
-function runAfterDOMIsBuild(){
+/**
+ * @description: Main function of the application. Needs to be run after the DOM is build initially.
+ */
+function main(){
 	createCards();
 
+	// TODO: create a new function createCardClickEventListener()
 	// Event listener for click on any card.
 	$('.card-content').click(function(){
 		cardPick(this);
@@ -275,5 +313,5 @@ function runAfterDOMIsBuild(){
 }
 
 // This is running the DOM manipulation after the DOM is initially created.
-$(runAfterDOMIsBuild);
+$(main);
 
