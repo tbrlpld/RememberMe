@@ -292,6 +292,14 @@ function cardPick(card){
 	console.log('Card click processing is done.');
 }
 
+/**
+ * @description: Create event lister for click on any card.
+ */
+function createCardClickEventListener(){
+	$('.card-content').click(function(){
+		cardPick(this);
+	});
+}
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -304,13 +312,15 @@ function cardPick(card){
  */
 function main(){
 	createCards();
-
-	// TODO: create a new function createCardClickEventListener()
-	// Event listener for click on any card.
-	$('.card-content').click(function(){
-		cardPick(this);
-	});
+	createCardClickEventListener();
 }
+
+
+//-------------------------------------------------------------------------------------------------
+//
+// RUN
+//
+//-------------------------------------------------------------------------------------------------
 
 // This is running the DOM manipulation after the DOM is initially created.
 $(main);
