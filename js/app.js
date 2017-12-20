@@ -343,7 +343,13 @@ function startTimer(){
 	}, 1000);
 }
 
-
+/**
+ * @description: Return time string of game timer
+ * @returns: {string} Time string of game timer.
+ */
+function getGameTime(){
+	return $('.timer').html();
+}
 //-------------------------------------------------------------------------------------------------
 //
 // MAIN
