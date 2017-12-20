@@ -1,5 +1,3 @@
-// TODO: timer.
-// TODO: Congratulations message showing moves, star rating and time.
 // TODO: Vertically center the game in the body/borwser.
 // TODO: function to destroy the card deck.
 // TODO: function to create the card deck.
@@ -185,9 +183,53 @@ function updateStarRating(){
 	};
 }
 
+function getStarSymbols(numberOfStars){
+	let starSymbols = ''
+	for (let counter = 1; counter <= numberOfStars; counter++){
+		starSymbols += '<span class="star-active">&#9733;</span>';
+	}
+	return starSymbols
+}
+
+
 //-------------------------------------------------------------------------------------------------
 //
-// Card Selection
+// Timer
+//
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Start a timer and display the time since the timer was started. Timer stops when game is won.
+ */
+function startTimer(){
+	const startTime = Date.now();
+
+	const timer = setInterval(function(){
+		let now = Date.now();
+		let deltaSeconds = Math.floor((now - startTime)/1000);
+		let displayMinutes = Math.floor(deltaSeconds / 60);
+		let displaySeconds = Math.floor(deltaSeconds % 60);
+
+		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
+
+		if (gameIsWon()){
+			clearInterval(timer);
+		}
+	}, 1000);
+}
+
+/**
+ * @description: Return time string of game timer
+ * @returns: {string} Time string of game timer.
+ */
+function getGameTime(){
+	return $('.timer').html();
+}
+
+
+//-------------------------------------------------------------------------------------------------
+//
+// Game Flow
 //
 //-------------------------------------------------------------------------------------------------
 
@@ -200,7 +242,7 @@ function gameIsWon() {
 	const numberOfCards = $('.card-content').length;
 	const numberOfMatchedCards = $('.matched').length;
 	// console.log('Cards matched: ' + numberOfMatchedCards);
-	if (numberOfMatchedCards == numberOfCards){
+	if (numberOfMatchedCards == 2){
 		// $('body').append('<div>YOU WIN!</div>');
 		// console.log('Game is won!!')
 		return true
@@ -214,8 +256,20 @@ function gameIsWon() {
  * @description: Display congratulations message when game is won.
  */
 function displayCongratulations(){
-	$('body').append('<div>YOU WIN!</div>');
+	const moves = getCurrentMovesCount();
+	const stars = getStarSymbols(getCurrentStarRating());
+	const time = getGameTime();
+	$('body').append('<div class="congratulations">YOU WIN!</div>');
+	$('.congratulations').append('<table class="stats"></table>');
+	$('.stats').append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
+	$('.stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
+	$('.stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
 }
+//-------------------------------------------------------------------------------------------------
+//
+// Card Selection
+//
+//-------------------------------------------------------------------------------------------------
 
 /**
  * @description: Check if picked cards match and execute according response.
@@ -317,39 +371,6 @@ function createCardClickEventListener(){
 }
 
 
-//-------------------------------------------------------------------------------------------------
-//
-// Timer
-//
-//-------------------------------------------------------------------------------------------------
-
-/**
- * @description: Start a timer and display the time since the timer was started. Timer stops when game is won.
- */
-function startTimer(){
-	const startTime = Date.now();
-
-	const timer = setInterval(function(){
-		let now = Date.now();
-		let deltaSeconds = Math.floor((now - startTime)/1000);
-		let displayMinutes = Math.floor(deltaSeconds / 60);
-		let displaySeconds = Math.floor(deltaSeconds % 60);
-
-		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
-
-		if (gameIsWon()){
-			clearInterval(timer);
-		}
-	}, 1000);
-}
-
-/**
- * @description: Return time string of game timer
- * @returns: {string} Time string of game timer.
- */
-function getGameTime(){
-	return $('.timer').html();
-}
 //-------------------------------------------------------------------------------------------------
 //
 // MAIN

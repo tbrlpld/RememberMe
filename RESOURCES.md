@@ -12,3 +12,4 @@ This is a unsorted list of resources (outside of Udacity) I used to create the m
 * CSS animations: (https://www.w3schools.com/css/css3_animations.asp)
 * Info on custom jQuery queues: (http://cdmckay.org/blog/2010/06/22/how-to-use-custom-jquery-animation-queues/)
 * Example for a js count down (orientation for the timer):  (https://www.w3schools.com/howto/howto_js_countdown.asp)
+* How to make a modal (congratulations pop-up): (https://www.w3schools.com/howto/howto_css_modals.asp)
