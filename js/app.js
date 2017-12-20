@@ -1,4 +1,3 @@
-// TODO: Create doc strings/comments for the functions.
 // TODO: timer.
 // TODO: Congratulations message showing moves, star rating and time.
 // TODO: Vertically center the game in the body/borwser.
@@ -258,7 +257,6 @@ function checksAndActionsAfterCardPick() {
 		updateStarRating();
 		// Check equality of selected cards and perform according response
 		checkPickedCards();
-		// TODO: Move check game status into checkPickedCards. Game can only be finished with a successful move.
 		// Check game status
 		checkGameStatus();
 	} else {
