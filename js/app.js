@@ -196,7 +196,6 @@ function updateStarRating(){
  * @returns: {boolean} true if all cards are matched, false otherwise.
  */
 function gameIsWon() {
-	// TODO: Remove hard coded number of cards. Get number of cards from DOM.
 	// console.log('Checking if game is won.')
 	const numberOfCards = $('.card-content').length;
 	const numberOfMatchedCards = $('.matched').length;
