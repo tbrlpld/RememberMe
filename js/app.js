@@ -181,8 +181,8 @@ function removeOneStar(){
  * @description: Update star rating based on current star rating and number of moves. Removes star if maximum number of moves for that star rating was reached.
  */
 function updateStarRating(){
-	const maxMovesThreeStarRating = 16;
-	const maxMovesTwoStarRating = 24;
+	const maxMovesThreeStarRating = 3; //16;
+	const maxMovesTwoStarRating = 5; //24;
 	const currentStarRating = getCurrentStarRating();
 	const currentMovesCount = getCurrentMovesCount();
 
@@ -192,6 +192,19 @@ function updateStarRating(){
 	};
 }
 
+/**
+ * @description: Set all dead stars to active.
+ */
+function activateAllStars(){
+	const deadStars = $('.star-area').find('.star-dead');
+	deadStars.addClass('star-active');
+	deadStars.removeClass('star-dead');
+}
+
+/**
+ * @description: Return html code for a defined number of active stars
+ * @returns: {string}
+ */
 function getStarSymbols(numberOfStars){
 	let starSymbols = ''
 	for (let counter = 1; counter <= numberOfStars; counter++){
@@ -417,6 +430,7 @@ function createRestartButtonEventListener(){
 		triggerStopTimer();
 		writeTime(0);
 		setMovesCount(0);
+		activateAllStars();
 	});
 }
 
