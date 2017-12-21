@@ -206,6 +206,16 @@ function triggerStopTimer(){
 }
 
 /**
+ * @description: Writer time for a certain number of seconds. Seconds will be reformatted into minutes and seconds.
+ * @param: {number} seconds - Seconds in game to be written into timer.
+ */
+function writeTime(seconds){
+		const displayMinutes = Math.floor(seconds / 60);
+		const displaySeconds = Math.floor(seconds % 60);
+		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
+}
+
+/**
  * @description: Start a timer and display the time since the timer was started. Timer stops when game is won.
  */
 function startTimer(){
@@ -214,14 +224,7 @@ function startTimer(){
 	const timer = setInterval(function(){
 		let now = Date.now();
 		let deltaSeconds = Math.floor((now - startTime)/1000);
-		let displayMinutes = Math.floor(deltaSeconds / 60);
-		let displaySeconds = Math.floor(deltaSeconds % 60);
-
-		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
-
-		// if (gameIsWon()){
-		// 	clearInterval(timer);
-		// }
+		writeTime(deltaSeconds);
 	}, 1000);
 
 	// Event listener for timer to stop
