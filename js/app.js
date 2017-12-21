@@ -407,6 +407,7 @@ function createCardClickEventListener(){
 function createRestartButtonEventListener(){
 	$('.restart-button').click(function(){
 		triggerStopTimer();
+		writeTime(0);
 	});
 }
 
