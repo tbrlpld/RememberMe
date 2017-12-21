@@ -349,8 +349,7 @@ function checksAndActionsAfterCardPick() {
 		// Check equality of selected cards and perform according response
 		checkPickedCards();
 		// Check game status
-		const win = gameIsWon();
-		if (win){
+		if (gameIsWon()){
 			triggerStopTimer();
 			displayCongratulations();
 		}
