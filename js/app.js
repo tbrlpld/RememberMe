@@ -1,11 +1,3 @@
-// TODO: Add restart/play-again button to congratulations overlay.
-// TODO: Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
-// TODO: Welcome message. Shows name of game and a button to start the game.
-// TODO: Vertically center the game in the body/browser.
-// TODO: Add card animations for flipping the card, rejecting and accepting the pair.
-// TODO: Reset correct limits for star rating and game to be won.
-// TODO: Add animations for welcome screen, transition to game view, build of game, build of card deck, destruction of card deck, destruction of game, transition to congratulations message, congratulations message itself.
-// TODO: (Optional) Add option in welcome message to select game size (16, 32)
 
 //-------------------------------------------------------------------------------------------------
 //
