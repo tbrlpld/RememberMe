@@ -25,7 +25,7 @@
 }
 
 .header-table td {
-	width: 33.333%;
+	width: 25%;
 }
 
 .card-area{
@@ -143,6 +143,11 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	font-size: calc(3vmin);;
 }
 
-.stats{
+.stats {
 	margin: auto;
+}
+
+.restart-button {
+/*	background: none;
+	border: none;*/
 }

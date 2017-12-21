@@ -1,9 +1,9 @@
-// TODO: Vertically center the game in the body/browser.
 // TODO: function to destroy the card deck.
 // TODO: function to create the card deck.
 // TODO: restart button, which destroys the current deck, builds a new one and resets the counters.
 // TODO: Add restart/play-again button to congratulations overlay.
 // TODO: Welcome message. Shows name of game and a button to start the game.
+// TODO: Vertically center the game in the body/browser.
 // TODO: Add card animations for flipping the card, rejecting and accepting the pair.
 // TODO: Add animations for welcome screen, transition to game view, build of game, build of card deck, destruction of card deck, destruction of game, transition to congratulations message, congratulations message itself.
 // TODO: (Optional) Add option in welcome message to select game size (16, 32)
@@ -199,6 +199,13 @@ function getStarSymbols(numberOfStars){
 //-------------------------------------------------------------------------------------------------
 
 /**
+ * @description: Send trigger for game end events.
+ */
+function triggerStopTimer(){
+	$(document).trigger('stopTimer');
+}
+
+/**
  * @description: Start a timer and display the time since the timer was started. Timer stops when game is won.
  */
 function startTimer(){
@@ -212,10 +219,15 @@ function startTimer(){
 
 		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
 
-		if (gameIsWon()){
-			clearInterval(timer);
-		}
+		// if (gameIsWon()){
+		// 	clearInterval(timer);
+		// }
 	}, 1000);
+
+	// Event listener for timer to stop
+	$(document).on('stopTimer', function(){
+		clearInterval(timer);
+	});
 }
 
 /**
@@ -233,6 +245,13 @@ function getGameTime(){
 //
 //-------------------------------------------------------------------------------------------------
 
+// /**
+//  * @description: Send trigger for game end events.
+//  */
+// function triggerGameEnd(){
+// 	$(document).trigger('gameEnd');
+// }
+
 /**
  * @description: Check if game is won (all cards are matched).
  * @returns: {boolean} true if all cards are matched, false otherwise.
@@ -245,6 +264,7 @@ function gameIsWon() {
 	if (numberOfMatchedCards == 2){
 		// $('body').append('<div>YOU WIN!</div>');
 		// console.log('Game is won!!')
+		// triggerGameEnd();
 		return true
 	} else {
 		// console.log('Game is not won yet.')
@@ -373,6 +393,22 @@ function createCardClickEventListener(){
 
 //-------------------------------------------------------------------------------------------------
 //
+// Restart
+//
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Create event lister for click on restart button.
+ */
+function createRestartButtonEventListener(){
+	$('.restart-button').click(function(){
+		triggerStopTimer();
+	});
+}
+
+
+//-------------------------------------------------------------------------------------------------
+//
 // MAIN
 //
 //-------------------------------------------------------------------------------------------------
@@ -384,6 +420,7 @@ function main(){
 	createCards();
 	startTimer();
 	createCardClickEventListener();
+	createRestartButtonEventListener();
 }
 
 
