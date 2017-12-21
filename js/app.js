@@ -133,13 +133,22 @@ function getCurrentMovesCount(){
 }
 
 /**
+ * @description: Set shown number of moves to a specific number
+ * @param: {number} moves - Number of moves to be displayed.
+ */
+function setMovesCount(moves){
+	console.log('Setting moves counter to = ' + moves);
+	$('.counter-number').text(moves);
+}
+
+/**
  * @description: Increase the currently shown number of moves by one.
  */
 function increaseMovesCount(){
 	let moves = getCurrentMovesCount();
 	moves += 1;
-	$('.counter-number').text(moves);
 	console.log('New number of moves = ' + moves);
+	setMovesCount(moves);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -407,6 +416,7 @@ function createRestartButtonEventListener(){
 	$('.restart-button').click(function(){
 		triggerStopTimer();
 		writeTime(0);
+		setMovesCount(0);
 	});
 }
 
