@@ -348,6 +348,7 @@ function checksAndActionsAfterCardPick() {
 		// Check game status
 		const win = gameIsWon();
 		if (win){
+			triggerStopTimer();
 			displayCongratulations();
 		}
 	} else {
