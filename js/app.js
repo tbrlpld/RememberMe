@@ -220,7 +220,7 @@ function getStarSymbols(numberOfStars){
 //-------------------------------------------------------------------------------------------------
 
 /**
- * @description: Send trigger for game end events.
+ * @description: Send trigger to stop timer.
  */
 function triggerStopTimer(){
 	$(document).trigger('stopTimer');
@@ -237,7 +237,7 @@ function writeTime(seconds){
 }
 
 /**
- * @description: Start a timer and display the time since the timer was started. Timer stops when game is won.
+ * @description: Start a timer and display the time since the timer was started. Timer stops when "stopTimer" is triggered on document.
  */
 function startTimer(){
 	const startTime = Date.now();
