@@ -236,13 +236,6 @@ function getGameTime(){
 //
 //-------------------------------------------------------------------------------------------------
 
-// /**
-//  * @description: Send trigger for game end events.
-//  */
-// function triggerGameEnd(){
-// 	$(document).trigger('gameEnd');
-// }
-
 /**
  * @description: Check if game is won (all cards are matched).
  * @returns: {boolean} true if all cards are matched, false otherwise.
@@ -276,6 +269,8 @@ function displayCongratulations(){
 	$('.stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
 	$('.stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
 }
+
+
 //-------------------------------------------------------------------------------------------------
 //
 // Card Selection
@@ -372,15 +367,6 @@ function cardPick(card){
 	console.log('Card click processing is done.');
 }
 
-/**
- * @description: Create event lister for click on any card.
- */
-function createCardClickEventListener(){
-	$('.card-content').click(function(){
-		cardPick(this);
-	});
-}
-
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -436,7 +422,7 @@ function destroyGame(){
 
 //-------------------------------------------------------------------------------------------------
 //
-// Restart
+// User Action Event Listeners
 //
 //-------------------------------------------------------------------------------------------------
 
@@ -452,6 +438,58 @@ function createRestartButtonEventListener(){
 		startTimer();
 		createCardClickEventListener();
 	});
+}
+
+/**
+ * @description: Create event lister for click on any card.
+ */
+function createCardClickEventListener(){
+	$('.card-content').click(function(){
+		cardPick(this);
+	});
+}
+
+
+//-------------------------------------------------------------------------------------------------
+//
+// Game Status Events
+//
+//-------------------------------------------------------------------------------------------------
+
+// Game start
+
+function createGameStartEventListener(){
+	$(document).on('gameStart', function(){
+		console.log('Game started!');
+	});
+}
+
+function triggerGameStart(){
+	$(document).trigger('gameStart');
+}
+
+// Game end
+
+function createGameEndEventListener(){
+	$(document).on('gameEnd', function(){
+		console.log('Game ended!');
+	});
+}
+
+function triggerGameEnd(){
+	$(document).trigger('gameEnd');
+}
+
+// Game won
+
+function createGameWonEventListener(){
+	$(document).on('gameWon', function(){
+		console.log('Game won!');
+	});
+}
+
+function triggerGameWon(){
+	$(document).trigger('gameWon');
 }
 
 
