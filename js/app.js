@@ -81,39 +81,6 @@ function getRandomSymbolArray(){
 	return symbolsShuffled
 }
 
-//-------------------------------------------------------------------------------------------------
-//
-// Create Cards
-//
-//-------------------------------------------------------------------------------------------------
-
-/**
- * @description: Add 16 cards (8 symbols -- always two cards with same symbol) to card area.
- */
-function createCards(){
-	const symbols = getRandomSymbolArray();
-	const cardsPerRow = 4;
-	const cardsPerColumn = 4;
-	let currentCardNumber = 0;
-	let lastCardCreated;
-
-	for (let row = 1; row <= cardsPerRow; row++) {
-		for (let column = 1; column <= cardsPerColumn; column++){
-			currentCardNumber += 1;
-			symbolIndex = currentCardNumber - 1;
-			currentSymbol = symbols[symbolIndex];
-			$('.card-area').append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
-		}
-	}
-}
-
-/**
- * @description: Remove all cards from the card area.
- */
-function destroyCards(){
-	$('.card-area').find('.card-spacer').remove();
-}
-
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -280,7 +247,7 @@ function getGameTime(){
  * @description: Check if game is won (all cards are matched).
  * @returns: {boolean} true if all cards are matched, false otherwise.
  */
-function gameIsWon() {
+function allCardsMatched() {
 	// console.log('Checking if game is won.')
 	const numberOfCards = $('.card-content').length;
 	const numberOfMatchedCards = $('.matched').length;
@@ -370,7 +337,7 @@ function checksAndActionsAfterCardPick() {
 		// Check equality of selected cards and perform according response
 		checkPickedCards();
 		// Check game status
-		if (gameIsWon()){
+		if (allCardsMatched()){
 			triggerStopTimer();
 			displayCongratulations();
 		}
@@ -417,6 +384,58 @@ function createCardClickEventListener(){
 
 //-------------------------------------------------------------------------------------------------
 //
+// Build Game
+//
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Add 16 cards (8 symbols -- always two cards with same symbol) to card area.
+ */
+function createCards(){
+	const symbols = getRandomSymbolArray();
+	const cardsPerRow = 4;
+	const cardsPerColumn = 4;
+	let currentCardNumber = 0;
+	let lastCardCreated;
+
+	for (let row = 1; row <= cardsPerRow; row++) {
+		for (let column = 1; column <= cardsPerColumn; column++){
+			currentCardNumber += 1;
+			symbolIndex = currentCardNumber - 1;
+			currentSymbol = symbols[symbolIndex];
+			$('.card-area').append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
+		}
+	}
+}
+
+/**
+ * @description: Remove all cards from the card area.
+ */
+function destroyCards(){
+	$('.card-area').find('.card-spacer').remove();
+}
+
+/**
+ * @description: Build the game elements.
+ */
+function buildGame(){
+	writeTime(0);
+	setMovesCount(0);
+	activateAllStars();
+	createCards();
+}
+
+/**
+ * @description: Destroy the game elements.
+ */
+function destroyGame(){
+	triggerStopTimer();
+	destroyCards();
+}
+
+
+//-------------------------------------------------------------------------------------------------
+//
 // Restart
 //
 //-------------------------------------------------------------------------------------------------
@@ -426,13 +445,10 @@ function createCardClickEventListener(){
  */
 function createRestartButtonEventListener(){
 	$('.restart-button').click(function(){
-		triggerStopTimer();
-		destroyCards();
+		destroyGame();
 
-		writeTime(0);
-		setMovesCount(0);
-		activateAllStars();
-		createCards();
+		buildGame();
+
 		startTimer();
 		createCardClickEventListener();
 	});
@@ -449,7 +465,8 @@ function createRestartButtonEventListener(){
  * @description: Main function of the application. Needs to be run after the DOM is build initially.
  */
 function main(){
-	createCards();
+	buildGame();
+
 	startTimer();
 	createCardClickEventListener();
 	createRestartButtonEventListener();
