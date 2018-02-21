@@ -187,13 +187,6 @@ function getStarSymbols(numberOfStars){
 //-------------------------------------------------------------------------------------------------
 
 /**
- * @description: Send trigger to stop timer.
- */
-function triggerStopTimer(){
-	$(document).trigger('stopTimer');
-}
-
-/**
  * @description: Writer time for a certain number of seconds. Seconds will be reformatted into minutes and seconds.
  * @param: {number} seconds - Seconds in game to be written into timer.
  */
@@ -201,6 +194,14 @@ function writeTime(seconds){
 		const displayMinutes = Math.floor(seconds / 60);
 		const displaySeconds = Math.floor(seconds % 60);
 		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
+}
+
+/**
+ * @description: Return time string of game timer
+ * @returns: {string} Time string of game timer.
+ */
+function getGameTime(){
+	return $('.timer').html();
 }
 
 /**
@@ -222,17 +223,37 @@ function startTimer(){
 }
 
 /**
- * @description: Return time string of game timer
- * @returns: {string} Time string of game timer.
+ * @description: Send trigger to stop timer.
  */
-function getGameTime(){
-	return $('.timer').html();
+function triggerStopTimer(){
+	$(document).trigger('stopTimer');
 }
 
 
 //-------------------------------------------------------------------------------------------------
 //
-// Game Flow
+// Congratulations
+//
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Display congratulations message when game is won.
+ */
+function displayCongratulations(){
+	const moves = getCurrentMovesCount();
+	const stars = getStarSymbols(getCurrentStarRating());
+	const time = getGameTime();
+	$('body').append('<div class="congratulations">YOU WIN!</div>');
+	$('.congratulations').append('<table class="stats"></table>');
+	$('.stats').append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
+	$('.stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
+	$('.stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
+}
+
+
+//-------------------------------------------------------------------------------------------------
+//
+// Card Selection
 //
 //-------------------------------------------------------------------------------------------------
 
@@ -255,27 +276,6 @@ function allCardsMatched() {
 		return false;
 	}
 }
-
-/**
- * @description: Display congratulations message when game is won.
- */
-function displayCongratulations(){
-	const moves = getCurrentMovesCount();
-	const stars = getStarSymbols(getCurrentStarRating());
-	const time = getGameTime();
-	$('body').append('<div class="congratulations">YOU WIN!</div>');
-	$('.congratulations').append('<table class="stats"></table>');
-	$('.stats').append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
-	$('.stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
-	$('.stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
-}
-
-
-//-------------------------------------------------------------------------------------------------
-//
-// Card Selection
-//
-//-------------------------------------------------------------------------------------------------
 
 /**
  * @description: Check if picked cards match and execute according response.
@@ -333,8 +333,10 @@ function checksAndActionsAfterCardPick() {
 		checkPickedCards();
 		// Check game status
 		if (allCardsMatched()){
-			triggerStopTimer();
-			displayCongratulations();
+			// triggerStopTimer();
+			triggerGameEnd();
+			// displayCongratulations();
+			triggerGameWon();
 		}
 	} else {
 		console.log('Only one card was selected. Waiting for next input.');
@@ -409,6 +411,7 @@ function buildGame(){
 	setMovesCount(0);
 	activateAllStars();
 	createCards();
+	createGameStartEventListener();
 }
 
 /**
@@ -422,7 +425,30 @@ function destroyGame(){
 
 //-------------------------------------------------------------------------------------------------
 //
-// User Action Event Listeners
+// Card Events
+//
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Create event lister for click on any card.
+ */
+function createCardClickEventListener(){
+	$('.card-content').on("click", function(){
+		cardPick(this);
+	});
+}
+
+/**
+ * @description: Remove event lister for click on any card.
+ */
+function removeCardClickEventListener(){
+	$('.card-content').off("click");
+}
+
+
+//-------------------------------------------------------------------------------------------------
+//
+// Button Events
 //
 //-------------------------------------------------------------------------------------------------
 
@@ -430,23 +456,19 @@ function destroyGame(){
  * @description: Create event lister for click on restart button.
  */
 function createRestartButtonEventListener(){
-	$('.restart-button').click(function(){
+	$('.restart-button').on("click", function(){
+		triggerGameEnd();
 		destroyGame();
-
 		buildGame();
-
-		startTimer();
-		createCardClickEventListener();
+		triggerGameStart();
 	});
 }
 
 /**
- * @description: Create event lister for click on any card.
+ * @description: Create event lister for click on restart button.
  */
-function createCardClickEventListener(){
-	$('.card-content').click(function(){
-		cardPick(this);
-	});
+function removeRestartButtonEventListener(){
+	$('.restart-button').off("click")
 }
 
 
@@ -458,39 +480,77 @@ function createCardClickEventListener(){
 
 // Game start
 
-function createGameStartEventListener(){
-	$(document).on('gameStart', function(){
-		console.log('Game started!');
-	});
-}
-
 function triggerGameStart(){
 	$(document).trigger('gameStart');
 }
 
-// Game end
+function removeGameStartEventListener(){
+	$(document).off('gameStart');
+}
 
-function createGameEndEventListener(){
-	$(document).on('gameEnd', function(){
-		console.log('Game ended!');
+function createGameStartEventListener(){
+	$(document).on('gameStart', function(){
+		console.log('Game started!');
+		startTimer();
+		// enableCardClick
+		createCardClickEventListener();
+		// enableRestartClick
+		createRestartButtonEventListener();
+		// enableCardMatch
+		// enableGameEnd
+		createGameEndEventListener();
+		// enableGameWon
+		createGameWonEventListener();
+		// Game is already started. It can not be started again.
+		removeGameStartEventListener();
 	});
 }
+
+// Game end
 
 function triggerGameEnd(){
 	$(document).trigger('gameEnd');
 }
 
-// Game won
+function removeGameEndEventListener(){
+	$(document).off('gameEnd');
+}
 
-function createGameWonEventListener(){
-	$(document).on('gameWon', function(){
-		console.log('Game won!');
+function createGameEndEventListener(){
+	$(document).on('gameEnd', function(){
+		console.log('Game ended!');
+		// stop timer
+		triggerStopTimer();
+		// remove option to click cards
+		removeCardClickEventListener();
+		// remove option to click restart button
+		removeRestartButtonEventListener();
+		// disable card match
+		// disable card reject
+		// disable game end. Game is already ended and can not be ended again.
+		removeGameEndEventListener();
 	});
 }
+
+// Game won
 
 function triggerGameWon(){
 	$(document).trigger('gameWon');
 }
+
+function removeGameWonEventListener(){
+	$(document).off('gameWon');
+}
+
+function createGameWonEventListener(){
+	$(document).on('gameWon', function(){
+		console.log('Game won!');
+		// displayCongratulations();
+		// Game is already won. It can not be won again
+		removeGameWonEventListener();
+	});
+}
+
 
 
 //-------------------------------------------------------------------------------------------------
@@ -504,10 +564,7 @@ function triggerGameWon(){
  */
 function main(){
 	buildGame();
-
-	startTimer();
-	createCardClickEventListener();
-	createRestartButtonEventListener();
+	triggerGameStart();
 }
 
 // This is running the DOM manipulation after the DOM is initially created.
