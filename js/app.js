@@ -249,10 +249,10 @@ function allCardsMatched() {
 		// $('body').append('<div>YOU WIN!</div>');
 		// console.log('Game is won!!')
 		// triggerGameEnd();
-		return true
+		return true;
 	} else {
 		// console.log('Game is not won yet.')
-		return false
+		return false;
 	}
 }
 
