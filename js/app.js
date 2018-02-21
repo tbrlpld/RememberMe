@@ -1,7 +1,7 @@
 
 //-------------------------------------------------------------------------------------------------
 //
-// Random Symbol Array
+// Cards
 //
 //-------------------------------------------------------------------------------------------------
 
@@ -81,6 +81,32 @@ function getRandomSymbolArray(){
 	return symbolsShuffled
 }
 
+/**
+ * @description: Add 16 cards (8 symbols -- always two cards with same symbol) to card area.
+ */
+function createCards(){
+	const symbols = getRandomSymbolArray();
+	const cardsPerRow = 4;
+	const cardsPerColumn = 4;
+	let currentCardNumber = 0;
+	let lastCardCreated;
+
+	for (let row = 1; row <= cardsPerRow; row++) {
+		for (let column = 1; column <= cardsPerColumn; column++){
+			currentCardNumber += 1;
+			symbolIndex = currentCardNumber - 1;
+			currentSymbol = symbols[symbolIndex];
+			$('.card-area').append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
+		}
+	}
+}
+
+/**
+ * @description: Remove all cards from the card area.
+ */
+function destroyCards(){
+	$('.card-area').find('.card-spacer').remove();
+}
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -240,6 +266,7 @@ function triggerStopTimer(){
  * @description: Display congratulations message when game is won.
  */
 function displayCongratulations(){
+	console.log("Displaying the congratulations");
 	const moves = getCurrentMovesCount();
 	const stars = getStarSymbols(getCurrentStarRating());
 	const time = getGameTime();
@@ -248,8 +275,14 @@ function displayCongratulations(){
 	$('.stats').append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
 	$('.stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
 	$('.stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
+	$('.congratulations').append('<button type="button" class="play-again-button">&#10226;</button>');
+	createPlayAgainButtonEventListener();
 }
 
+function destroyCongratulations(){
+	console.log("Destroying the congratulations");
+	$('body').find('.congratulations').remove();
+}
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -377,33 +410,6 @@ function cardPick(card){
 //-------------------------------------------------------------------------------------------------
 
 /**
- * @description: Add 16 cards (8 symbols -- always two cards with same symbol) to card area.
- */
-function createCards(){
-	const symbols = getRandomSymbolArray();
-	const cardsPerRow = 4;
-	const cardsPerColumn = 4;
-	let currentCardNumber = 0;
-	let lastCardCreated;
-
-	for (let row = 1; row <= cardsPerRow; row++) {
-		for (let column = 1; column <= cardsPerColumn; column++){
-			currentCardNumber += 1;
-			symbolIndex = currentCardNumber - 1;
-			currentSymbol = symbols[symbolIndex];
-			$('.card-area').append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
-		}
-	}
-}
-
-/**
- * @description: Remove all cards from the card area.
- */
-function destroyCards(){
-	$('.card-area').find('.card-spacer').remove();
-}
-
-/**
  * @description: Build the game elements.
  */
 function buildGame(){
@@ -418,7 +424,6 @@ function buildGame(){
  * @description: Destroy the game elements.
  */
 function destroyGame(){
-	triggerStopTimer();
 	destroyCards();
 }
 
@@ -452,12 +457,17 @@ function removeCardClickEventListener(){
 //
 //-------------------------------------------------------------------------------------------------
 
+// Restart
+
 /**
  * @description: Create event lister for click on restart button.
  */
 function createRestartButtonEventListener(){
 	$('.restart-button').on("click", function(){
+		console.log('"Restart" button clicked');
 		triggerGameEnd();
+		// Game has been ended and con not be won anymore.
+		removeGameWonEventListener();
 		destroyGame();
 		buildGame();
 		triggerGameStart();
@@ -471,6 +481,20 @@ function removeRestartButtonEventListener(){
 	$('.restart-button').off("click")
 }
 
+// Play again
+
+/**
+ * @description: Create event lister for click on play again button.
+ */
+function createPlayAgainButtonEventListener(){
+	$('.play-again-button').on("click", function(){
+		console.log('"Play Again" button clicked');
+		destroyCongratulations();
+		destroyGame();
+		buildGame();
+		triggerGameStart();
+	});
+}
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -481,14 +505,17 @@ function removeRestartButtonEventListener(){
 // Game start
 
 function triggerGameStart(){
+	console.log('Trigger "gameStart"');
 	$(document).trigger('gameStart');
 }
 
 function removeGameStartEventListener(){
+	console.log('Removing the "gameStart" event listener');
 	$(document).off('gameStart');
 }
 
 function createGameStartEventListener(){
+	console.log('Creating the "gameStart" event listener');
 	$(document).on('gameStart', function(){
 		console.log('Game started!');
 		startTimer();
@@ -509,14 +536,17 @@ function createGameStartEventListener(){
 // Game end
 
 function triggerGameEnd(){
+	console.log('Trigger "gameEnd"');
 	$(document).trigger('gameEnd');
 }
 
 function removeGameEndEventListener(){
+	console.log('Removing the "gameEnd" event listener');
 	$(document).off('gameEnd');
 }
 
 function createGameEndEventListener(){
+	console.log('Creating the "gameEnd" event listener');
 	$(document).on('gameEnd', function(){
 		console.log('Game ended!');
 		// stop timer
@@ -535,19 +565,22 @@ function createGameEndEventListener(){
 // Game won
 
 function triggerGameWon(){
+	console.log('Trigger "gameWon"');
 	$(document).trigger('gameWon');
 }
 
 function removeGameWonEventListener(){
+	console.log('Removing the "gameWon" event listener');
 	$(document).off('gameWon');
 }
 
 function createGameWonEventListener(){
+	console.log('Creating the "gameWon" event listener')
 	$(document).on('gameWon', function(){
 		console.log('Game won!');
-		// displayCongratulations();
 		// Game is already won. It can not be won again
 		removeGameWonEventListener();
+		displayCongratulations();
 	});
 }
 
