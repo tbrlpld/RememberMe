@@ -9,27 +9,26 @@ Game is developed using jQuery 3.2.1 (jquery-3.2.1.min.js).
 New Code Sections/Order
 -----------------------
 
-DOM Creation
-	Build Welcome
-	Build Game
-	Cards (Symbol Array, Shuffling, Card Creation)
-	Build Congratulations
+* DOM Creation
+  * Build Welcome
+  * Build Game
+  * Cards (Symbol Array, Shuffling, Card Creation)
+  * Build Congratulations
 
-Animations (if needed)
+* Animations (if needed)
 
-Stats
-	Timer
-	Move Counter
-	Star Rating
+* Stats
+  * Timer
+  * Move Counter
+  * Star Rating
 
-Events
-	Button Events
-	Card Events
-		Card Selection (Card Pick, Checks, )
-	Game Events
+* Events
+  * Button Events
+  * Card Events
+    * Card Selection (Card Pick, Checks, )
+  * Game Events
 
-RUN
-
+* RUN
 
 
 TODO
