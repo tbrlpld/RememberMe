@@ -1,8 +1,33 @@
-
 //-------------------------------------------------------------------------------------------------
 //
-// Cards
+// DOM Creation
 //
+//-------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------
+// Build Game
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Build the game elements.
+ */
+function buildGame(){
+	writeTime(0);
+	setMovesCount(0);
+	activateAllStars();
+	createCards();
+	createGameStartEventListener();
+}
+
+/**
+ * @description: Destroy the game elements.
+ */
+function destroyGame(){
+	destroyCards();
+}
+
+//-------------------------------------------------------------------------------------------------
+// Cards Creation
 //-------------------------------------------------------------------------------------------------
 
 /**
@@ -109,9 +134,94 @@ function destroyCards(){
 }
 
 //-------------------------------------------------------------------------------------------------
+// Congratulations
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Display congratulations message when game is won.
+ */
+function buildCongratulations(){
+	console.log("Displaying the congratulations");
+	const moves = getCurrentMovesCount();
+	const stars = getStarSymbols(getCurrentStarRating());
+	const time = getGameTime();
+	$('body').append('<div class="congratulations">YOU WIN!</div>');
+	$('.congratulations').append('<table class="stats"></table>');
+	$('.stats').append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
+	$('.stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
+	$('.stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
+	$('.congratulations').append('<button type="button" class="play-again-button">&#10226;</button>');
+	createPlayAgainButtonEventListener();
+}
+
+function destroyCongratulations(){
+	console.log("Destroying the congratulations");
+	$('body').find('.congratulations').remove();
+}
+
+//-------------------------------------------------------------------------------------------------
 //
+// Animations
+//
+//-------------------------------------------------------------------------------------------------
+
+// not sure yet if the Animations section will be needed.
+
+//-------------------------------------------------------------------------------------------------
+//
+// Statistics
+//
+//-------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------
+// Timer
+//-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Writer time for a certain number of seconds. Seconds will be reformatted into minutes and seconds.
+ * @param: {number} seconds - Seconds in game to be written into timer.
+ */
+function writeTime(seconds){
+		const displayMinutes = Math.floor(seconds / 60);
+		const displaySeconds = Math.floor(seconds % 60);
+		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
+}
+
+/**
+ * @description: Return time string of game timer
+ * @returns: {string} Time string of game timer.
+ */
+function getGameTime(){
+	return $('.timer').html();
+}
+
+/**
+ * @description: Start a timer and display the time since the timer was started. Timer stops when "stopTimer" is triggered on document.
+ */
+function startTimer(){
+	const startTime = Date.now();
+
+	const timer = setInterval(function(){
+		let now = Date.now();
+		let deltaSeconds = Math.floor((now - startTime)/1000);
+		writeTime(deltaSeconds);
+	}, 1000);
+
+	// Event listener for timer to stop
+	$(document).on('stopTimer', function(){
+		clearInterval(timer);
+	});
+}
+
+/**
+ * @description: Send trigger to stop timer.
+ */
+function triggerStopTimer(){
+	$(document).trigger('stopTimer');
+}
+
+//-------------------------------------------------------------------------------------------------
 // Move Counter
-//
 //-------------------------------------------------------------------------------------------------
 
 /**
@@ -144,9 +254,7 @@ function increaseMovesCount(){
 }
 
 //-------------------------------------------------------------------------------------------------
-//
 // Star Rating
-//
 //-------------------------------------------------------------------------------------------------
 
 /**
@@ -205,89 +313,57 @@ function getStarSymbols(numberOfStars){
 	return starSymbols
 }
 
-
 //-------------------------------------------------------------------------------------------------
 //
-// Timer
+// Events
 //
 //-------------------------------------------------------------------------------------------------
 
-/**
- * @description: Writer time for a certain number of seconds. Seconds will be reformatted into minutes and seconds.
- * @param: {number} seconds - Seconds in game to be written into timer.
- */
-function writeTime(seconds){
-		const displayMinutes = Math.floor(seconds / 60);
-		const displaySeconds = Math.floor(seconds % 60);
-		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
-}
+//-------------------------------------------------------------------------------------------------
+// Button Events
+//-------------------------------------------------------------------------------------------------
+
+// Restart ----------------------------------------------------------------------------------------
 
 /**
- * @description: Return time string of game timer
- * @returns: {string} Time string of game timer.
+ * @description: Create event lister for click on restart button.
  */
-function getGameTime(){
-	return $('.timer').html();
-}
-
-/**
- * @description: Start a timer and display the time since the timer was started. Timer stops when "stopTimer" is triggered on document.
- */
-function startTimer(){
-	const startTime = Date.now();
-
-	const timer = setInterval(function(){
-		let now = Date.now();
-		let deltaSeconds = Math.floor((now - startTime)/1000);
-		writeTime(deltaSeconds);
-	}, 1000);
-
-	// Event listener for timer to stop
-	$(document).on('stopTimer', function(){
-		clearInterval(timer);
+function createRestartButtonEventListener(){
+	$('.restart-button').on("click", function(){
+		console.log('"Restart" button clicked');
+		triggerGameEnd();
+		// Game has been ended and con not be won anymore.
+		removeGameWonEventListener();
+		destroyGame();
+		buildGame();
+		triggerGameStart();
 	});
 }
 
 /**
- * @description: Send trigger to stop timer.
+ * @description: Create event lister for click on restart button.
  */
-function triggerStopTimer(){
-	$(document).trigger('stopTimer');
+function removeRestartButtonEventListener(){
+	$('.restart-button').off("click")
 }
 
-
-//-------------------------------------------------------------------------------------------------
-//
-// Congratulations
-//
-//-------------------------------------------------------------------------------------------------
+// Play again -------------------------------------------------------------------------------------
 
 /**
- * @description: Display congratulations message when game is won.
+ * @description: Create event lister for click on play again button.
  */
-function displayCongratulations(){
-	console.log("Displaying the congratulations");
-	const moves = getCurrentMovesCount();
-	const stars = getStarSymbols(getCurrentStarRating());
-	const time = getGameTime();
-	$('body').append('<div class="congratulations">YOU WIN!</div>');
-	$('.congratulations').append('<table class="stats"></table>');
-	$('.stats').append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
-	$('.stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
-	$('.stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
-	$('.congratulations').append('<button type="button" class="play-again-button">&#10226;</button>');
-	createPlayAgainButtonEventListener();
-}
-
-function destroyCongratulations(){
-	console.log("Destroying the congratulations");
-	$('body').find('.congratulations').remove();
+function createPlayAgainButtonEventListener(){
+	$('.play-again-button').on("click", function(){
+		console.log('"Play Again" button clicked');
+		destroyCongratulations();
+		destroyGame();
+		buildGame();
+		triggerGameStart();
+	});
 }
 
 //-------------------------------------------------------------------------------------------------
-//
-// Card Selection
-//
+// Card Events
 //-------------------------------------------------------------------------------------------------
 
 /**
@@ -368,7 +444,6 @@ function checksAndActionsAfterCardPick() {
 		if (allCardsMatched()){
 			// triggerStopTimer();
 			triggerGameEnd();
-			// displayCongratulations();
 			triggerGameWon();
 		}
 	} else {
@@ -402,38 +477,6 @@ function cardPick(card){
 	console.log('Card click processing is done.');
 }
 
-
-//-------------------------------------------------------------------------------------------------
-//
-// Build Game
-//
-//-------------------------------------------------------------------------------------------------
-
-/**
- * @description: Build the game elements.
- */
-function buildGame(){
-	writeTime(0);
-	setMovesCount(0);
-	activateAllStars();
-	createCards();
-	createGameStartEventListener();
-}
-
-/**
- * @description: Destroy the game elements.
- */
-function destroyGame(){
-	destroyCards();
-}
-
-
-//-------------------------------------------------------------------------------------------------
-//
-// Card Events
-//
-//-------------------------------------------------------------------------------------------------
-
 /**
  * @description: Create event lister for click on any card.
  */
@@ -450,59 +493,11 @@ function removeCardClickEventListener(){
 	$('.card-content').off("click");
 }
 
-
 //-------------------------------------------------------------------------------------------------
-//
-// Button Events
-//
+// Game Events
 //-------------------------------------------------------------------------------------------------
 
-// Restart
-
-/**
- * @description: Create event lister for click on restart button.
- */
-function createRestartButtonEventListener(){
-	$('.restart-button').on("click", function(){
-		console.log('"Restart" button clicked');
-		triggerGameEnd();
-		// Game has been ended and con not be won anymore.
-		removeGameWonEventListener();
-		destroyGame();
-		buildGame();
-		triggerGameStart();
-	});
-}
-
-/**
- * @description: Create event lister for click on restart button.
- */
-function removeRestartButtonEventListener(){
-	$('.restart-button').off("click")
-}
-
-// Play again
-
-/**
- * @description: Create event lister for click on play again button.
- */
-function createPlayAgainButtonEventListener(){
-	$('.play-again-button').on("click", function(){
-		console.log('"Play Again" button clicked');
-		destroyCongratulations();
-		destroyGame();
-		buildGame();
-		triggerGameStart();
-	});
-}
-
-//-------------------------------------------------------------------------------------------------
-//
-// Game Status Events
-//
-//-------------------------------------------------------------------------------------------------
-
-// Game start
+// Game start -------------------------------------------------------------------------------------
 
 function triggerGameStart(){
 	console.log('Trigger "gameStart"');
@@ -533,7 +528,7 @@ function createGameStartEventListener(){
 	});
 }
 
-// Game end
+// Game end ---------------------------------------------------------------------------------------
 
 function triggerGameEnd(){
 	console.log('Trigger "gameEnd"');
@@ -562,7 +557,7 @@ function createGameEndEventListener(){
 	});
 }
 
-// Game won
+// Game won ---------------------------------------------------------------------------------------
 
 function triggerGameWon(){
 	console.log('Trigger "gameWon"');
@@ -580,11 +575,9 @@ function createGameWonEventListener(){
 		console.log('Game won!');
 		// Game is already won. It can not be won again
 		removeGameWonEventListener();
-		displayCongratulations();
+		buildCongratulations();
 	});
 }
-
-
 
 //-------------------------------------------------------------------------------------------------
 //
