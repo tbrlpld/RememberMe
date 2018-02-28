@@ -7,7 +7,6 @@ Game is developed using jQuery 3.2.1 (jquery-3.2.1.min.js).
 
 TODO
 ----
-* Add restart/play-again button to congratulations overlay.
 * Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
 * Welcome message. Shows name of game and a button to start the game.
 * Add card animations for flipping the card, rejecting and accepting the pair.
