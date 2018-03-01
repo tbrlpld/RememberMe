@@ -605,7 +605,7 @@ function createTwoCardsPickedEventListener(){
 		console.log('Delaying the check of the card equality for visibility.')
 		setTimeout(function(){
 			checkPickedCardsEquality();
-		}, 1000);
+		}, 10000);
 	});
 }
 
