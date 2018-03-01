@@ -5,6 +5,12 @@
 //-------------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------
+// Build Welcome
+//-------------------------------------------------------------------------------------------------
+
+// empty so far
+
+//-------------------------------------------------------------------------------------------------
 // Build Game
 //-------------------------------------------------------------------------------------------------
 
@@ -12,6 +18,7 @@
  * @description: Build the game elements.
  */
 function buildGame(){
+	console.log('Building the game.')
 	writeTime(0);
 	setMovesCount(0);
 	activateAllStars();
@@ -23,6 +30,7 @@ function buildGame(){
  * @description: Destroy the game elements.
  */
 function destroyGame(){
+	console.log('Destroying the game.')
 	destroyCards();
 }
 
@@ -126,11 +134,34 @@ function createCards(){
 	}
 }
 
+//-------------------------------------------------------------------------------------------------
+// Cards Manipulation
+//-------------------------------------------------------------------------------------------------
+
 /**
  * @description: Remove all cards from the card area.
  */
 function destroyCards(){
 	$('.card-area').find('.card-spacer').remove();
+}
+
+/**
+ * @description: Add "matched" class to picked cards and remove "picked" class.
+ */
+function matchPickedCards(){
+	console.log('Adding "matched" class to picked cards.')
+	$('.picked').addClass('matched');
+	console.log('Removing picks!');
+	$('.picked').removeClass('picked');
+}
+
+/**
+ * @description: Remove "picked" class.
+ */
+function rejectPickedCards(){
+	console.log('Rejecting picked cards.')
+	console.log('Removing picks!')
+	$('.picked').removeClass('picked');
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -247,6 +278,7 @@ function setMovesCount(moves){
  * @description: Increase the currently shown number of moves by one.
  */
 function increaseMovesCount(){
+	console.log('Increasing moves count.')
 	let moves = getCurrentMovesCount();
 	moves += 1;
 	console.log('New number of moves = ' + moves);
@@ -281,6 +313,7 @@ function removeOneStar(){
  * @description: Update star rating based on current star rating and number of moves. Removes star if maximum number of moves for that star rating was reached.
  */
 function updateStarRating(){
+	console.log('Updating star rating.')
 	const maxMovesThreeStarRating = 3; //16;
 	const maxMovesTwoStarRating = 5; //24;
 	const currentStarRating = getCurrentStarRating();
@@ -296,6 +329,7 @@ function updateStarRating(){
  * @description: Set all dead stars to active.
  */
 function activateAllStars(){
+	console.log('Activating all stars.')
 	const deadStars = $('.star-area').find('.star-dead');
 	deadStars.addClass('star-active');
 	deadStars.removeClass('star-dead');
@@ -366,6 +400,8 @@ function createPlayAgainButtonEventListener(){
 // Card Events
 //-------------------------------------------------------------------------------------------------
 
+// Card Logic -------------------------------------------------------------------------------------
+
 /**
  * @description: Check if game is won (all cards are matched).
  * @returns: {boolean} true if all cards are matched, false otherwise.
@@ -375,7 +411,7 @@ function allCardsMatched() {
 	const numberOfCards = $('.card-content').length;
 	const numberOfMatchedCards = $('.matched').length;
 	// console.log('Cards matched: ' + numberOfMatchedCards);
-	if (numberOfMatchedCards == 2){
+	if (numberOfMatchedCards == 4){
 		// $('body').append('<div>YOU WIN!</div>');
 		// console.log('Game is won!!')
 		// triggerGameEnd();
@@ -386,19 +422,85 @@ function allCardsMatched() {
 	}
 }
 
+// /**
+//  * @description: Check if picked cards match and execute according response.
+//  */
+// function checkPickedCards() {
+// 	const pickedCards = $('.picked');
+// 	console.log('The picked cards are the following:');
+// 	console.log(pickedCards);
+
+// 	const pickedCardsSymbols = pickedCards.find('.card-symbol');
+// 	// Delay to allow user observation of picked symbols
+// 	pickedCardsSymbols.delay(800);
+
+// 	console.log('Comparing picked cards.');
+
+// 	const firstSymbol = pickedCardsSymbols.first().html();
+// 	console.log('First symbol = ' + firstSymbol);
+// 	const secondSymbol = pickedCardsSymbols.last().html();
+// 	console.log('Second symbol = ' + secondSymbol);
+
+// 	if (firstSymbol != undefined && firstSymbol === secondSymbol){
+// 		console.log('Cards are equal!')
+// 		pickedCards.addClass('matched');
+// 	} else {
+// 		console.log('Cards are NOT equal!')
+// 		console.log('Hiding symbols.')
+// 		pickedCardsSymbols.fadeOut('fast', function(){
+// 			console.log('Symbol faded out.')
+// 		});
+// 	}
+
+// 	// Remove selection
+// 	console.log('Removing picks!')
+// 	pickedCards.removeClass('picked');
+
+// 	// Delay on all symbol animations to prevent selection of further cards
+// 	// before animations are finished.
+// 	$('.card-symbol').delay(1000);
+// }
+
+// /**
+//  * @description: Run all checks and actions after a card has been picked. If only one card is picked, nothing is done. If two cards are picked, the move counter is increased, the star rating updated, the cards are checked for equality and the game status is checked.
+//  */
+// function checksAndActionsAfterCardPick() {
+// 	console.log('Staring checks.')
+// 	const targetNumberOfPicksPerMove = 2;
+// 	let numberOfPickedCards = $('.picked').length;
+// 	console.log('numberOfPickedCards = ' + numberOfPickedCards);
+// 	// Once two cards are selected, they need to be check for equality
+// 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
+// 		console.log('Two are selected. Time to compare them.')
+// 		increaseMovesCount();
+// 		updateStarRating();
+// 		// Check equality of selected cards and perform according response
+// 		checkPickedCards();
+// 		// Check game status
+// 		if (allCardsMatched()){
+// 			// triggerStopTimer();
+// 			triggerGameEnd();
+// 			triggerGameWon();
+// 		}
+// 	} else {
+// 		console.log('Only one card was selected. Waiting for next input.');
+// 	}
+// 	// Updating number of picked cards to check if removal has worked.
+// 	numberOfPickedCards = $('.picked').length;
+// 	console.log('numberOfPickedCards = ' + numberOfPickedCards);
+// 	console.log('Checks finished.')
+// }
+
 /**
- * @description: Check if picked cards match and execute according response.
+ * @description: Check if picked cards match and trigger according response.
  */
-function checkPickedCards() {
+function checkPickedCardsEquality() {
+	console.log('Checking equality of picked cards.');
 	const pickedCards = $('.picked');
 	console.log('The picked cards are the following:');
 	console.log(pickedCards);
 
 	const pickedCardsSymbols = pickedCards.find('.card-symbol');
-	// Delay to allow user observation of picked symbols
-	pickedCardsSymbols.delay(800);
-
-	console.log('Comparing picked cards.');
 
 	const firstSymbol = pickedCardsSymbols.first().html();
 	console.log('First symbol = ' + firstSymbol);
@@ -407,60 +509,33 @@ function checkPickedCards() {
 
 	if (firstSymbol != undefined && firstSymbol === secondSymbol){
 		console.log('Cards are equal!')
-		pickedCards.addClass('matched');
+		triggerCardsMatched();
 	} else {
 		console.log('Cards are NOT equal!')
-		console.log('Hiding symbols.')
-		pickedCardsSymbols.fadeOut('fast', function(){
-			console.log('Symbol faded out.')
-		});
+		triggerCardsRejected();
 	}
-
-	// Remove selection
-	console.log('Removing picks!')
-	pickedCards.removeClass('picked');
-
-	// Delay on all symbol animations to prevent selection of further cards
-	// before animations are finished.
-	$('.card-symbol').delay(1000);
 }
 
 /**
- * @description: Run all checks and actions after a card has been picked. If only one card is picked, nothing is done. If two cards are picked, the move counter is increased, the star rating updated, the cards are checked for equality and the game status is checked.
+ * @description: Checks if two cards (a pair) is picked.
  */
-function checksAndActionsAfterCardPick() {
-	console.log('Staring checks.')
+function checkIfTwoCardsPicked(){
+	console.log('Checking if two cards are picked.')
 	const targetNumberOfPicksPerMove = 2;
 	let numberOfPickedCards = $('.picked').length;
-	console.log('numberOfPickedCards = ' + numberOfPickedCards);
-	// Once two cards are selected, they need to be check for equality
 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
-		console.log('Two are selected. Time to compare them.')
-		increaseMovesCount();
-		updateStarRating();
-		// Check equality of selected cards and perform according response
-		checkPickedCards();
-		// Check game status
-		if (allCardsMatched()){
-			// triggerStopTimer();
-			triggerGameEnd();
-			triggerGameWon();
-		}
+		console.log('Two cards are picked.')
+		triggerTwoCardsPicked();
 	} else {
-		console.log('Only one card was selected. Waiting for next input.');
+		console.log('Different number than 2 cards are picked.')
 	}
-	// Updating number of picked cards to check if removal has worked.
-	numberOfPickedCards = $('.picked').length;
-	console.log('numberOfPickedCards = ' + numberOfPickedCards);
-	console.log('Checks finished.')
 }
 
 /**
  * @description: Add picked class and show card if card is allowed to be picked. Only two cards can be picked at a time. Matched and already picked cards can not be picked.
  * @param: {element} card - Object of the clicked card.
  */
-function cardPick(card){
-	console.log('Card was clicked.')
+function pickCard(card){
 	// Only two cards are allowed to be picked at a time.
 	const maximumNumberOfCardsPicked = 2;
 	let numberOfPickedCards = $('.picked').length;
@@ -469,20 +544,31 @@ function cardPick(card){
 		// A picked or matched card can not be selected again (or be unselected).
 		if ($(card).hasClass('picked') == false && $(card).hasClass('matched') == false){
 			$(card).addClass('picked');
-			$(card).find('.card-symbol').fadeIn(function(){
-				checksAndActionsAfterCardPick();
-			});
+			console.log('Card picked.')
+			$(card).find('.card-symbol').fadeIn()
+			console.log('Card symbol visible.')
+			// $(card).find('.card-symbol').fadeIn(function(){
+			// 	checksAndActionsAfterCardPick();
+			// });
+		} else {
+			console.warn('Card not picked. Card already picked or matched.')
 		}
+	} else {
+		console.warn('Card not picked. Maximum number of cards picked.')
 	}
-	console.log('Card click processing is done.');
 }
+
+// Card Click -------------------------------------------------------------------------------------
 
 /**
  * @description: Create event lister for click on any card.
  */
 function createCardClickEventListener(){
+	console.log('Creating the "cardClick" event listener.');
 	$('.card-content').on("click", function(){
-		cardPick(this);
+		console.log('Card was clicked.');
+		pickCard(this);
+		checkIfTwoCardsPicked();
 	});
 }
 
@@ -490,7 +576,90 @@ function createCardClickEventListener(){
  * @description: Remove event lister for click on any card.
  */
 function removeCardClickEventListener(){
+	console.log('Removing the "cardClick" event listener.');
 	$('.card-content').off("click");
+}
+
+// Two Cards Picked -------------------------------------------------------------------------------
+
+function triggerTwoCardsPicked(){
+	console.log('Trigger "twoCardsPicked".');
+	$('.card-area').trigger('twoCardsPicked');
+}
+
+function removeTwoCardsPickedEventListener(){
+	console.log('Removing the "twoCardsPicked" event listener.');
+	$('.card-area').off('twoCardsPicked');
+}
+
+function createTwoCardsPickedEventListener(){
+	console.log('Creating the "twoCardsPicked" event listener.');
+	$('.card-area').on('twoCardsPicked', function(){
+		console.log('Starting processing after two cards are picked.')
+		removeTwoCardsPickedEventListener();
+		removeCardClickEventListener();
+		increaseMovesCount();
+		updateStarRating();
+		createCardsMatchedEventListener();
+		createCardsRejectedEventListener();
+		console.log('Delaying the check of the card equality for visibility.')
+		setTimeout(function(){
+			checkPickedCardsEquality();
+		}, 1000);
+	});
+}
+
+// Cards Matched ----------------------------------------------------------------------------------
+
+function triggerCardsMatched(){
+	console.log('Trigger "cardsMatched".');
+	$('.card-area').trigger('cardsMatched');
+}
+
+function removeCardsMatchedEventListener(){
+	console.log('Removing the "cardsMatched" event listener.');
+	$('.card-area').off('cardsMatched');
+}
+
+function createCardsMatchedEventListener(){
+	console.log('Creating the "cardsMatched" event listener.');
+	$('.card-area').on('cardsMatched', function(){
+		console.log('Starting processing after two cards are matched.')
+		removeCardsMatchedEventListener();
+		removeCardsRejectedEventListener();
+		matchPickedCards();
+		if (allCardsMatched() == true){
+			triggerGameEnd();
+			triggerGameWon();
+		} else {
+			createCardClickEventListener();
+			createTwoCardsPickedEventListener();
+		}
+	});
+}
+
+// Cards Rejected ---------------------------------------------------------------------------------
+
+function triggerCardsRejected(){
+	console.log('Trigger "cardsRejected".');
+	$('.card-area').trigger('cardsRejected');
+}
+
+function removeCardsRejectedEventListener(){
+	console.log('Removing the "cardsRejected" event listener.');
+	$('.card-area').off('cardsRejected');
+}
+
+function createCardsRejectedEventListener(){
+	console.log('Creating the "cardsRejected" event listener.');
+	$('.card-area').on('cardsRejected', function(){
+		console.log('Starting processing after two cards are rejected.')
+		removeCardsRejectedEventListener();
+		removeCardsMatchedEventListener();
+		rejectPickedCards();
+		createCardClickEventListener();
+		createTwoCardsPickedEventListener();
+	});
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -500,77 +669,76 @@ function removeCardClickEventListener(){
 // Game start -------------------------------------------------------------------------------------
 
 function triggerGameStart(){
-	console.log('Trigger "gameStart"');
+	console.log('Trigger "gameStart".');
 	$(document).trigger('gameStart');
 }
 
 function removeGameStartEventListener(){
-	console.log('Removing the "gameStart" event listener');
+	console.log('Removing the "gameStart" event listener.');
 	$(document).off('gameStart');
 }
 
 function createGameStartEventListener(){
-	console.log('Creating the "gameStart" event listener');
+	console.log('Creating the "gameStart" event listener.');
 	$(document).on('gameStart', function(){
 		console.log('Game started!');
-		startTimer();
-		// enableCardClick
-		createCardClickEventListener();
-		// enableRestartClick
-		createRestartButtonEventListener();
-		// enableCardMatch
-		// enableGameEnd
-		createGameEndEventListener();
-		// enableGameWon
-		createGameWonEventListener();
 		// Game is already started. It can not be started again.
 		removeGameStartEventListener();
+
+		startTimer();
+
+		createRestartButtonEventListener();
+
+		createCardClickEventListener();
+		createTwoCardsPickedEventListener();
+
+		createGameEndEventListener();
+		createGameWonEventListener();
 	});
 }
 
 // Game end ---------------------------------------------------------------------------------------
 
 function triggerGameEnd(){
-	console.log('Trigger "gameEnd"');
+	console.log('Trigger "gameEnd".');
 	$(document).trigger('gameEnd');
 }
 
 function removeGameEndEventListener(){
-	console.log('Removing the "gameEnd" event listener');
+	console.log('Removing the "gameEnd" event listener.');
 	$(document).off('gameEnd');
 }
 
 function createGameEndEventListener(){
-	console.log('Creating the "gameEnd" event listener');
+	console.log('Creating the "gameEnd" event listener.');
 	$(document).on('gameEnd', function(){
 		console.log('Game ended!');
+		// Disable game end. Game is already ended and can not be ended again.
+		removeGameEndEventListener();
+
 		// stop timer
 		triggerStopTimer();
-		// remove option to click cards
+
+		// Disable user interactions
 		removeCardClickEventListener();
-		// remove option to click restart button
 		removeRestartButtonEventListener();
-		// disable card match
-		// disable card reject
-		// disable game end. Game is already ended and can not be ended again.
-		removeGameEndEventListener();
 	});
 }
 
 // Game won ---------------------------------------------------------------------------------------
 
 function triggerGameWon(){
-	console.log('Trigger "gameWon"');
+	console.log('Trigger "gameWon".');
 	$(document).trigger('gameWon');
 }
 
 function removeGameWonEventListener(){
-	console.log('Removing the "gameWon" event listener');
+	console.log('Removing the "gameWon" event listener.');
 	$(document).off('gameWon');
 }
 
 function createGameWonEventListener(){
-	console.log('Creating the "gameWon" event listener')
+	console.log('Creating the "gameWon" event listener.');
 	$(document).on('gameWon', function(){
 		console.log('Game won!');
 		// Game is already won. It can not be won again
