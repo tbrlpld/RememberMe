@@ -82,7 +82,7 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	font-size: calc(10vmin);
 	/*border: solid;*/
 	/*visibility: hidden;*/
-	display: none;
+	display: flex; /* this needs to be "none" to hide the symbols*/
 	/*opacity: 0;*/
 }
 
