@@ -9,10 +9,11 @@ Game is developed using jQuery 3.2.1 (jquery-3.2.1.min.js).
 New Code Sections/Order
 -----------------------
 
-* DOM Creation
+* DOM Manipulation
   * Build Welcome
   * Build Game
-  * Cards (Symbol Array, Shuffling, Card Creation)
+  * Card Creation
+  * Card Manipulation
   * Build Congratulations
 
 * Animations (if needed)
@@ -33,16 +34,15 @@ New Code Sections/Order
 
 TODO
 ----
-* Make card logic really event based. Card click is an event. Create events for cards match and rejected.
-* To make the code even more event controlled:
-  * Card click checks if two cards are clicked
-  * If so, triggers pair selected
-  * On pairSelected equality check is done
-  * If successful, match is triggered
-  * Else, reject is triggered
-  * Probably makes sense to create functions to create and deactivate all card events at once
-* Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
+* Pressing the restart button during the delay before equality check
+  does not stop the delay and the execution thereafter.
+  The check is then performed on no selected cards.
+  But, this can lead to an issue if only one card is selected before the check is performed.
+  The one card will be first and last object at the same time and therefore check as equal.
+  Best would be if the restart button clears the timeout and prevents the intended function.
+  See (https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)[link].
 * Welcome message. Shows name of game and a button to start the game.
+* Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
 * Add card animations for flipping the card, rejecting and accepting the pair.
 * Vertically center the game in the body/browser.
 * Make restart button be only text icon (remove border etc.)
