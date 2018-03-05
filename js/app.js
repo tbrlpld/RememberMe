@@ -16,7 +16,15 @@ let equalityResponseTimeout
 // Build Welcome
 //-------------------------------------------------------------------------------------------------
 
-// empty so far
+function buildWelcome(){
+	$('body').append('<div class="welcome">RememberMe!</div>');
+	$('.welcome').append('<button type="button" class="play-game-button">Play!</button>');
+	createPlayGameButtonEventListener();
+}
+
+function destroyWelcome(){
+	$('.welcome').remove();
+}
 
 //-------------------------------------------------------------------------------------------------
 // Build Game
@@ -364,6 +372,18 @@ function getStarSymbols(numberOfStars){
 //-------------------------------------------------------------------------------------------------
 // Button Events
 //-------------------------------------------------------------------------------------------------
+
+/**
+ * @description: Create event lister for click on "play game" button.
+ */
+function createPlayGameButtonEventListener(){
+	$('.play-game-button').on("click", function(){
+		console.log('"Play Game" button clicked');
+		destroyWelcome();
+		buildGame();
+		triggerGameStart();
+	});
+}
 
 // Restart ----------------------------------------------------------------------------------------
 
@@ -790,8 +810,9 @@ function createGameWonEventListener(){
  * @description: Main function of the application. Needs to be run after the DOM is build initially.
  */
 function main(){
-	buildGame();
-	triggerGameStart();
+	// buildGame();
+	// triggerGameStart();
+	buildWelcome();
 }
 
 // This is running the DOM manipulation after the DOM is initially created.
