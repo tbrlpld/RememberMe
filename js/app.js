@@ -1,5 +1,13 @@
 //-------------------------------------------------------------------------------------------------
 //
+// Global Variables
+//
+//-------------------------------------------------------------------------------------------------
+
+let equalityResponseTimeout
+
+//-------------------------------------------------------------------------------------------------
+//
 // DOM Creation
 //
 //-------------------------------------------------------------------------------------------------
@@ -368,6 +376,12 @@ function createRestartButtonEventListener(){
 		triggerGameEnd();
 		// Game has been ended and con not be won anymore.
 		removeGameWonEventListener();
+		// Because of the timeout set after two cards are clicked, before the check is performed
+		// it can happen that the restart button is clicked during this delay. To prevent checks
+		// that where triggered before restart button is clicked, being  performed after the
+		// restart button was clicked (in the new game), the timeout has to be cleared. The
+		// function defined in the timeout will not be performed.
+		clearTimeout(equalityResponseTimeout);
 		destroyGame();
 		buildGame();
 		triggerGameStart();
@@ -514,8 +528,8 @@ function twoCardsPicked(){
  * @returns: {boolean} true if picked cards are equal, false otherwise.
  */
 function pickedCardsEqual() {
-	// The equality should ony be checked for two cards. Therefore, double checking that two cards are picked.
 	console.log('Checking equality of picked cards.');
+	// The equality should ony be checked for two cards. Therefore, double checking that two cards are picked.
 	if (twoCardsPicked() == true){
 		const pickedCards = $('.picked');
 		console.log('The picked cards are the following:');
@@ -607,14 +621,14 @@ function createTwoCardsPickedEventListener(){
 	console.log('Creating the "twoCardsPicked" event listener.');
 	$('.card-area').on('twoCardsPicked', function(){
 		console.log('Starting processing after two cards are picked.')
-		removeTwoCardsPickedEventListener();
 		removeCardClickEventListener();
+		removeTwoCardsPickedEventListener();
 		increaseMovesCount();
 		updateStarRating();
 		createCardsMatchedEventListener();
 		createCardsRejectedEventListener();
 		console.log('Delaying the check of the card equality for visibility.')
-		setTimeout(function(){
+		equalityResponseTimeout = setTimeout(function(){
 			if (pickedCardsEqual() == true){
 				triggerCardsMatched();
 			} else {
@@ -737,6 +751,10 @@ function createGameEndEventListener(){
 		// Disable user interactions
 		removeCardClickEventListener();
 		removeRestartButtonEventListener();
+
+		// Disable checks
+		removeCardsRejectedEventListener();
+		removeCardsMatchedEventListener();
 	});
 }
 
