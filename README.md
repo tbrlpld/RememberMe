@@ -34,6 +34,7 @@ New Code Sections/Order
 
 TODO
 ----
+* Reponse to picking cards on iPhone is delayed! This needs to be fixed.
 * Welcome message. Shows name of game and a button to start the game.
 * Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
 * Add card animations for flipping the card, rejecting and accepting the pair.
