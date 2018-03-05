@@ -376,8 +376,8 @@ function createRestartButtonEventListener(){
 		triggerGameEnd();
 		// Game has been ended and con not be won anymore.
 		removeGameWonEventListener();
-		// Because of the timeout set after two cards are clicked, before the check is performed
-		// it can happen that the restart button is clicked during this delay. To prevent checks
+		// Because of the timeout set after two cards are clicked, before the response is performed
+		// it can happen that the restart button is clicked during this delay. To prevent responses
 		// that where triggered before restart button is clicked, being  performed after the
 		// restart button was clicked (in the new game), the timeout has to be cleared. The
 		// function defined in the timeout will not be performed.
@@ -634,7 +634,7 @@ function createTwoCardsPickedEventListener(){
 			} else {
 				triggerCardsRejected();
 			};
-		}, 10000);
+		}, 1000);
 	});
 }
 

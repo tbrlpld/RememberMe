@@ -15,3 +15,4 @@ This is a unsorted list of resources (outside of Udacity) I used to create the m
 * How to make a modal (congratulations pop-up): (https://www.w3schools.com/howto/howto_css_modals.asp)
 * CSS button styling: (https://www.w3schools.com/css/css3_buttons.asp)
 * Creating custom events without a specific DOM element: (https://stackoverflow.com/questions/1553342/custom-event-in-jquery-that-isnt-bound-to-a-dom-element)
+* Setting and clearing timeouts: (https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).

@@ -34,13 +34,6 @@ New Code Sections/Order
 
 TODO
 ----
-* Pressing the restart button during the delay before equality check
-  does not stop the delay and the execution thereafter.
-  The check is then performed on no selected cards.
-  But, this can lead to an issue if only one card is selected before the check is performed.
-  The one card will be first and last object at the same time and therefore check as equal.
-  Best would be if the restart button clears the timeout and prevents the intended function.
-  See [this](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
 * Welcome message. Shows name of game and a button to start the game.
 * Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
 * Add card animations for flipping the card, rejecting and accepting the pair.
