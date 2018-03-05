@@ -41,11 +41,6 @@ TODO
   The one card will be first and last object at the same time and therefore check as equal.
   Best would be if the restart button clears the timeout and prevents the intended function.
   See [this](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
-* It might be a good idea to move the event triggers out of the logic functions (checkIfTwoCardsPicked, checkPickedCardsEquality).
-  The logic functions should be changed so that they return true/false based on their check.
-  This especially makes sense because so far I only call these logic functions at one place.
-  Therefore, not much code repetition is created.
-  This should increase the readability and reuseability.
 * Welcome message. Shows name of game and a button to start the game.
 * Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
 * Add card animations for flipping the card, rejecting and accepting the pair.
