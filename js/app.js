@@ -492,42 +492,51 @@ function allCardsMatched() {
 // }
 
 /**
- * @description: Check if picked cards match and trigger according response.
+ * @description: Checks if two cards are picked.
+ * @returns: {boolean} true two cards picked, false otherwise.
  */
-function checkPickedCardsEquality() {
-	console.log('Checking equality of picked cards.');
-	const pickedCards = $('.picked');
-	console.log('The picked cards are the following:');
-	console.log(pickedCards);
-
-	const pickedCardsSymbols = pickedCards.find('.card-symbol');
-
-	const firstSymbol = pickedCardsSymbols.first().html();
-	console.log('First symbol = ' + firstSymbol);
-	const secondSymbol = pickedCardsSymbols.last().html();
-	console.log('Second symbol = ' + secondSymbol);
-
-	if (firstSymbol != undefined && firstSymbol === secondSymbol){
-		console.log('Cards are equal!')
-		triggerCardsMatched();
-	} else {
-		console.log('Cards are NOT equal!')
-		triggerCardsRejected();
-	}
-}
-
-/**
- * @description: Checks if two cards (a pair) is picked.
- */
-function checkIfTwoCardsPicked(){
+function twoCardsPicked(){
 	console.log('Checking if two cards are picked.')
 	const targetNumberOfPicksPerMove = 2;
 	let numberOfPickedCards = $('.picked').length;
 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
 		console.log('Two cards are picked.')
-		triggerTwoCardsPicked();
+		return true;
+		// triggerTwoCardsPicked();
 	} else {
 		console.log('Different number than 2 cards are picked.')
+		return false;
+	}
+}
+
+/**
+ * @description: Check if picked cards match-.
+ * @returns: {boolean} true if picked cards are equal, false otherwise.
+ */
+function pickedCardsEqual() {
+	// The equality should ony be checked for two cards. Therefore, double checking that two cards are picked.
+	console.log('Checking equality of picked cards.');
+	if (twoCardsPicked() == true){
+		const pickedCards = $('.picked');
+		console.log('The picked cards are the following:');
+		console.log(pickedCards);
+
+		const pickedCardsSymbols = pickedCards.find('.card-symbol');
+
+		const firstSymbol = pickedCardsSymbols.first().html();
+		console.log('First symbol = ' + firstSymbol);
+		const secondSymbol = pickedCardsSymbols.last().html();
+		console.log('Second symbol = ' + secondSymbol);
+
+		if (firstSymbol != undefined && firstSymbol === secondSymbol){
+			console.log('Cards are equal!')
+			// triggerCardsMatched();
+			return true;
+		} else {
+			console.log('Cards are NOT equal!')
+			// triggerCardsRejected();
+			return false;
+		}
 	}
 }
 
@@ -568,7 +577,9 @@ function createCardClickEventListener(){
 	$('.card-content').on("click", function(){
 		console.log('Card was clicked.');
 		pickCard(this);
-		checkIfTwoCardsPicked();
+		if (twoCardsPicked() == true){
+			triggerTwoCardsPicked();
+		}
 	});
 }
 
@@ -604,7 +615,11 @@ function createTwoCardsPickedEventListener(){
 		createCardsRejectedEventListener();
 		console.log('Delaying the check of the card equality for visibility.')
 		setTimeout(function(){
-			checkPickedCardsEquality();
+			if (pickedCardsEqual() == true){
+				triggerCardsMatched();
+			} else {
+				triggerCardsRejected();
+			};
 		}, 10000);
 	});
 }
@@ -653,7 +668,7 @@ function removeCardsRejectedEventListener(){
 function createCardsRejectedEventListener(){
 	console.log('Creating the "cardsRejected" event listener.');
 	$('.card-area').on('cardsRejected', function(){
-		console.log('Starting processing after two cards are rejected.')
+		console.log('Starting processing after picked cards are rejected.')
 		removeCardsRejectedEventListener();
 		removeCardsMatchedEventListener();
 		rejectPickedCards();
