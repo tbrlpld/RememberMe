@@ -18,3 +18,4 @@ This is a unsorted list of resources (outside of Udacity) I used to create the m
 * Setting and clearing timeouts: (https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
 * Eliminate 300ms delay on click events in mobile Safari: (https://stackoverflow.com/questions/12238587/eliminate-300ms-delay-on-click-events-in-mobile-safari)
 * More on the meta viewport tag (that fixes the iPhone delay): (https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag)
+* Centering elements (vertical and horizontal): (https://www.w3schools.com/csS/tryit.asp?filename=trycss_align_transform) or (https://www.w3schools.com/csS/css_align.asp)
