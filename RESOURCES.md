@@ -16,3 +16,5 @@ This is a unsorted list of resources (outside of Udacity) I used to create the m
 * CSS button styling: (https://www.w3schools.com/css/css3_buttons.asp)
 * Creating custom events without a specific DOM element: (https://stackoverflow.com/questions/1553342/custom-event-in-jquery-that-isnt-bound-to-a-dom-element)
 * Setting and clearing timeouts: (https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
+* Eliminate 300ms delay on click events in mobile Safari: (https://stackoverflow.com/questions/12238587/eliminate-300ms-delay-on-click-events-in-mobile-safari)
+* More on the meta viewport tag (that fixes the iPhone delay): (https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag)
