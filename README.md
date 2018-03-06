@@ -34,11 +34,10 @@ New Code Sections/Order
 
 TODO
 ----
-* Welcome message. Shows name of game and a button to start the game.
 * Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
-* Add card animations for flipping the card, rejecting and accepting the pair.
-* Vertically center the game in the body/browser.
-* Make restart button be only text icon (remove border etc.)
+* Add card animations for flipping the card, rejecting and accepting the pair and all cards matched (maybe a delay for congratulations necessary).
+* Make restart button be only text icon (remove border etc.).
+* Also, restart button needs to be vertically centered in header (more apparent on bigger screen).
 * Make hover shadow of cards smaller.
 * Create proper nice looking layout. Especially welcome and congratulations message.
 * Make sure layout looks good on all screen sizes/devices. This is also important for the font sizes.
