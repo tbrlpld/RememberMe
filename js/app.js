@@ -17,8 +17,12 @@ let equalityResponseTimeout
 //-------------------------------------------------------------------------------------------------
 
 function buildWelcome(){
-	$('body').append('<div class="welcome">RememberMe!</div>');
-	$('.welcome').append('<button type="button" class="play-game-button">Play!</button>');
+	$('body').append('<div class="welcome"></div>');
+	$('.welcome').append('<div class="welcome-content center-vertical-horizontal"></div>');
+	$('.welcome-content').append('<div class="welcome-above-title">Welcome to</div>');
+	$('.welcome-content').append('<div class="welcome-title">RememberMe!</div>');
+	$('.welcome-content').append('<div class="welcome-below-title">a memory game web application created for the Udacity Nanodegree "Into to Programming"</div>');
+	$('.welcome-content').append('<button type="button" class="play-game-button">Play!</button>');
 	createPlayGameButtonEventListener();
 }
 
@@ -192,12 +196,15 @@ function buildCongratulations(){
 	const moves = getCurrentMovesCount();
 	const stars = getStarSymbols(getCurrentStarRating());
 	const time = getGameTime();
-	$('body').append('<div class="congratulations">YOU WIN!</div>');
-	$('.congratulations').append('<table class="stats"></table>');
-	$('.stats').append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
-	$('.stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
-	$('.stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
-	$('.congratulations').append('<button type="button" class="play-again-button">&#10226;</button>');
+	$('body').append('<div class="congratulations"></div>');
+	$('.congratulations').append('<div class="congratulations-content center-vertical-horizontal"></div>');
+	$('.congratulations-content').append('<div class="congratulations-above-title">Congratulations</div>');
+	$('.congratulations-content').append('<div class="congratulations-title">YOU WIN!</div>');
+	$('.congratulations-content').append('<table class="congratulations-stats"></table>');
+	$('.congratulations-stats').append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
+	$('.congratulations-stats').append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
+	$('.congratulations-stats').append('<tr><td>Time</td><td>' + time + '</td></tr>');
+	$('.congratulations-content').append('<button type="button" class="play-again-button">&#10226;</button>');
 	createPlayAgainButtonEventListener();
 }
 
@@ -813,6 +820,7 @@ function main(){
 	// buildGame();
 	// triggerGameStart();
 	buildWelcome();
+	// buildCongratulations();
 }
 
 // This is running the DOM manipulation after the DOM is initially created.

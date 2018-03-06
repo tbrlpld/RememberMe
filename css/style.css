@@ -1,12 +1,39 @@
+/*-------------------------------------------------------------------------------------------------*/
+/* GENERAL */
+/*-------------------------------------------------------------------------------------------------*/
 
 * {
 	font-family: "Helvetica";
 	box-sizing: border-box;
 }
 
+.center-vertical-horizontal{
+	margin: 0;
+	position: absolute;
+	/* top and left define the position of the object relative to the parent in
+	dimensions of the parent.*/
+	top: 50%;
+	left: 50%;
+	/* transform translate shifts the element aways from the defined position
+	in dimensions of it self. That means these 50% are 50% of the element sizes
+	them selfs.*/
+	transform: translate(-50%, -50%);
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+/* Welcome */
+/*-------------------------------------------------------------------------------------------------*/
+
 .welcome{
+	border: yellow solid;
 	z-index: 1;
-	overflow: auto;
 	width: 100%;
 	height: 100%;
 	position: fixed;
@@ -19,10 +46,48 @@
 	font-size: calc(3vmin);
 }
 
-.play-game-button {
-/*	background: none;
-	border: none;*/
+.welcome-content{
+	border: red solid;
+	text-align: center;
 }
+
+
+.welcome-above-title{
+	border: orange solid;
+	display: block;
+	text-align: left;
+	width: 50%;
+	margin-right: 50%;
+}
+
+.welcome-title{
+	border: blue solid;
+	display: block;
+	font-weight: bold;
+	/*font-size: larger;*/
+	font-size: 300%;
+}
+
+.welcome-below-title{
+	border: green solid;
+	display: block;
+	text-align: right;
+	width: 50%;
+	margin-left: 50%;
+}
+
+.play-game-button {
+	/*background: none;*/
+	border: black solid;
+	display: block;
+	margin: auto;
+}
+
+
+/*-------------------------------------------------------------------------------------------------*/
+/* Game Area */
+/*-------------------------------------------------------------------------------------------------*/
+
 
 .game-area {
 	background: gray;
@@ -48,6 +113,15 @@
 	width: 25%;
 }
 
+.restart-button {
+/*	background: none;
+	border: none;*/
+}
+
+/*-------------------------------------------------------------------------------------------------*/
+/* Cards */
+/*-------------------------------------------------------------------------------------------------*/
+
 .card-area{
 	background: lightblue;
 	padding: 20px;
@@ -68,6 +142,7 @@ Pseudo element to create square cards.
 Sources:
 http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 */
+
 .card-spacer::before {
 	content:"";
 	display: block;
@@ -114,12 +189,9 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	background-color: green;
 }
 
-.unselectable {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+/*-------------------------------------------------------------------------------------------------*/
+/* Stats */
+/*-------------------------------------------------------------------------------------------------*/
 
 .counter-area {
 	/*text-align: left;*/
@@ -148,7 +220,12 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 .timer {
 }
 
+/*-------------------------------------------------------------------------------------------------*/
+/* Congratulations */
+/*-------------------------------------------------------------------------------------------------*/
+
 .congratulations{
+	border: yellow solid;
 	z-index: 1;
 	overflow: auto;
 	width: 100%;
@@ -163,13 +240,29 @@ http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 	font-size: calc(3vmin);
 }
 
-.stats {
-	margin: auto;
+.congratulations-content{
+	border: red solid;
+	text-align: center;
 }
 
-.restart-button {
-/*	background: none;
-	border: none;*/
+.congratulations-above-title{
+	border: orange solid;
+	/*font-size: medium;*/
+	text-align: left;
+	width: 75%;
+	margin-right: 25%;
+}
+
+.congratulations-title{
+	border: black solid;
+	display: block;
+	font-size: 300%;
+	font-weight: bold;
+}
+
+.congratulations-stats {
+	border: blue solid;
+	margin: auto;
 }
 
 .play-again-button {
