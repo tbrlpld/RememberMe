@@ -34,6 +34,7 @@ New Code Sections/Order
 
 TODO
 ----
+* Look up HTML tags/elements that suite the purpose of the elements best. Currently almost everything is divs. Try using things like header, nav, main, etc.
 * Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
 * Add card animations for flipping the card, rejecting and accepting the pair and all cards matched (maybe a delay for congratulations necessary).
 * Make restart button be only text icon (remove border etc.).
