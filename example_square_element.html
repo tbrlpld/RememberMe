@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<style type="text/css">
+			.square_spacer {
+				width: 300px;
+				background-color: steelblue;
+				border: solid;
+				position: relative;
+			}
+
+			.square_spacer::before {
+				content: "";
+				display: block;
+				padding-bottom: 100%;
+			}
+
+			.square_inner {
+				border: yellow dashed;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow: hidden;
+			}
+		</style>
+		<title>Example of a dynamic square</title>
+	</head>
+	<body>
+		This is square:
+		<div class="square_spacer"></div>
+		<br>
+		The width can be set dynamically.
+		<div class="square_spacer" style="width: 50%"></div>
+		<br>		
+		The content makes it <b>not</b> square because of the content:
+		<div class="square_spacer">
+			With content.
+		</div>		
+		<br>
+		You could say there is no line height, but that's ugly:
+		<div class="square_spacer" style="line-height: 0">
+			With content.
+		</div>		
+		<br>
+		The better way is probably too use the square as a wrapper for an element that completely fills the square. 
+		The filling element is set with absolute position to and all positional measures (top, bottom, left, right) 0.
+		<div class="square_spacer">
+			<div class="square_inner">
+			</div>
+		</div>			
+		<br>
+		This also works with content.
+		<div class="square_spacer">
+			<div class="square_inner">
+				With content.
+			</div>
+		</div>	
+		<br>
+		Even with crazy long content.	
+		<div class="square_spacer">
+			<div class="square_inner">
+				Content even if this content gets super duper weirdly long. 
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+				Content even if this content gets super duper weirdly long.
+			</div>
+		</div>		
+		<br>			
+	</body>
+</html>
