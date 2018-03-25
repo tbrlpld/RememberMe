@@ -40,10 +40,12 @@
 
 			header {
 				background-color: cornflowerblue;
-				padding: 20px;
+				padding-top: 50px;
+				padding-left: 20px;
+				padding-bottom: 20px;
 				/* Center content / text */
 				display: flex;
-				align-items: center;
+				align-items: end;
 				/*justify-content: center;				*/
 			}
 
@@ -141,11 +143,24 @@
 				justify-content: center;
 			}
 
-/*			@media screen and (max-height: 400px){
-				.container {
-					width: 60%;
+			@media screen and (max-height: 770px){
+				footer {
+					padding: 10px;
 				}
-			}		*/
+				header {
+					padding-bottom: 10px;
+				}
+			}		
+
+			@media screen and (max-height: 740px){
+				footer {
+					padding: 5px;
+				}
+				header {
+					padding-bottom: 5px;
+					padding-top: 10px;
+				}
+			}					
 		</style>
 		<title>Testing Responsive Layout</title>
 	</head>
