@@ -16,17 +16,20 @@
 
 			header, main, footer {
 				width: 100%;
-				min-height: 200px;
-				box-sizing: border-box;
 			}
 
 			header {
 				background-color: cornflowerblue;
+				padding: 20px;
+			}
+
+			header h1 {
+				margin: 0;
+				font-size: 30px;
 			}
 
 			main {
 				background-color: gold;
-				/*padding: 5px;*/
 			}
 
 			.menu {
@@ -63,6 +66,7 @@
 				grid-template-columns: auto auto auto auto;
 				grid-gap: 1px;
 				padding: 1px;
+				margin-top: 10px;
 			}
 
 			.card-spacer {
@@ -95,12 +99,16 @@
 
 			footer {
 				background-color: indigo;
+				padding-top: 20px;
+				padding-bottom: 20px;
+				font-size: small;
+				text-align: center;
 			}
 		</style>
 		<title>Testing Responsive Layout</title>
 	</head>
 	<body>
-		<header></header>
+		<header><h1>RememberMe</h1></header>
 		<main>
 				<div class="menu">
 					<span>Moves</span>
@@ -129,6 +137,6 @@
 					<div class="card-spacer"><div class="card">C</div></div>
 				</div>
 		</main>
-		<footer></footer>
+		<footer>Footer Content</footer>
 	</body>
 </html>	
