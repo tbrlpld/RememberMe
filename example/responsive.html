@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name=”viewport” content=”width=device-width, initial-scale=1”>
+		<meta charset="utf-8">
+		<style type="text/css">
+			* {
+				font-size: 16px;
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+			}
+
+			header, main, footer {
+				width: 100%;
+				min-height: 200px;
+				box-sizing: border-box;
+			}
+
+			header {
+				background-color: cornflowerblue;
+			}
+
+			main {
+				background-color: gold;
+				/*padding: 5px;*/
+			}
+
+			.menu {
+				background-color: indianred;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				display: table;
+				table-layout: fixed;
+			}
+
+			.menu span {
+				display: table-cell;
+				text-align: center;
+				vertical-align: middle;
+			}
+
+			.menu__restart {
+				background-color: firebrick;
+				margin
+				min-width: 48px;
+				min-height: 48px;
+			}
+
+			footer {
+				background-color: indigo;
+			}
+		</style>
+		<title>Testing Responsive Layout</title>
+	</head>
+	<body>
+		<header></header>
+		<main>
+				<div class="menu">
+					<span>Moves</span>
+					<span>Stars</span>
+					<span>Time</span>
+					<span><div class="menu__restart"></div></span>
+				</div>
+		</main>
+		<footer></footer>
+	</body>
+</html>	
