@@ -7,6 +7,7 @@
 			* {
 				font-size: 16px;
 				box-sizing: border-box;
+				font-family: Helvetica, Arial, sans-serif;
 			}
 
 			body {
@@ -42,13 +43,18 @@
 				display: table-cell;
 				text-align: center;
 				vertical-align: middle;
+				align-items: center;
+				justify-content: center;
 			}
 
-			.menu__restart {
+			.menu span button {
 				background-color: firebrick;
-				margin
+				width: 100%;
 				min-width: 48px;
+				height: 100%;
 				min-height: 48px;
+				padding: 0;
+				border: 0; 
 			}
 
 			footer {
@@ -64,7 +70,9 @@
 					<span>Moves</span>
 					<span>Stars</span>
 					<span>Time</span>
-					<span><div class="menu__restart"></div></span>
+					<span>
+						<button>Restart</button>
+					</span>
 				</div>
 		</main>
 		<footer></footer>
