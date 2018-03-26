@@ -4,40 +4,30 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/mediaquery.css">		
 		<!-- <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
 		<script src="js/jquery-3.2.1.min.js"></script>
 		<script src="js/app.js"></script>
 		<title>RememberMe!</title>
 	</head>
 	<body>
-		<!-- This is the body. -->
-		<div class="game-area center-vertical-horizontal">
-			This is the game area.
-			<div class="header">
-				<!-- This is the header -->
-				<table class="header-table">
-					<tr>
-						<td class="counter-area">
-							<span class="counter-number">0</span>
-							<span class="counter-title">Moves</span>
-						</td>
-						<td class="star-area">
-							<span class="star-active">&#9733;</span>
-							<span class="star-active">&#9733;</span>
-							<span class="star-active">&#9733;</span>
-						</td>
-						<td>
-							<span class="timer">0m 0s</span>
-						</td>
-						<td>
-							<button type="button" class="restart-button">&#10226;</button>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="card-area">
-				<!-- This is the card area. -->
-			</div>
+		<div class="game-container">
+			<header><h1>RememberMe</h1></header>
+			<main>
+				<div class="main-inner">
+					<div class="menu">
+						<span>Moves</span>
+						<span>Stars</span>
+						<span>Time</span>
+						<span>
+							<button class="restart-button">Restart</button>
+						</span>
+					</div>
+					<div class="card-area">
+					</div>
+				</div>
+			</main>
+			<footer>Created for Udacity Nanodegree "Intro to Programming"</footer>			
 		</div>
 	</body>
 </html>

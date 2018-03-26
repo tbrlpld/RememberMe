@@ -1,0 +1,14 @@
+@media screen and (max-height: 770px){
+	footer {
+		padding: 10px;
+	}
+}		
+
+@media screen and (max-height: 740px){
+	footer {
+		padding: 5px;
+	}
+	header {
+		padding-top: 10px;
+	}
+}			
