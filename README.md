@@ -35,8 +35,9 @@ New Code Sections/Order
 TODO
 ----
 * Make moves, stars and time work again. Starts should switch from filled to hollow star symbol, rather than colors.
+* Prevent possible user manipulation of moves, stars and time. Don't read values from DOM.
 * Make header etc unselectable.
-* Create functions to build the DOM in the way that it is needed. HTML should not have more than body.
+* Create functions to build the DOM in the way that it is needed. ~~HTML should not have more than body.~~ HTML should contain the welcome screen to make it searchable by webcrawlers. The game can be build by js.
 * Add card animations for flipping the card, rejecting and accepting the pair and all cards matched (maybe a delay for congratulations if necessary).
 * Create proper nice looking layout. Especially welcome and congratulations message.
 * Make sure layout looks good on all screen sizes/devices. This is also important for the font sizes.
