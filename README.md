@@ -34,7 +34,7 @@ New Code Sections/Order
 
 TODO
 ----
-* Make moves, stars and time work again. Starts should switch from filled to hollow star symbol, rather than colors.
+* Make moves, stars ~~and time~~ work again. Starts should switch from filled to hollow star symbol, rather than colors.
 * Prevent possible user manipulation of moves, stars and time. Don't read values from DOM.
 * Make header etc unselectable.
 * Create functions to build the DOM in the way that it is needed. ~~HTML should not have more than body.~~ HTML should contain the welcome screen to make it searchable by webcrawlers. The game can be build by js.

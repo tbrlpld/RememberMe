@@ -5,6 +5,7 @@
 //-------------------------------------------------------------------------------------------------
 
 let equalityResponseTimeout
+let gameTimeSeconds
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -41,7 +42,7 @@ function destroyWelcome(){
  */
 function buildGame(){
 	console.log('Building the game.')
-	writeTime(0);
+	writeToTimer(getTimeString(0));
 	setMovesCount(0);
 	activateAllStars();
 	createCards();
@@ -197,7 +198,6 @@ function buildCongratulations(){
 	console.log("Displaying the congratulations");
 	const moves = getCurrentMovesCount();
 	const stars = getStarSymbols(getCurrentStarRating());
-	const time = getGameTime();
 	$('body').append('<div class="congratulations"></div>');
 	$('.congratulations').append('<div class="congratulations-content center-vertical-horizontal"></div>');
 	const congratulationsContentObj = $('.congratulations-content');
@@ -207,7 +207,7 @@ function buildCongratulations(){
 	const congratulationsStatsObj = $('.congratulations-stats');
 	congratulationsStatsObj.append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
 	congratulationsStatsObj.append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
-	congratulationsStatsObj.append('<tr><td>Time</td><td>' + time + '</td></tr>');
+	congratulationsStatsObj.append('<tr><td>Time</td><td>' + getTimeString(gameTimeSeconds) + '</td></tr>');
 	congratulationsContentObj.append('<button type="button" class="play-again-button">&#10226;</button>');
 	createPlayAgainButtonEventListener();
 }
@@ -236,13 +236,22 @@ function destroyCongratulations(){
 //-------------------------------------------------------------------------------------------------
 
 /**
+ * @description: Turn seconds into a more readable string.
+ * @param: {number} seconds - Time in seconds.
+ * @returns: {string} Time string of the game time.
+ */
+function getTimeString(seconds){
+	const displayMinutes = Math.floor(seconds / 60);
+	const displaySeconds = Math.floor(seconds % 60);
+	return displayMinutes + 'm ' + displaySeconds + 's';	
+}
+
+/**
  * @description: Writer time for a certain number of seconds. Seconds will be reformatted into minutes and seconds.
  * @param: {number} seconds - Seconds in game to be written into timer.
  */
-function writeTime(seconds){
-		const displayMinutes = Math.floor(seconds / 60);
-		const displaySeconds = Math.floor(seconds % 60);
-		$('.timer').html(displayMinutes + 'm ' + displaySeconds + 's');
+function writeToTimer(timerString){
+	$('.timer').html(timerString);
 }
 
 /**
@@ -258,11 +267,13 @@ function getGameTime(){
  */
 function startTimer(){
 	const startTime = Date.now();
+	gameTimeSeconds = 0;
 
 	const timer = setInterval(function(){
 		let now = Date.now();
-		let deltaSeconds = Math.floor((now - startTime)/1000);
-		writeTime(deltaSeconds);
+		// let deltaSeconds = Math.floor((now - startTime)/1000);
+	 	gameTimeSeconds = Math.floor((now - startTime)/1000);		
+		writeToTimer(getTimeString(gameTimeSeconds));
 	}, 1000);
 
 	// Event listener for timer to stop
