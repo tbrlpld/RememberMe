@@ -245,7 +245,11 @@ function destroyCongratulations(){
 function createTimeString(seconds){
 	const displayMinutes = Math.floor(seconds / 60);
 	const displaySeconds = Math.floor(seconds % 60);
-	return displayMinutes + 'm ' + displaySeconds + 's';	
+	displayTimeString = displaySeconds + '&thinsp;s';
+	if (displayMinutes > 0){
+		displayTimeString = displayMinutes + '&thinsp;m ' + displayTimeString
+	}
+	return displayTimeString;
 }
 
 /**
