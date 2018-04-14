@@ -5,7 +5,9 @@
 //-------------------------------------------------------------------------------------------------
 
 let equalityResponseTimeout
-let gameTimeSeconds
+let gameTimeSeconds = 0;
+let gameStars = 0;
+let gameMoves = 0;
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -18,7 +20,7 @@ let gameTimeSeconds
 //-------------------------------------------------------------------------------------------------
 
 function buildWelcome(){
-	$('body').append('<div class="welcome"></div>');
+	$('body').append('<div class="welcome"p></div>');
 	$('.welcome').append('<div class="welcome-content center-vertical-horizontal"></div>');
 	const welcomeContentObj = $('.welcome-content')
 	welcomeContentObj.append('<div class="welcome-above-title">Welcome to</div>');
@@ -42,8 +44,8 @@ function destroyWelcome(){
  */
 function buildGame(){
 	console.log('Building the game.')
-	writeToTimer(getTimeString(0));
-	setMovesCount(0);
+	writeToTimer(createTimeString(0));
+	writeToMovesCounter(createMovesString(0));
 	activateAllStars();
 	createCards();
 	createGameStartEventListener();
@@ -196,7 +198,7 @@ function rejectPickedCards(){
  */
 function buildCongratulations(){
 	console.log("Displaying the congratulations");
-	const moves = getCurrentMovesCount();
+	const moves = gameMoves;
 	const stars = getStarSymbols(getCurrentStarRating());
 	$('body').append('<div class="congratulations"></div>');
 	$('.congratulations').append('<div class="congratulations-content center-vertical-horizontal"></div>');
@@ -207,7 +209,7 @@ function buildCongratulations(){
 	const congratulationsStatsObj = $('.congratulations-stats');
 	congratulationsStatsObj.append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
 	congratulationsStatsObj.append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
-	congratulationsStatsObj.append('<tr><td>Time</td><td>' + getTimeString(gameTimeSeconds) + '</td></tr>');
+	congratulationsStatsObj.append('<tr><td>Time</td><td>' + createTimeString(gameTimeSeconds) + '</td></tr>');
 	congratulationsContentObj.append('<button type="button" class="play-again-button">&#10226;</button>');
 	createPlayAgainButtonEventListener();
 }
@@ -240,18 +242,18 @@ function destroyCongratulations(){
  * @param: {number} seconds - Time in seconds.
  * @returns: {string} Time string of the game time.
  */
-function getTimeString(seconds){
+function createTimeString(seconds){
 	const displayMinutes = Math.floor(seconds / 60);
 	const displaySeconds = Math.floor(seconds % 60);
 	return displayMinutes + 'm ' + displaySeconds + 's';	
 }
 
 /**
- * @description: Writer time for a certain number of seconds. Seconds will be reformatted into minutes and seconds.
- * @param: {number} seconds - Seconds in game to be written into timer.
+ * @description: Writer string to the timer object.
+ * @param: {string} timerString - String to be displayed in the timer.
  */
 function writeToTimer(timerString){
-	$('.timer').html(timerString);
+	$('#timer').html(timerString);
 }
 
 /**
@@ -259,7 +261,7 @@ function writeToTimer(timerString){
  * @returns: {string} Time string of game timer.
  */
 function getGameTime(){
-	return $('.timer').html();
+	return $('#timer').html();
 }
 
 /**
@@ -273,7 +275,7 @@ function startTimer(){
 		let now = Date.now();
 		// let deltaSeconds = Math.floor((now - startTime)/1000);
 	 	gameTimeSeconds = Math.floor((now - startTime)/1000);		
-		writeToTimer(getTimeString(gameTimeSeconds));
+		writeToTimer(createTimeString(gameTimeSeconds));
 	}, 1000);
 
 	// Event listener for timer to stop
@@ -293,34 +295,50 @@ function triggerStopTimer(){
 // Move Counter
 //-------------------------------------------------------------------------------------------------
 
+// /**
+//  * @description: Get currently shown number of moves.
+//  * @returns: {number} Number of current moves.
+//  */
+// function getCurrentMovesCount(){
+// 	const moves = Number($('.counter-number').text());
+// 	console.log('Current number of moves = ' + moves);
+// 	return moves
+// }
+
 /**
- * @description: Get currently shown number of moves.
- * @returns: {number} Number of current moves.
+ * @description: Transform given number of moves into a string for readability. The unit "Move" will be added to the number. If number not 1, the unit is for plural "Moves".
+ * @param: {int} movesNumber - Number to be tranformed into the corresponding moves string.
+ * @returns: {string} String showing moves number and unit.
  */
-function getCurrentMovesCount(){
-	const moves = Number($('.counter-number').text());
-	console.log('Current number of moves = ' + moves);
-	return moves
+function createMovesString(movesNumber){
+	movesString = " Move";
+	if (movesNumber != 1){
+		movesString = movesString + "s";
+	}
+	movesString = movesNumber + movesString;
+	console.log("Moves string = " + movesString);
+	return movesString;
 }
 
 /**
- * @description: Set shown number of moves to a specific number
- * @param: {number} moves - Number of moves to be displayed.
+ * @description: Writer string to the moves counter object.
+ * @param: {string} movesString - String to be displayed in the moves counter.
  */
-function setMovesCount(moves){
-	console.log('Setting moves counter to = ' + moves);
-	$('.counter-number').text(moves);
+function writeToMovesCounter(movesString){
+	console.log('Setting moves counter display to = ' + movesString);
+	$('#moves-counter').text(movesString);
 }
 
 /**
- * @description: Increase the currently shown number of moves by one.
+ * @description: Increase moves by 1 and updates the displayed counter.
  */
-function increaseMovesCount(){
+function increaseMovesCounter(){
 	console.log('Increasing moves count.')
-	let moves = getCurrentMovesCount();
-	moves += 1;
-	console.log('New number of moves = ' + moves);
-	setMovesCount(moves);
+	// let moves = gameMoves;
+	// moves += 1;
+	gameMoves += 1;
+	console.log('New number of moves = ' + gameMoves);
+	writeToMovesCounter(createMovesString(gameMoves));
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -355,7 +373,7 @@ function updateStarRating(){
 	const maxMovesThreeStarRating = 3; //16;
 	const maxMovesTwoStarRating = 5; //24;
 	const currentStarRating = getCurrentStarRating();
-	const currentMovesCount = getCurrentMovesCount();
+	const currentMovesCount = gameMoves;
 
 	if ((currentStarRating == 3 && currentMovesCount == maxMovesThreeStarRating)
 		||(currentStarRating == 2 && currentMovesCount == maxMovesTwoStarRating)) {
@@ -531,7 +549,7 @@ function allCardsMatched() {
 // 	// Once two cards are selected, they need to be check for equality
 // 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
 // 		console.log('Two are selected. Time to compare them.')
-// 		increaseMovesCount();
+// 		increaseMovesCounter();
 // 		updateStarRating();
 // 		// Check equality of selected cards and perform according response
 // 		checkPickedCards();
@@ -668,7 +686,7 @@ function createTwoCardsPickedEventListener(){
 		console.log('Starting processing after two cards are picked.')
 		removeCardClickEventListener();
 		removeTwoCardsPickedEventListener();
-		increaseMovesCount();
+		increaseMovesCounter();
 		updateStarRating();
 		createCardsMatchedEventListener();
 		createCardsRejectedEventListener();
@@ -758,6 +776,11 @@ function createGameStartEventListener(){
 		console.log('Game started!');
 		// Game is already started. It can not be started again.
 		removeGameStartEventListener();
+
+		// Set moves, stars and time to initial (values)
+		gameTimeSeconds = 0;
+		gameStars = 0;
+		gameMoves = 0;
 
 		startTimer();
 
