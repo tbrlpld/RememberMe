@@ -4,10 +4,11 @@
 //
 //-------------------------------------------------------------------------------------------------
 
+const maxStarsRating = 3;
 let equalityResponseTimeout
 let gameTimeSeconds = 0;
-let gameStars = 0;
 let gameMoves = 0;
+let gameStars = 3;
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -44,9 +45,12 @@ function destroyWelcome(){
  */
 function buildGame(){
 	console.log('Building the game.')
-	writeToTimer(createTimeString(0));
-	writeToMovesCounter(createMovesString(0));
-	activateAllStars();
+	gameTimeSeconds = 0;
+	gameMoves = 0;	
+	gameStars = 3;
+	writeToTimer(createTimeString(gameTimeSeconds));
+	writeToMovesCounter(createMovesString(gameMoves));
+	writeToStarsDisplay(createStarsString(gameStars, maxStarsRating));	
 	createCards();
 	createGameStartEventListener();
 }
@@ -71,12 +75,13 @@ function getArrayOfSymbols(){
 	const symbols = ['&#9728;',
 				   	 '&#9729;',
 				   	 '&#9730;',
-				   	 '&#9733;',
+				   	 '&#9731;',
 				   	 '&#9752;',
 				   	 '&#9774;',
 				   	 '&#9786;',
 				   	 '&#9822;'
 	];
+	console.log('Symbols = ' + symbols);
 	return symbols
 }
 
@@ -198,8 +203,6 @@ function rejectPickedCards(){
  */
 function buildCongratulations(){
 	console.log("Displaying the congratulations");
-	const moves = gameMoves;
-	const stars = getStarSymbols(getCurrentStarRating());
 	$('body').append('<div class="congratulations"></div>');
 	$('.congratulations').append('<div class="congratulations-content center-vertical-horizontal"></div>');
 	const congratulationsContentObj = $('.congratulations-content');
@@ -207,8 +210,8 @@ function buildCongratulations(){
 	congratulationsContentObj.append('<div class="congratulations-title">YOU WIN!</div>');
 	congratulationsContentObj.append('<table class="congratulations-stats"></table>');
 	const congratulationsStatsObj = $('.congratulations-stats');
-	congratulationsStatsObj.append('<tr><td>Stars</td><td>' + stars + '</td></tr>');
-	congratulationsStatsObj.append('<tr><td>Moves</td><td>' + moves + '</td></tr>');
+	congratulationsStatsObj.append('<tr><td>Stars</td><td>' + createStarsString(gameStars, maxStarsRating) + '</td></tr>');
+	congratulationsStatsObj.append('<tr><td>Moves</td><td>' + gameMoves + '</td></tr>');
 	congratulationsStatsObj.append('<tr><td>Time</td><td>' + createTimeString(gameTimeSeconds) + '</td></tr>');
 	congratulationsContentObj.append('<button type="button" class="play-again-button">&#10226;</button>');
 	createPlayAgainButtonEventListener();
@@ -349,24 +352,67 @@ function increaseMovesCounter(){
 // Star Rating
 //-------------------------------------------------------------------------------------------------
 
+// /**
+//  * @description: Get currently shown number of stars.
+//  * @returns: {number} Number of current stars.
+//  */
+// function getCurrentStarRating(){
+// 	const stars = $('.star-area').find('.star-active').length;
+// 	console.log('Current star rating = ' + stars + ' stars');
+// 	return stars
+// }
+
+// /**
+//  * @description: Change class of last active star to dead. Dead stars don't count in rating.
+//  */
+// function removeOneStar(){
+// 	const lastActiveStar = $('.star-area').find('.star-active').last();
+// 	console.log(lastActiveStar);
+// 	lastActiveStar.addClass('star-dead');
+// 	lastActiveStar.removeClass('star-active');
+// }
+
+// /**
+//  * @description: Set all dead stars to active.
+//  */
+// function activateAllStars(){
+// 	console.log('Activating all stars.')
+// 	const deadStars = $('.star-area').find('.star-dead');
+// 	deadStars.addClass('star-active');
+// 	deadStars.removeClass('star-dead');
+// }
+
+// createStarsString
 /**
- * @description: Get currently shown number of stars.
- * @returns: {number} Number of current stars.
+ * @description: Create string to represent the currrent star rating. Maximum will be represented by hollow/white stars, active rating will be represented by full/black stars. 
+ * @param: {int} activeStars - Number of stars (star rating) to be tranformed into the corresponding stars string.
+ * @param: {int} maxStarsRating - Maximum number of possible active stars.
+ * @returns: {string} Representation string for the current star rating.
  */
-function getCurrentStarRating(){
-	const stars = $('.star-area').find('.star-active').length;
-	console.log('Current star rating = ' + stars + ' stars');
-	return stars
+function createStarsString(activeStars, maxStars){
+	const fullStarString = '&#9733;';
+	const hollowStarString = '&#9734;';
+	// let currentStarString = hollowStarString;
+	let starRatingString = '';
+	for (var currentStar = 1; currentStar <= maxStars; currentStar++) {
+		console.log('Current star = ' + currentStar);
+		let currentStarString = hollowStarString;
+		if (currentStar <= activeStars){
+			currentStarString = fullStarString;
+		}
+		starRatingString = starRatingString + currentStarString;
+	}
+	console.log('Star rating string = ' + starRatingString);
+	return starRatingString;
 }
 
 /**
- * @description: Change class of last active star to dead. Dead stars don't count in rating.
+ * @description: Writer string to the moves counter object.
+ * @param: {string} movesString - String to be displayed in the moves counter.
  */
-function removeOneStar(){
-	const lastActiveStar = $('.star-area').find('.star-active').last();
-	console.log(lastActiveStar);
-	lastActiveStar.addClass('star-dead');
-	lastActiveStar.removeClass('star-active');
+function writeToStarsDisplay(starsString){
+	console.log('Setting stars display to = ' + starsString);
+	$('#stars-display').html(starsString);
 }
 
 /**
@@ -376,36 +422,29 @@ function updateStarRating(){
 	console.log('Updating star rating.')
 	const maxMovesThreeStarRating = 3; //16;
 	const maxMovesTwoStarRating = 5; //24;
-	const currentStarRating = getCurrentStarRating();
 	const currentMovesCount = gameMoves;
 
-	if ((currentStarRating == 3 && currentMovesCount == maxMovesThreeStarRating)
-		||(currentStarRating == 2 && currentMovesCount == maxMovesTwoStarRating)) {
-		removeOneStar();
-	};
-}
-
-/**
- * @description: Set all dead stars to active.
- */
-function activateAllStars(){
-	console.log('Activating all stars.')
-	const deadStars = $('.star-area').find('.star-dead');
-	deadStars.addClass('star-active');
-	deadStars.removeClass('star-dead');
-}
-
-/**
- * @description: Return html code for a defined number of active stars
- * @returns: {string}
- */
-function getStarSymbols(numberOfStars){
-	let starSymbols = ''
-	for (let counter = 1; counter <= numberOfStars; counter++){
-		starSymbols += '<span class="star-active">&#9733;</span>';
+	gameStars = 1;
+	if (currentMovesCount <= maxMovesTwoStarRating){
+		gameStars = 2;
 	}
-	return starSymbols
+	if (currentMovesCount <= maxMovesThreeStarRating){
+		gameStars = 3;
+	}	
+	writeToStarsDisplay(createStarsString(gameStars, maxStarsRating));	
 }
+
+// /**
+//  * @description: Return html code for a defined number of active stars
+//  * @returns: {string}
+//  */
+// function getStarSymbols(numberOfStars){
+// 	let starSymbols = ''
+// 	for (let counter = 1; counter <= numberOfStars; counter++){
+// 		starSymbols += '<span class="star-active">&#9733;</span>';
+// 	}
+// 	return starSymbols
+// }
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -862,9 +901,9 @@ function createGameWonEventListener(){
  * @description: Main function of the application. Needs to be run after the DOM is build initially.
  */
 function main(){
-	buildWelcome();
+	// buildWelcome();
 	buildGame();
-	// triggerGameStart();
+	triggerGameStart();
 	// buildCongratulations();
 }
 
