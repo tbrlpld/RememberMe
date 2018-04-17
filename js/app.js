@@ -21,8 +21,9 @@ let gameStars = 3;
 //-------------------------------------------------------------------------------------------------
 
 function buildWelcome(){
-	$('body').append('<div class="welcome"p></div>');
-	$('.welcome').append('<div class="welcome-content center-vertical-horizontal"></div>');
+	$('body').append('<div class="welcome"></div>');
+	// $('.welcome').append('<div class="welcome-content center-vertical-horizontal"></div>');
+	$('.welcome').append('<div class="welcome-content"></div>');
 	const welcomeContentObj = $('.welcome-content')
 	welcomeContentObj.append('<div class="welcome-above-title">Welcome to</div>');
 	welcomeContentObj.append('<div class="welcome-title">RememberMe!</div>');
@@ -204,7 +205,8 @@ function rejectPickedCards(){
 function buildCongratulations(){
 	console.log("Displaying the congratulations");
 	$('body').append('<div class="congratulations"></div>');
-	$('.congratulations').append('<div class="congratulations-content center-vertical-horizontal"></div>');
+	// $('.congratulations').append('<div class="congratulations-content center-vertical-horizontal"></div>');
+	$('.congratulations').append('<div class="congratulations-content"></div>');
 	const congratulationsContentObj = $('.congratulations-content');
 	congratulationsContentObj.append('<div class="congratulations-above-title">Congratulations</div>');
 	congratulationsContentObj.append('<div class="congratulations-title">YOU WIN!</div>');
@@ -903,7 +905,8 @@ function createGameWonEventListener(){
 function main(){
 	buildWelcome();
 	buildGame();
-	triggerGameStart();
+	// triggerGameStart();
+	// triggerGameWon();
 	// buildCongratulations();
 }
 
