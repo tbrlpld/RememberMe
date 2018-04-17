@@ -901,7 +901,7 @@ function createGameWonEventListener(){
  * @description: Main function of the application. Needs to be run after the DOM is build initially.
  */
 function main(){
-	// buildWelcome();
+	buildWelcome();
 	buildGame();
 	triggerGameStart();
 	// buildCongratulations();
