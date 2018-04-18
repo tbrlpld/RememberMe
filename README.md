@@ -34,7 +34,7 @@ New Code Sections/Order
 
 TODO
 ----
-* Create functions to build the DOM in the way that it is needed. ~~HTML should not have more than body.~~ HTML should contain the welcome screen to make it searchable by webcrawlers. The game can be build by js.
+* Extend flipping animation example to reverse on second click.
 * Add card animations for flipping the card, rejecting and accepting the pair and all cards matched (maybe a delay for congratulations if necessary).
 * Make sure layout looks good on all screen sizes/devices. Game area is already redesigned. Welcome and congratulations should also be reponsive.
 * Update colors, especially of game area and header.
