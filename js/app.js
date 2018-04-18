@@ -21,15 +21,15 @@ let gameStars = 3;
 //-------------------------------------------------------------------------------------------------
 
 function buildWelcome(){
-	$('body').append('<div class="welcome"></div>');
-	// $('.welcome').append('<div class="welcome-content center-vertical-horizontal"></div>');
-	$('.welcome').append('<div class="welcome-content"></div>');
-	const welcomeContentObj = $('.welcome-content')
-	welcomeContentObj.append('<div class="welcome-above-title">Welcome to</div>');
-	welcomeContentObj.append('<div class="welcome-title">RememberMe!</div>');
-	welcomeContentObj.append('<div class="welcome-below-title">a memory game web application created'
-		+ ' for the Udacity Nanodegree "Into to Programming"</div>');
-	welcomeContentObj.append('<button type="button" class="play-game-button">Play!</button>');
+	// $('body').append('<div class="welcome"></div>');
+	// // $('.welcome').append('<div class="welcome-content center-vertical-horizontal"></div>');
+	// $('.welcome').append('<div class="welcome-content"></div>');
+	// const welcomeContentObj = $('.welcome-content')
+	// welcomeContentObj.append('<div class="welcome-above-title">Welcome to</div>');
+	// welcomeContentObj.append('<div class="welcome-title">RememberMe!</div>');
+	// welcomeContentObj.append('<div class="welcome-below-title">a memory game web application created'
+	// 	+ ' for the Udacity Nanodegree "Into to Programming"</div>');
+	// welcomeContentObj.append('<button type="button" class="play-game-button">Play!</button>');
 	createPlayGameButtonEventListener();
 }
 
@@ -46,9 +46,27 @@ function destroyWelcome(){
  */
 function buildGame(){
 	console.log('Building the game.')
+	// Set global game variable values
 	gameTimeSeconds = 0;
 	gameMoves = 0;	
 	gameStars = 3;
+	// Build basic DOM
+	$('body').append('<div class="game-container"></div>');
+	const gameContainerObj = $('.game-container');
+	gameContainerObj.append('<header><h1>RememberMe!</h1></header>');
+	gameContainerObj.append('<main></main>');
+	$('main').append('<div class="main-inner"></div>');
+	const mainInnerObj = $('.main-inner');
+	mainInnerObj.append('<div class="menu"></div>');
+	const menuObj = $('.menu');
+	menuObj.append('<span id="moves-counter"></span>');
+	menuObj.append('<span id="stars-display"></span>');
+	menuObj.append('<span id="timer"></span>');
+	menuObj.append('<span><button class="restart-button">Restart</button></span>');
+	mainInnerObj.append('<div class="card-area"></div>');
+	gameContainerObj.append('<footer></footer>');
+	$('footer').append('<span>Created for the Udacity Nanodegree <a target="_blank" href="https://www.udacity.com/course/intro-to-programming-nanodegree--nd000">"Intro to Programming"</a></span>');
+	// Fill DOM
 	writeToTimer(createTimeString(gameTimeSeconds));
 	writeToMovesCounter(createMovesString(gameMoves));
 	writeToStarsDisplay(createStarsString(gameStars, maxStarsRating));	
@@ -61,7 +79,8 @@ function buildGame(){
  */
 function destroyGame(){
 	console.log('Destroying the game.')
-	destroyCards();
+	$('.game-container').remove();
+	// destroyCards();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -903,7 +922,8 @@ function createGameWonEventListener(){
  * @description: Main function of the application. Needs to be run after the DOM is build initially.
  */
 function main(){
-	buildWelcome();
+	// buildWelcome();
+	createPlayGameButtonEventListener();
 	buildGame();
 	// triggerGameStart();
 	// triggerGameWon();
