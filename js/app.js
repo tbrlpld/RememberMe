@@ -179,7 +179,8 @@ function createCards(){
 			currentCardNumber += 1;
 			symbolIndex = currentCardNumber - 1;
 			currentSymbol = symbols[symbolIndex];
-			$('.card-area').append('<div class="card-spacer"><div class="card-content unselectable"><div class="card-symbol">' + currentSymbol + '</div></div></div>');
+			// $('.card-area').append('<div class="card-spacer"><div class="card-content"><div class="card-face">' + currentSymbol + '</div><div class="card-back">Back</div></div></div>');
+			$('.card-area').append('<div class="card-spacer"><div class="card-content card-face">' + currentSymbol + '</div><div class="card-content card-back">Back</div></div></div>');
 		}
 	}
 }
@@ -201,6 +202,10 @@ function destroyCards(){
 function matchPickedCards(){
 	console.log('Adding "matched" class to picked cards.')
 	$('.picked').addClass('matched');
+	matchedFaces = $('.matched').find('.card-face')
+	console.log('Matched Faces are:');
+	console.log(matchedFaces);
+	matchedFaces.addClass('matched-face');
 	console.log('Removing picks!');
 	$('.picked').removeClass('picked');
 }
@@ -210,8 +215,11 @@ function matchPickedCards(){
  */
 function rejectPickedCards(){
 	console.log('Rejecting picked cards.')
+	const pickedCards = $('.picked')
+	pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
+	pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
 	console.log('Removing picks!')
-	$('.picked').removeClass('picked');
+	pickedCards.removeClass('picked');
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -662,7 +670,7 @@ function pickedCardsEqual() {
 		console.log('The picked cards are the following:');
 		console.log(pickedCards);
 
-		const pickedCardsSymbols = pickedCards.find('.card-symbol');
+		const pickedCardsSymbols = pickedCards.find('.card-face');
 
 		const firstSymbol = pickedCardsSymbols.first().html();
 		console.log('First symbol = ' + firstSymbol);
@@ -695,7 +703,8 @@ function pickCard(card){
 		if ($(card).hasClass('picked') == false && $(card).hasClass('matched') == false){
 			$(card).addClass('picked');
 			console.log('Card picked.')
-			$(card).find('.card-symbol').fadeIn()
+			$(card).find('.card-back').css('animation-name', 'flip_back_down');
+			$(card).find('.card-face').css('animation-name', 'flip_face_up');
 			console.log('Card symbol visible.')
 			// $(card).find('.card-symbol').fadeIn(function(){
 			// 	checksAndActionsAfterCardPick();
@@ -715,7 +724,7 @@ function pickCard(card){
  */
 function createCardClickEventListener(){
 	console.log('Creating the "cardClick" event listener.');
-	$('.card-content').on("click", function(){
+	$('.card-spacer').on("click", function(){
 		console.log('Card was clicked.');
 		pickCard(this);
 		if (twoCardsPicked() == true){
@@ -729,7 +738,7 @@ function createCardClickEventListener(){
  */
 function removeCardClickEventListener(){
 	console.log('Removing the "cardClick" event listener.');
-	$('.card-content').off("click");
+	$('.card-spacer').off("click");
 }
 
 // Two Cards Picked -------------------------------------------------------------------------------
@@ -761,7 +770,7 @@ function createTwoCardsPickedEventListener(){
 			} else {
 				triggerCardsRejected();
 			};
-		}, 1000);
+		}, 2000);
 	});
 }
 
@@ -923,9 +932,10 @@ function createGameWonEventListener(){
  */
 function main(){
 	// buildWelcome();
+	destroyWelcome();
 	createPlayGameButtonEventListener();
 	buildGame();
-	// triggerGameStart();
+	triggerGameStart();
 	// triggerGameWon();
 	// buildCongratulations();
 }

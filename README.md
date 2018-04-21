@@ -34,7 +34,12 @@ New Code Sections/Order
 
 TODO
 ----
-* Add card animations for flipping the card, rejecting and accepting the pair and all cards matched (maybe a delay for congratulations if necessary).
+* Prevent DOM maipulation for matching cards. 
+  Currently the matched class could be added to any card in the DOM. 
+  I have to think about this a little more. 
+  But, what I now realize is that the symbols are visible in the DOM.
+  Not sure if I have to take cre of things like that to pass the class. 
+  It is not in the rubric.
 * Make sure layout looks good on all screen sizes/devices. Game area is already redesigned. Welcome and congratulations should also be reponsive.
 * Update colors, especially of game area and header.
 * Add animations for welcome screen, transition to game view, build of game, build of card deck, destruction of card deck, destruction of game, transition to congratulations message, congratulations message itself.
