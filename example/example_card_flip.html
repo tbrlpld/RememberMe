@@ -33,7 +33,8 @@
 			}
 
 			.back {
-				border: yellow dashed;				
+				border: yellow dashed;		
+				background-color: orange;		
 				/*animation-name: backflip;*/
 				transform: rotateY(0deg);
 			}
@@ -54,12 +55,13 @@
 					transform: rotateY(180deg);
 				}
 				to {
-					transform: rotateY(180deg);
+					transform: rotateY(0deg);
 				}
 			}
 
 			.front {
 				border: red dashed;				
+				background-color: indianred;
 				/*animation-name: frontflip;*/
 				transform: rotateY(180deg);
 			}
@@ -84,11 +86,27 @@
 		</style>
 		<script src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript">
+function checkFrontDirection(){
+	animationName = $('.front').css('animation-name');
+	console.log(animationName);
+	if (animationName == 'flip_front_up'){
+		return 'up'
+	} else {
+		return 'down'
+	}
+}
+
 $(document).ready(function(){			
 	$('.square_spacer').click(function(){
 		console.log('Square clicked');
-		$('.back').css('animation-name', 'flip_back_down');
-		$('.front').css('animation-name', 'flip_front_up');		
+		frontDirection = checkFrontDirection();
+		if (frontDirection != 'up'){
+			$('.back').css('animation-name', 'flip_back_down');
+			$('.front').css('animation-name', 'flip_front_up');		
+		} else {
+			$('.back').css('animation-name', 'flip_back_up');
+			$('.front').css('animation-name', 'flip_front_down');					
+		}
 	});
 });
 		</script>

@@ -34,7 +34,6 @@ New Code Sections/Order
 
 TODO
 ----
-* Extend flipping animation example to reverse on second click.
 * Add card animations for flipping the card, rejecting and accepting the pair and all cards matched (maybe a delay for congratulations if necessary).
 * Make sure layout looks good on all screen sizes/devices. Game area is already redesigned. Welcome and congratulations should also be reponsive.
 * Update colors, especially of game area and header.
