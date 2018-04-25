@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			.square_spacer {
+				width: 300px;
+				background-color: steelblue;
+				border: solid;
+				position: relative;
+				perspective: 1200px;
+			}
+
+			.square_spacer::before {
+				content: "";
+				display: block;
+				padding-bottom: 100%;
+			}
+
+			.square_inner {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				/*overflow: hidden;*/
+				/* Animation */
+				/*animation-duration: 2s;*/
+				/*animation-iteration-count: 1;*/
+				/* Fill mode defines how the animation is affecting the style before and after it is run. */
+				/*animation-fill-mode: forwards;*/
+				/*backface-visibility: hidden;	*/
+			}
+
+			.back {
+				border: yellow dashed;		
+				background-color: orange;		
+				/*animation-name: backflip;*/
+				/*transform: rotateY(0deg);*/
+			}
+
+			/*.back:hover {
+				animation: flip_back_down 1s forwards, shake 1s 1s both forwards, flip_back_up 1s 2s forwards;
+			}*/
+
+			@keyframes flip_back_down {
+				/*from {background-color: red;}*/
+				/*to {background-color: yellow;}*/
+				from {
+					transform: rotateY(0deg);
+				}
+				to {
+					transform: rotateY(180deg);
+				}
+			}
+
+			@keyframes flip_back_up {
+				from {
+					transform: rotateY(180deg);
+				}
+				to {
+					transform: rotateY(0deg);
+				}
+			}
+
+			.front {
+				border: red dashed;				
+				background-color: indianred;
+				/*animation-name: frontflip;*/
+				transform: rotateY(180deg);
+			}
+
+			@keyframes flip_front_up {
+				from {
+					transform: rotateY(180deg);
+				}
+				to {
+					transform: rotateY(360deg);
+				}
+			}
+
+			@keyframes flip_front_down {
+				from {
+					transform: rotateY(360deg);
+				}
+				to {
+					transform: rotateY(180deg);
+				}
+			}
+
+			@keyframes shake {
+			  10%, 90% {
+			    transform: translate3d(-1px, 0, 0);
+			  }
+			  
+			  20%, 80% {
+			    transform: translate3d(2px, 0, 0);
+			  }
+			
+			  30%, 50%, 70% {
+			    transform: translate3d(-4px, 0, 0);
+			  }
+			
+			  40%, 60% {
+			    transform: translate3d(4px, 0, 0);
+			  }
+			}	
+		</style>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript">
+$(document).ready(function(){			
+	$('.square_spacer').click(function(){
+		console.log('Square clicked');
+		// frontDirection = checkFrontDirection();
+		// if (frontDirection != 'up'){				
+		$('.back').css('animation',  'flip_back_down 1s forwards, flip_back_up 2s 2s forwards');
+		// Putting shake animation on the .back flips the card again, because both rely on transform.
+		$('.square_spacer').css('animation', 'shake 1s 1s');		
+		// }
+	});
+});
+		</script>
+		<title>Example of flipping a square card</title>
+	</head>
+	<body>
+		This is the card
+		<div class="square_spacer">
+			<div class="square_inner back">
+				Back Up
+			</div>
+			<!-- <div class="square_inner front">
+				Front Up
+			</div>		 -->	
+		</div>			
+	</body>
+</html>
