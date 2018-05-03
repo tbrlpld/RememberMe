@@ -78,7 +78,7 @@ function buildGame(){
  * @description: Destroy the game elements.
  */
 function destroyGame(){
-	console.log('Destroying the game.')
+	console.log('Destroying the game.');
 	$('.game-container').remove();
 	// destroyCards();
 }
@@ -102,7 +102,7 @@ function getArrayOfSymbols(){
 				   	 '&#9822;'
 	];
 	console.log('Symbols = ' + symbols);
-	return symbols
+	return symbols;
 }
 
 /**
@@ -116,7 +116,7 @@ function doubleArrayOfSymbols(symbols){
 		symbolsDoubled.push(item);
 		symbolsDoubled.push(item);
 	});
-	return symbolsDoubled
+	return symbolsDoubled;
 }
 
 /**
@@ -150,7 +150,7 @@ function shuffleArray(inputArray){
 		inputArray[randomIndex] = tempValue;
 		currentIndex += 1;
 	}
-	return inputArray
+	return inputArray;
 }
 
 /**
@@ -162,7 +162,7 @@ function getRandomSymbolArray(){
 	const symbolsDoubled = doubleArrayOfSymbols(symbols);
 	// const symbolsShuffled = shuffleArray(symbolsDoubled);
 	const symbolsShuffled = symbolsDoubled;
-	return symbolsShuffled
+	return symbolsShuffled;
 }
 
 /**
@@ -217,6 +217,9 @@ function buildCongratulations(){
 	createPlayAgainButtonEventListener();
 }
 
+/**
+ * @description: Destroy the congratulations modal.
+ */
 function destroyCongratulations(){
 	console.log("Destroying the congratulations");
 	$('body').find('.congratulations').remove();
@@ -242,7 +245,7 @@ function createTimeString(seconds){
 	const displaySeconds = Math.floor(seconds % 60);
 	displayTimeString = displaySeconds + '&thinsp;s';
 	if (displayMinutes > 0){
-		displayTimeString = displayMinutes + '&thinsp;m ' + displayTimeString
+		displayTimeString = displayMinutes + '&thinsp;m ' + displayTimeString;
 	}
 	return displayTimeString;
 }
@@ -332,7 +335,7 @@ function writeToMovesCounter(movesString){
  * @description: Increase moves by 1 and updates the displayed counter.
  */
 function increaseMovesCounter(){
-	console.log('Increasing moves count.')
+	console.log('Increasing moves count.');
 	// let moves = gameMoves;
 	// moves += 1;
 	gameMoves += 1;
@@ -490,7 +493,7 @@ function createRestartButtonEventListener(){
  * @description: Create event lister for click on restart button.
  */
 function removeRestartButtonEventListener(){
-	$('.restart-button').off("click")
+	$('.restart-button').off("click");
 }
 
 // Play again -------------------------------------------------------------------------------------
@@ -608,15 +611,15 @@ function allCardsMatched() {
  * @returns: {boolean} true two cards picked, false otherwise.
  */
 function twoCardsPicked(){
-	console.log('Checking if two cards are picked.')
+	console.log('Checking if two cards are picked.');
 	const targetNumberOfPicksPerMove = 2;
 	let numberOfPickedCards = $('.picked').length;
 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
-		console.log('Two cards are picked.')
+		console.log('Two cards are picked.');
 		return true;
 		// triggerTwoCardsPicked();
 	} else {
-		console.log('Different number than 2 cards are picked.')
+		console.log('Different number than 2 cards are picked.');
 		return false;
 	}
 }
@@ -641,11 +644,11 @@ function pickedCardsEqual() {
 		console.log('Second symbol = ' + secondSymbol);
 
 		if (firstSymbol != undefined && firstSymbol === secondSymbol){
-			console.log('Cards are equal!')
+			console.log('Cards are equal!');
 			// triggerCardsMatched();
 			return true;
 		} else {
-			console.log('Cards are NOT equal!')
+			console.log('Cards are NOT equal!');
 			// triggerCardsRejected();
 			return false;
 		}
@@ -665,18 +668,18 @@ function pickCard(card){
 		// A picked or matched card can not be selected again (or be unselected).
 		if ($(card).hasClass('picked') == false && $(card).hasClass('matched') == false){
 			$(card).addClass('picked');
-			console.log('Card picked.')
+			console.log('Card picked.');
 			$(card).find('.card-back').css('animation-name', 'flip_back_down');
 			$(card).find('.card-face').css('animation-name', 'flip_face_up');
-			console.log('Card symbol visible.')
+			console.log('Card symbol visible.');
 			// $(card).find('.card-symbol').fadeIn(function(){
 			// 	checksAndActionsAfterCardPick();
 			// });
 		} else {
-			console.warn('Card not picked. Card already picked or matched.')
+			console.warn('Card not picked. Card already picked or matched.');
 		}
 	} else {
-		console.warn('Card not picked. Maximum number of cards picked.')
+		console.warn('Card not picked. Maximum number of cards picked.');
 	}
 }
 
@@ -719,14 +722,14 @@ function removeTwoCardsPickedEventListener(){
 function createTwoCardsPickedEventListener(){
 	console.log('Creating the "twoCardsPicked" event listener.');
 	$('.card-area').on('twoCardsPicked', function(){
-		console.log('Starting processing after two cards are picked.')
+		console.log('Starting processing after two cards are picked.');
 		removeCardClickEventListener();
 		removeTwoCardsPickedEventListener();
 		increaseMovesCounter();
 		updateStarRating();
 		createCardsMatchedEventListener();
 		createCardsRejectedEventListener();
-		console.log('Delaying the check of the card equality for visibility.')
+		console.log('Delaying the check of the card equality for visibility.');
 		equalityResponseTimeout = setTimeout(function(){
 			if (pickedCardsEqual() == true){
 				triggerCardsMatched();
@@ -744,15 +747,15 @@ function createTwoCardsPickedEventListener(){
  * @description: Add "matched" class and play animation to picked cards and remove "picked" class.
  */
 function matchPickedCards(){
-	console.log('Adding "matched" class to picked cards.')
+	console.log('Adding "matched" class to picked cards.');
 	const pickedCards = $('.picked');
 	pickedCards.addClass('matched');
-	pickedCards.css('animation', 'pop 1s')
+	pickedCards.css('animation', 'pop 1s');
 	// Grab faces of matched cards to add class
 	// matchedFaces = $('.matched').find('.card-face')
 	setTimeout(function(){
 			$('.matched').find('.card-face').addClass('matched-face');
-			console.log('Removing picks!')
+			console.log('Removing picks!');
 			pickedCards.removeClass('picked');
 		}, 1000);
 }
@@ -770,7 +773,7 @@ function removeCardsMatchedEventListener(){
 function createCardsMatchedEventListener(){
 	console.log('Creating the "cardsMatched" event listener.');
 	$('.card-area').on('cardsMatched', function(){
-		console.log('Starting processing after two cards are matched.')
+		console.log('Starting processing after two cards are matched.');
 		removeCardsMatchedEventListener();
 		removeCardsRejectedEventListener();
 		matchPickedCards();
@@ -793,14 +796,14 @@ function createCardsMatchedEventListener(){
  * @description: Play rejct animation and remove "picked" class.
  */
 function rejectPickedCards(){
-	console.log('Rejecting picked cards.')
-	const pickedCards = $('.picked')
-	pickedCards.css('animation', 'shake 1s')
+	console.log('Rejecting picked cards.');
+	const pickedCards = $('.picked');
+	pickedCards.css('animation', 'shake 1s');
 	setTimeout(function(){
 			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
 			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
 			pickedCards.css('animation', '');			
-			console.log('Removing picks!')
+			console.log('Removing picks!');
 			pickedCards.removeClass('picked');
 		}, 1000);
 }
