@@ -252,7 +252,7 @@ footer span {
 	background-color: cornsilk;
 	margin: 0;
 	font-size: 40px;
-	display: flex; /* this needs to be "none" to hide the symbols*/
+	display: flex; 
 	transform: rotateY(180deg);
 }
 
