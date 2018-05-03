@@ -160,7 +160,8 @@ function shuffleArray(inputArray){
 function getRandomSymbolArray(){
 	const symbols = getArrayOfSymbols();
 	const symbolsDoubled = doubleArrayOfSymbols(symbols);
-	const symbolsShuffled = shuffleArray(symbolsDoubled);
+	// const symbolsShuffled = shuffleArray(symbolsDoubled);
+	const symbolsShuffled = symbolsDoubled;
 	return symbolsShuffled
 }
 
@@ -185,46 +186,11 @@ function createCards(){
 	}
 }
 
-//-------------------------------------------------------------------------------------------------
-// Cards Manipulation
-//-------------------------------------------------------------------------------------------------
-
 /**
  * @description: Remove all cards from the card area.
  */
 function destroyCards(){
 	$('.card-area').find('.card-spacer').remove();
-}
-
-/**
- * @description: Add "matched" class to picked cards and remove "picked" class.
- */
-function matchPickedCards(){
-	console.log('Adding "matched" class to picked cards.')
-	$('.picked').addClass('matched');
-	matchedFaces = $('.matched').find('.card-face')
-	console.log('Matched Faces are:');
-	console.log(matchedFaces);
-	matchedFaces.addClass('matched-face');
-	console.log('Removing picks!');
-	$('.picked').removeClass('picked');
-}
-
-/**
- * @description: Remove "picked" class.
- */
-function rejectPickedCards(){
-	console.log('Rejecting picked cards.')
-	const pickedCards = $('.picked')
-	pickedCards.css('animation', 'shake 1s')
-	console.log('Removing picks!')
-	setTimeout(function(){
-			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
-			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
-			pickedCards.removeClass('picked');
-			pickedCards.css('animation', '');			
-		}, 1000);
-	// pickedCards.removeClass('picked');
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -255,14 +221,6 @@ function destroyCongratulations(){
 	console.log("Destroying the congratulations");
 	$('body').find('.congratulations').remove();
 }
-
-//-------------------------------------------------------------------------------------------------
-//
-// Animations
-//
-//-------------------------------------------------------------------------------------------------
-
-// not sure yet if the Animations section will be needed.
 
 //-------------------------------------------------------------------------------------------------
 //
@@ -781,6 +739,24 @@ function createTwoCardsPickedEventListener(){
 
 // Cards Matched ----------------------------------------------------------------------------------
 
+
+/**
+ * @description: Add "matched" class and play animation to picked cards and remove "picked" class.
+ */
+function matchPickedCards(){
+	console.log('Adding "matched" class to picked cards.')
+	const pickedCards = $('.picked');
+	pickedCards.addClass('matched');
+	pickedCards.css('animation', 'pop 1s')
+	// Grab faces of matched cards to add class
+	// matchedFaces = $('.matched').find('.card-face')
+	setTimeout(function(){
+			$('.matched').find('.card-face').addClass('matched-face');
+			console.log('Removing picks!')
+			pickedCards.removeClass('picked');
+		}, 1000);
+}
+
 function triggerCardsMatched(){
 	console.log('Trigger "cardsMatched".');
 	$('.card-area').trigger('cardsMatched');
@@ -799,8 +775,11 @@ function createCardsMatchedEventListener(){
 		removeCardsRejectedEventListener();
 		matchPickedCards();
 		if (allCardsMatched() == true){
-			triggerGameEnd();
-			triggerGameWon();
+			// Delay to see last accept animation when all cards are matched.
+			setTimeout(function(){
+				triggerGameEnd();
+				triggerGameWon();
+			}, 1000);
 		} else {
 			createCardClickEventListener();
 			createTwoCardsPickedEventListener();
@@ -809,6 +788,22 @@ function createCardsMatchedEventListener(){
 }
 
 // Cards Rejected ---------------------------------------------------------------------------------
+
+/**
+ * @description: Play rejct animation and remove "picked" class.
+ */
+function rejectPickedCards(){
+	console.log('Rejecting picked cards.')
+	const pickedCards = $('.picked')
+	pickedCards.css('animation', 'shake 1s')
+	setTimeout(function(){
+			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
+			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
+			pickedCards.css('animation', '');			
+			console.log('Removing picks!')
+			pickedCards.removeClass('picked');
+		}, 1000);
+}
 
 function triggerCardsRejected(){
 	console.log('Trigger "cardsRejected".');

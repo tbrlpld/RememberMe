@@ -88,21 +88,21 @@
 				}
 			}
 
-			@keyframes shake {
+			@keyframes pop {
 			  10%, 90% {
-			    transform: translate3d(-1px, 0, 0) rotateZ(-2deg);
+			    transform: scale(1.01);
 			  }
 			  
 			  20%, 80% {
-			    transform: translate3d(2px, 0, 0) rotateZ(4deg);
+			    transform: scale(0.99);
 			  }
 			
 			  30%, 50%, 70% {
-			    transform: translate3d(-4px, 0, 0) rotateZ(-5deg);
+			    transform: scale(1.05);
 			  }
 			
 			  40%, 60% {
-			    transform: translate3d(4px, 0, 0) rotateZ(5deg);
+			    transform: scale(0.98);
 			  }
 			}	
 		</style>
@@ -113,9 +113,9 @@ $(document).ready(function(){
 		console.log('Square clicked');
 		// frontDirection = checkFrontDirection();
 		// if (frontDirection != 'up'){				
-		$('.back').css('animation',  'flip_back_down 1s forwards, flip_back_up 2s 2s forwards');
+		$('.back').css('animation',  'flip_back_down 1s forwards');
 		// Putting shake animation on the .back flips the card again, because both rely on transform.
-		$('.square_spacer').css('animation', 'shake 1s 1s');		
+		$('.square_spacer').css('animation', 'pop 1s 1s');		
 		// }
 	});
 });
