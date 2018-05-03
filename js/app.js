@@ -216,10 +216,15 @@ function matchPickedCards(){
 function rejectPickedCards(){
 	console.log('Rejecting picked cards.')
 	const pickedCards = $('.picked')
-	pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
-	pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
+	pickedCards.css('animation', 'shake 1s')
 	console.log('Removing picks!')
-	pickedCards.removeClass('picked');
+	setTimeout(function(){
+			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
+			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
+			pickedCards.removeClass('picked');
+			pickedCards.css('animation', '');			
+		}, 1000);
+	// pickedCards.removeClass('picked');
 }
 
 //-------------------------------------------------------------------------------------------------

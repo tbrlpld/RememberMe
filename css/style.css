@@ -242,11 +242,11 @@ footer span {
 	backface-visibility: hidden;		
 }
 
-.card-content:hover {
+/*.card-content:hover {
     box-shadow: 1px 1px 1px 1px #2a7189;
     transform: scale(1.01);
     z-index: 1;
-}
+}*/
 
 .card-face {
 	background-color: cornsilk;
@@ -257,7 +257,7 @@ footer span {
 }
 
 .card-back {
-	background-color: darkkhaki;
+	background-color: lightblue;
 	transform: rotateY(0deg);
 }
 
@@ -308,6 +308,24 @@ footer span {
 		transform: rotateY(180deg);
 	}
 }
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0) rotateZ(2deg);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0) rotateZ(-4deg);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0) rotateZ(5deg);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0) rotateZ(-5deg);
+  }
+}	
 
 /*-------------------------------------------------------------------------------------------------*/
 /* Congratulations */
