@@ -24,7 +24,10 @@ let gameStars = 3;
  * @description: Destroy the welcome modal.
  */
 function destroyWelcome(){
-	$('.welcome').remove();
+	const welcomeModal = $('.welcome')
+	welcomeModal.fadeOut(400, function(){
+		welcomeModal.remove();		
+	});
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -191,10 +194,11 @@ function destroyCards(){
  * @description: Display congratulations message when game is won in a modal.
  */
 function buildCongratulations(){
-	console.log("Displaying the congratulations");
+	// Create congratulations modal
+	console.log("Creating the congratulations modal");
 	$('body').append('<div class="congratulations"></div>');
-	// $('.congratulations').append('<div class="congratulations-content center-vertical-horizontal"></div>');
-	$('.congratulations').append('<div class="congratulations-content"></div>');
+	const congratulationsModal = $('.congratulations');
+	congratulationsModal.append('<div class="congratulations-content"></div>');
 	const congratulationsContentObj = $('.congratulations-content');
 	congratulationsContentObj.append('<div class="congratulations-above-title">Congratulations</div>');
 	congratulationsContentObj.append('<div class="congratulations-title">YOU WIN!</div>');
@@ -204,7 +208,11 @@ function buildCongratulations(){
 	congratulationsStatsObj.append('<tr><td>Moves</td><td>' + gameMoves + '</td></tr>');
 	congratulationsStatsObj.append('<tr><td>Time</td><td>' + createTimeString(gameTimeSeconds) + '</td></tr>');
 	congratulationsContentObj.append('<button type="button" class="play-again-button">&#10226;</button>');
-	createPlayAgainButtonEventListener();
+	// Fading in the opacity of the created congratulation modal
+	congratulationsModal.fadeTo(400, 1.0, function (){
+		console.log('Congratulation faded in.')
+		createPlayAgainButtonEventListener();
+	});
 }
 
 /**
@@ -212,7 +220,10 @@ function buildCongratulations(){
  */
 function destroyCongratulations(){
 	console.log("Destroying the congratulations");
-	$('body').find('.congratulations').remove();
+	const congratulationsModal = $('body').find('.congratulations');
+	congratulationsModal.fadeOut(400, function(){
+		congratulationsModal.remove();
+	});
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -663,7 +674,7 @@ function createCardsMatchedEventListener(){
 			setTimeout(function(){
 				triggerGameEnd();
 				triggerGameWon();
-			}, 1000);
+			}, 1200);
 		} else {
 			createCardClickEventListener();
 			createTwoCardsPickedEventListener();
