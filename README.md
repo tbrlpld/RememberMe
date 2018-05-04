@@ -32,9 +32,9 @@ New Code Sections/Order
 
 TODO
 ----
-* Add animations for welcome screen, transition to game view, build of game, build of card deck, destruction of card deck, destruction of game, transition to congratulations message, congratulations message itself.
 * Something is off with the text placement in the header.
 * Make sure layout looks good on all screen sizes/devices. Large display (vertically) does not look too good right now. Footer is too far away from main. It should be more similar to the header.
+* Remove the 'Back' text from the cards.
 * Update colors, especially of game area and header.
 * Clean up old comments.
 * Make sure every function is at least called once. Remove unneeded functions.
