@@ -17,22 +17,12 @@ let gameStars = 3;
 //-------------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------
-// Build Welcome
+// Welcome
 //-------------------------------------------------------------------------------------------------
 
-function buildWelcome(){
-	// $('body').append('<div class="welcome"></div>');
-	// // $('.welcome').append('<div class="welcome-content center-vertical-horizontal"></div>');
-	// $('.welcome').append('<div class="welcome-content"></div>');
-	// const welcomeContentObj = $('.welcome-content')
-	// welcomeContentObj.append('<div class="welcome-above-title">Welcome to</div>');
-	// welcomeContentObj.append('<div class="welcome-title">RememberMe!</div>');
-	// welcomeContentObj.append('<div class="welcome-below-title">a memory game web application created'
-	// 	+ ' for the Udacity Nanodegree "Into to Programming"</div>');
-	// welcomeContentObj.append('<button type="button" class="play-game-button">Play!</button>');
-	createPlayGameButtonEventListener();
-}
-
+/**
+ * @description: Destroy the welcome modal.
+ */
 function destroyWelcome(){
 	$('.welcome').remove();
 }
@@ -198,7 +188,7 @@ function destroyCards(){
 //-------------------------------------------------------------------------------------------------
 
 /**
- * @description: Display congratulations message when game is won.
+ * @description: Display congratulations message when game is won in a modal.
  */
 function buildCongratulations(){
 	console.log("Displaying the congratulations");
@@ -297,16 +287,6 @@ function triggerStopTimer(){
 // Move Counter
 //-------------------------------------------------------------------------------------------------
 
-// /**
-//  * @description: Get currently shown number of moves.
-//  * @returns: {number} Number of current moves.
-//  */
-// function getCurrentMovesCount(){
-// 	const moves = Number($('.counter-number').text());
-// 	console.log('Current number of moves = ' + moves);
-// 	return moves
-// }
-
 /**
  * @description: Transform given number of moves into a string for readability. The unit "Move" will be added to the number. If number not 1, the unit is for plural "Moves".
  * @param: {int} movesNumber - Number to be tranformed into the corresponding moves string.
@@ -336,8 +316,6 @@ function writeToMovesCounter(movesString){
  */
 function increaseMovesCounter(){
 	console.log('Increasing moves count.');
-	// let moves = gameMoves;
-	// moves += 1;
 	gameMoves += 1;
 	console.log('New number of moves = ' + gameMoves);
 	writeToMovesCounter(createMovesString(gameMoves));
@@ -347,37 +325,6 @@ function increaseMovesCounter(){
 // Star Rating
 //-------------------------------------------------------------------------------------------------
 
-// /**
-//  * @description: Get currently shown number of stars.
-//  * @returns: {number} Number of current stars.
-//  */
-// function getCurrentStarRating(){
-// 	const stars = $('.star-area').find('.star-active').length;
-// 	console.log('Current star rating = ' + stars + ' stars');
-// 	return stars
-// }
-
-// /**
-//  * @description: Change class of last active star to dead. Dead stars don't count in rating.
-//  */
-// function removeOneStar(){
-// 	const lastActiveStar = $('.star-area').find('.star-active').last();
-// 	console.log(lastActiveStar);
-// 	lastActiveStar.addClass('star-dead');
-// 	lastActiveStar.removeClass('star-active');
-// }
-
-// /**
-//  * @description: Set all dead stars to active.
-//  */
-// function activateAllStars(){
-// 	console.log('Activating all stars.')
-// 	const deadStars = $('.star-area').find('.star-dead');
-// 	deadStars.addClass('star-active');
-// 	deadStars.removeClass('star-dead');
-// }
-
-// createStarsString
 /**
  * @description: Create string to represent the currrent star rating. Maximum will be represented by hollow/white stars, active rating will be represented by full/black stars. 
  * @param: {int} activeStars - Number of stars (star rating) to be tranformed into the corresponding stars string.
@@ -411,7 +358,7 @@ function writeToStarsDisplay(starsString){
 }
 
 /**
- * @description: Update star rating based on current star rating and number of moves. Removes star if maximum number of moves for that star rating was reached.
+ * @description: Update star rating based on current star rating and number of moves. The updated star rating is written into the stars display.
  */
 function updateStarRating(){
 	console.log('Updating star rating.')
@@ -429,18 +376,6 @@ function updateStarRating(){
 	writeToStarsDisplay(createStarsString(gameStars, maxStarsRating));	
 }
 
-// /**
-//  * @description: Return html code for a defined number of active stars
-//  * @returns: {string}
-//  */
-// function getStarSymbols(numberOfStars){
-// 	let starSymbols = ''
-// 	for (let counter = 1; counter <= numberOfStars; counter++){
-// 		starSymbols += '<span class="star-active">&#9733;</span>';
-// 	}
-// 	return starSymbols
-// }
-
 //-------------------------------------------------------------------------------------------------
 //
 // Events
@@ -451,8 +386,7 @@ function updateStarRating(){
 // Button Events
 //-------------------------------------------------------------------------------------------------
 
-
-// Play ----------------------------------------------------------------------------------------
+// Play -------------------------------------------------------------------------------------------
 
 /**
  * @description: Create event lister for click on "play game" button.
@@ -537,75 +471,6 @@ function allCardsMatched() {
 	}
 }
 
-// /**
-//  * @description: Check if picked cards match and execute according response.
-//  */
-// function checkPickedCards() {
-// 	const pickedCards = $('.picked');
-// 	console.log('The picked cards are the following:');
-// 	console.log(pickedCards);
-
-// 	const pickedCardsSymbols = pickedCards.find('.card-symbol');
-// 	// Delay to allow user observation of picked symbols
-// 	pickedCardsSymbols.delay(800);
-
-// 	console.log('Comparing picked cards.');
-
-// 	const firstSymbol = pickedCardsSymbols.first().html();
-// 	console.log('First symbol = ' + firstSymbol);
-// 	const secondSymbol = pickedCardsSymbols.last().html();
-// 	console.log('Second symbol = ' + secondSymbol);
-
-// 	if (firstSymbol != undefined && firstSymbol === secondSymbol){
-// 		console.log('Cards are equal!')
-// 		pickedCards.addClass('matched');
-// 	} else {
-// 		console.log('Cards are NOT equal!')
-// 		console.log('Hiding symbols.')
-// 		pickedCardsSymbols.fadeOut('fast', function(){
-// 			console.log('Symbol faded out.')
-// 		});
-// 	}
-
-// 	// Remove selection
-// 	console.log('Removing picks!')
-// 	pickedCards.removeClass('picked');
-
-// 	// Delay on all symbol animations to prevent selection of further cards
-// 	// before animations are finished.
-// 	$('.card-symbol').delay(1000);
-// }
-
-// /**
-//  * @description: Run all checks and actions after a card has been picked. If only one card is picked, nothing is done. If two cards are picked, the move counter is increased, the star rating updated, the cards are checked for equality and the game status is checked.
-//  */
-// function checksAndActionsAfterCardPick() {
-// 	console.log('Staring checks.')
-// 	const targetNumberOfPicksPerMove = 2;
-// 	let numberOfPickedCards = $('.picked').length;
-// 	console.log('numberOfPickedCards = ' + numberOfPickedCards);
-// 	// Once two cards are selected, they need to be check for equality
-// 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
-// 		console.log('Two are selected. Time to compare them.')
-// 		increaseMovesCounter();
-// 		updateStarRating();
-// 		// Check equality of selected cards and perform according response
-// 		checkPickedCards();
-// 		// Check game status
-// 		if (allCardsMatched()){
-// 			// triggerStopTimer();
-// 			triggerGameEnd();
-// 			triggerGameWon();
-// 		}
-// 	} else {
-// 		console.log('Only one card was selected. Waiting for next input.');
-// 	}
-// 	// Updating number of picked cards to check if removal has worked.
-// 	numberOfPickedCards = $('.picked').length;
-// 	console.log('numberOfPickedCards = ' + numberOfPickedCards);
-// 	console.log('Checks finished.')
-// }
-
 /**
  * @description: Checks if two cards are picked.
  * @returns: {boolean} true two cards picked, false otherwise.
@@ -686,6 +551,14 @@ function pickCard(card){
 // Card Click -------------------------------------------------------------------------------------
 
 /**
+ * @description: Remove event lister for click on any card.
+ */
+function removeCardClickEventListener(){
+	console.log('Removing the "cardClick" event listener.');
+	$('.card-spacer').off("click");
+}
+
+/**
  * @description: Create event lister for click on any card.
  */
 function createCardClickEventListener(){
@@ -699,26 +572,27 @@ function createCardClickEventListener(){
 	});
 }
 
-/**
- * @description: Remove event lister for click on any card.
- */
-function removeCardClickEventListener(){
-	console.log('Removing the "cardClick" event listener.');
-	$('.card-spacer').off("click");
-}
-
 // Two Cards Picked -------------------------------------------------------------------------------
 
+/**
+ * @description: Trigger event listener for two cards being picked
+ */
 function triggerTwoCardsPicked(){
 	console.log('Trigger "twoCardsPicked".');
 	$('.card-area').trigger('twoCardsPicked');
 }
 
+/**
+ * @description: Remove event listener for two cards being picked
+ */
 function removeTwoCardsPickedEventListener(){
 	console.log('Removing the "twoCardsPicked" event listener.');
 	$('.card-area').off('twoCardsPicked');
 }
 
+/**
+ * @description: Create event listener for two cards being picked
+ */
 function createTwoCardsPickedEventListener(){
 	console.log('Creating the "twoCardsPicked" event listener.');
 	$('.card-area').on('twoCardsPicked', function(){
@@ -751,8 +625,6 @@ function matchPickedCards(){
 	const pickedCards = $('.picked');
 	pickedCards.addClass('matched');
 	pickedCards.css('animation', 'pop 1s');
-	// Grab faces of matched cards to add class
-	// matchedFaces = $('.matched').find('.card-face')
 	setTimeout(function(){
 			$('.matched').find('.card-face').addClass('matched-face');
 			console.log('Removing picks!');
@@ -760,16 +632,25 @@ function matchPickedCards(){
 		}, 1000);
 }
 
+/**
+ * @description: Trigger event listener for the picked cards being matched
+ */
 function triggerCardsMatched(){
 	console.log('Trigger "cardsMatched".');
 	$('.card-area').trigger('cardsMatched');
 }
 
+/**
+ * @description: Remove event listener for the picked cards being matched
+ */
 function removeCardsMatchedEventListener(){
 	console.log('Removing the "cardsMatched" event listener.');
 	$('.card-area').off('cardsMatched');
 }
 
+/**
+ * @description: Create event listener for the picked cards being matched
+ */
 function createCardsMatchedEventListener(){
 	console.log('Creating the "cardsMatched" event listener.');
 	$('.card-area').on('cardsMatched', function(){
@@ -808,16 +689,25 @@ function rejectPickedCards(){
 		}, 1000);
 }
 
+/**
+ * @description: Trigger event listener for the picked cards being rejected
+ */
 function triggerCardsRejected(){
 	console.log('Trigger "cardsRejected".');
 	$('.card-area').trigger('cardsRejected');
 }
 
+/**
+ * @description: Remove event listener for the picked cards being rejected
+ */
 function removeCardsRejectedEventListener(){
 	console.log('Removing the "cardsRejected" event listener.');
 	$('.card-area').off('cardsRejected');
 }
 
+/**
+ * @description: Create event listener for the picked cards being rejected
+ */
 function createCardsRejectedEventListener(){
 	console.log('Creating the "cardsRejected" event listener.');
 	$('.card-area').on('cardsRejected', function(){
@@ -836,16 +726,25 @@ function createCardsRejectedEventListener(){
 
 // Game start -------------------------------------------------------------------------------------
 
+/**
+ * @description: Trigger event listener for the game end
+ */
 function triggerGameStart(){
 	console.log('Trigger "gameStart".');
 	$(document).trigger('gameStart');
 }
 
+/**
+ * @description: Remove event listener for the game end
+ */
 function removeGameStartEventListener(){
 	console.log('Removing the "gameStart" event listener.');
 	$(document).off('gameStart');
 }
 
+/**
+ * @description: Create event listener for the game start
+ */
 function createGameStartEventListener(){
 	console.log('Creating the "gameStart" event listener.');
 	$(document).on('gameStart', function(){
@@ -872,16 +771,25 @@ function createGameStartEventListener(){
 
 // Game end ---------------------------------------------------------------------------------------
 
+/**
+ * @description: Trigger event listener for the game end
+ */
 function triggerGameEnd(){
 	console.log('Trigger "gameEnd".');
 	$(document).trigger('gameEnd');
 }
 
+/**
+ * @description: Remove event listener for the game end
+ */
 function removeGameEndEventListener(){
 	console.log('Removing the "gameEnd" event listener.');
 	$(document).off('gameEnd');
 }
 
+/**
+ * @description: Create event listener for the game end
+ */
 function createGameEndEventListener(){
 	console.log('Creating the "gameEnd" event listener.');
 	$(document).on('gameEnd', function(){
@@ -904,16 +812,25 @@ function createGameEndEventListener(){
 
 // Game won ---------------------------------------------------------------------------------------
 
+/**
+ * @description: Trigger event listener for the game being won
+ */
 function triggerGameWon(){
 	console.log('Trigger "gameWon".');
 	$(document).trigger('gameWon');
 }
 
+/**
+ * @description: Remove event listener for the game being won
+ */
 function removeGameWonEventListener(){
 	console.log('Removing the "gameWon" event listener.');
 	$(document).off('gameWon');
 }
 
+/**
+ * @description: Create event listener for the game being won
+ */
 function createGameWonEventListener(){
 	console.log('Creating the "gameWon" event listener.');
 	$(document).on('gameWon', function(){
@@ -934,11 +851,10 @@ function createGameWonEventListener(){
  * @description: Main function of the application. Needs to be run after the DOM is build initially.
  */
 function main(){
-	// buildWelcome();
-	destroyWelcome();
+	// destroyWelcome();
 	createPlayGameButtonEventListener();
 	buildGame();
-	triggerGameStart();
+	// triggerGameStart();
 	// triggerGameWon();
 	// buildCongratulations();
 }
