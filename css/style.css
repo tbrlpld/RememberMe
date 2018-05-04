@@ -203,6 +203,7 @@ footer span {
 	padding: 1px;
 	margin-top: 10px;
 	opacity: 0.0;
+	transform: scale(0.1);
 }
 
 .card-spacer {
