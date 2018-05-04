@@ -64,14 +64,7 @@ function buildGame(){
 	writeToMovesCounter(createMovesString(gameMoves));
 	writeToStarsDisplay(createStarsString(gameStars, maxStarsRating));	
 	createCards();
-	// $('.card-area').fadeTo(400, 1.0);
-	$('.card-area').animate({opacity: 1.0}, {
-		step: function(now){
-			$(this).css('transform', 'scale('+ now +')');
-			console.log('Now = ' + now);			
-			}, 
-		duration: 400
-	}, 'linear');
+	$('.card-area').fadeTo(400, 1.0);
 	createGameStartEventListener();
 }
 
@@ -191,14 +184,7 @@ function createCards(){
  * @description: Fade out the opacity of the card area
  */
 function fadeOutCardArea(){
-	// $('.card-area').fadeTo(400, 0.0);
-	$('.card-area').animate({opacity: 0.0}, {
-		step: function(now){
-			$(this).css('transform', 'scale('+ now +')');
-			console.log('Now = ' + now);
-			}, 
-		duration: 400
-	}, 'linear');	
+	$('.card-area').fadeTo(400, 0.0);
 }
 
 //-------------------------------------------------------------------------------------------------
