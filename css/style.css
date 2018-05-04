@@ -317,36 +317,44 @@ footer span {
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0) rotateZ(-2deg);
+    z-index: 1;
   }
   
   20%, 80% {
     transform: translate3d(2px, 0, 0) rotateZ(4deg);
+    z-index: 1;
   }
 
   30%, 50%, 70% {
     transform: translate3d(-4px, 0, 0) rotateZ(-5deg);
+    z-index: 1;
   }
 
   40%, 60% {
     transform: translate3d(4px, 0, 0) rotateZ(5deg);
+    z-index: 1;
   }
 }	
 
 @keyframes pop {
   10%, 90% {
     transform: scale(1.01);
+    z-index: 1;
   }
   
   20%, 80% {
     transform: scale(0.99);
+    z-index: 1;
   }
 
   30%, 50%, 70% {
-    transform: scale(1.05);
+    transform: scale(1.10);
+    z-index: 1;
   }
 
   40%, 60% {
     transform: scale(0.98);
+    z-index: 1;
   }
 }	
 
