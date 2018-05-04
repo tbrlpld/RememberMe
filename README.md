@@ -32,7 +32,8 @@ New Code Sections/Order
 
 TODO
 ----
-* Something is off with the text placement in the header.
+* On mobile Safari the animations for flipping the cards don't work. The back is still above the face after flipping. Fix needed.
+* Something is off with the text placement in the header. This was observed in Chome on macOS.
 * Make sure layout looks good on all screen sizes/devices. Large display (vertically) does not look too good right now. Footer is too far away from main. It should be more similar to the header.
 * Remove the 'Back' text from the cards.
 * Update colors, especially of game area and header.
