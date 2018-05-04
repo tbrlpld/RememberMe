@@ -202,6 +202,7 @@ footer span {
 	grid-gap: 1px;
 	padding: 1px;
 	margin-top: 10px;
+	opacity: 0.0;
 }
 
 .card-spacer {

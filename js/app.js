@@ -64,6 +64,7 @@ function buildGame(){
 	writeToMovesCounter(createMovesString(gameMoves));
 	writeToStarsDisplay(createStarsString(gameStars, maxStarsRating));	
 	createCards();
+	$('.card-area').fadeTo(400, 1.0);
 	createGameStartEventListener();
 }
 
@@ -180,10 +181,10 @@ function createCards(){
 }
 
 /**
- * @description: Remove all cards from the card area.
+ * @description: Fade out the opacity of the card area
  */
-function destroyCards(){
-	$('.card-area').find('.card-spacer').remove();
+function fadeOutCardArea(){
+	$('.card-area').fadeTo(400, 0.0);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -428,9 +429,14 @@ function createRestartButtonEventListener(){
 		// restart button was clicked (in the new game), the timeout has to be cleared. The
 		// function defined in the timeout will not be performed.
 		clearTimeout(equalityResponseTimeout);
-		destroyGame();
-		buildGame();
-		triggerGameStart();
+		// Fading out the card area
+		fadeOutCardArea();
+		// The destruction and recreation of the game needs to be delayed by time it takes to fade out the card area.
+		setTimeout(function() {
+			destroyGame();
+			buildGame();
+			triggerGameStart();
+		}, 400);
 	});
 }
 
