@@ -37,6 +37,7 @@ TODO
 * Make sure layout looks good on all screen sizes/devices. Large display (vertically) does not look too good right now. Footer is too far away from main. It should be more similar to the header.
 * Update colors, especially of game area and header.
 * Clean up old comments.
+* Make sure every function is at least called once. Remove unneeded functions.
 * Check HTML and CSS in code validators.
 * Reactivate shuffeling.
 * Reset correct limits for star rating and game to be won.
