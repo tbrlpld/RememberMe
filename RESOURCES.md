@@ -22,3 +22,4 @@ This is a unsorted list of resources (outside of Udacity) I used to create the m
 * Eliminate 300ms delay on click events in mobile Safari: (https://stackoverflow.com/questions/12238587/eliminate-300ms-delay-on-click-events-in-mobile-safari)
 * More on the meta viewport tag (that fixes the iPhone delay): (https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag)
 * Centering elements (vertical and horizontal): (https://www.w3schools.com/csS/tryit.asp?filename=trycss_align_transform) or (https://www.w3schools.com/csS/css_align.asp)
+* Visual guide to flex box properties - a nice overview I think: (https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties)
