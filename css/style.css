@@ -134,25 +134,32 @@ a {
 	margin: auto;
 	/* Flex box */
 	display: flex;
-	flex-wrap: wrap;	
+	flex-direction: column;
+	justify-content: start;
+	align-items: stretch;
 }
 
 header, main, footer {
-	width: 100%;
+	/*width: 100%;*/
+	flex: 1;
 }
 
 header {
 	background-color: cornflowerblue;
-	padding: 50px 20px 5px;
-    display: -webkit-flex; /* Safari */
-    -webkit-align-items: flex-end; /* Safari 7.0+ */
-    display: flex;
-    align-items: flex-end;
+	/*padding: 50px 20px 5px;*/
+    /*display: -webkit-flex; */
+    /*-webkit-align-items: flex-end; */
+    /*display: flex;*/
+    /*align-items: flex-end;*/
 }
 
 header h1 {
 	margin: 0;
 	font-size: 30px;
+}
+
+main {
+	background-color: yellow;
 }
 
 .menu {
@@ -179,11 +186,11 @@ header h1 {
 
 footer {
 	background-color: indigo;
-	padding: 20px;
+	/*padding: 20px;*/
 	/* Center content / text */
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	/*display: flex;*/
+	/*align-items: center;*/
+	/*justify-content: center;*/
 }
 
 footer span {

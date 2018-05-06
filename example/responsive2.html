@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name=”viewport” content=”width=device-width, initial-scale=1”>
+		<meta charset="utf-8">
+		<style type="text/css">
+			* {
+				font-size: 16px;
+				box-sizing: border-box;
+				font-family: Helvetica, Arial, sans-serif;
+			}
+
+			body {
+				margin: 0;
+			}
+
+			.container {
+				background-color: crimson;
+				/*border: dashed black;*/
+				min-width: 280px;
+				max-width: 550px;
+				/* Fill body */
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				/* Center in body */
+				margin: auto;
+				/* Flex box */
+				display: flex;
+				/*flex-wrap: wrap;*/
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+
+			header, main, footer {
+				/*width: 100%;*/
+				flex: 1;
+			}
+
+			header {
+				background-color: cornflowerblue;
+	/*			padding-top: 50px;
+				padding-left: 20px;
+				padding-bottom: 5px;*/
+				/* Center content / text */
+				/*display: flex;*/
+				/*align-items: end;*/
+				/*justify-content: center;				*/
+			}
+
+			header h1 {
+				margin: 0;
+				font-size: 30px;
+			}
+
+			main {
+				background-color: gold;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.main-inner {
+				background-color: chocolate;
+				border: dashed blue;
+				width: 100%;
+			}
+
+			.menu {
+				background-color: indianred;
+/*				margin: 0;
+				padding: 0;
+				width: 100%;*/
+				display: flex;
+				/*table-layout: fixed;*/
+			}
+
+			.menu span {
+				display: flex;
+				/*text-align: center;*/
+				/*vertical-align: middle;*/
+				align-items: center;
+				justify-content: center;
+				width: 100%
+			}
+
+			.menu span button {
+				background-color: firebrick;
+				width: 100%;
+				min-width: 48px;
+				height: 100%;
+				min-height: 48px;
+				/*padding: 0;*/
+				border: 0; 
+			}
+
+			.card-area {
+				background-color: burlywood;
+				display: grid;
+				grid-template-columns: auto auto auto auto;
+				grid-gap: 1px;
+				padding: 1px;
+				margin-top: 10px;
+			}
+
+			.card-spacer {
+				width: 100%;
+				background-color: steelblue;
+				position: relative;
+			}
+
+			.card-spacer::before {
+				content: "";
+				display: block;
+				padding-bottom: 100%;
+			}
+
+			.card {
+				background-color: cadetblue;
+				min-width: 48px;
+				min-height: 48px;
+				/* Fill complete card space */
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				/* Center content / text */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			footer {
+				background-color: indigo;
+				font-size: small;
+				/*padding: 20px;*/
+				/* Center content / text */
+				/*display: flex;*/
+				/*align-items: center;*/
+				/*justify-content: center;*/
+			}
+
+			@media screen and (max-height: 770px){
+				footer {
+					padding: 10px;
+				}
+			}		
+
+			@media screen and (max-height: 740px){
+				footer {
+					padding: 5px;
+				}
+				header {
+					padding-top: 10px;
+				}
+			}					
+		</style>
+		<title>Testing Responsive Layout</title>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>RememberMe</h1>
+			</header>
+			<main>
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+<!-- 				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		
+				Main content <br>		 -->
+			</main>
+			<footer>
+				Footer Content
+			</footer>
+		</div>
+	</body>
+</html>	
