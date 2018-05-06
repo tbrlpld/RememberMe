@@ -240,7 +240,6 @@ footer span {
 	animation-iteration-count: 1;
 	/* Fill mode defines how the animation is affecting the style before and after it is run. */
 	animation-fill-mode: forwards;
-	backface-visibility: hidden;		
 }
 
 /*.card-content:hover {
@@ -254,11 +253,15 @@ footer span {
 	margin: 0;
 	font-size: 40px;
 	display: flex; 
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;			
 	transform: rotateY(180deg);
 }
 
 .card-back {
 	background-color: lightblue;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;			
 	transform: rotateY(0deg);
 }
 
