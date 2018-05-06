@@ -143,11 +143,11 @@ header, main, footer {
 
 header {
 	background-color: cornflowerblue;
-	padding-top: 50px;
-	padding-left: 20px;
-	padding-bottom: 5px;
-	display: flex;
-	align-items: end;
+	padding: 50px 20px 5px;
+    display: -webkit-flex; /* Safari */
+    -webkit-align-items: flex-end; /* Safari 7.0+ */
+    display: flex;
+    align-items: flex-end;
 }
 
 header h1 {
