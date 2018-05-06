@@ -633,22 +633,6 @@ function createTwoCardsPickedEventListener(){
 
 // Cards Matched ----------------------------------------------------------------------------------
 
-
-/**
- * @description: Add "matched" class and play animation to picked cards and remove "picked" class.
- */
-function matchPickedCards(){
-	console.log('Adding "matched" class to picked cards.');
-	const pickedCards = $('.picked');
-	pickedCards.addClass('matched');
-	pickedCards.css('animation', 'pop 1s');
-	setTimeout(function(){
-			$('.matched').find('.card-face').addClass('matched-face');
-			console.log('Removing picks!');
-			pickedCards.removeClass('picked');
-		}, 1000);
-}
-
 /**
  * @description: Trigger event listener for the picked cards being matched
  */
@@ -674,37 +658,30 @@ function createCardsMatchedEventListener(){
 		console.log('Starting processing after two cards are matched.');
 		removeCardsMatchedEventListener();
 		removeCardsRejectedEventListener();
-		matchPickedCards();
-		if (allCardsMatched() == true){
-			// Delay to see last accept animation when all cards are matched.
-			setTimeout(function(){
-				triggerGameEnd();
-				triggerGameWon();
-			}, 1200);
-		} else {
-			createCardClickEventListener();
-			createTwoCardsPickedEventListener();
-		}
+		// matchPickedCards();
+		console.log('Adding "matched" class to picked cards.');
+		const pickedCards = $('.picked');
+		pickedCards.addClass('matched');
+		console.log('Playing animation for matched cards.');		
+		pickedCards.css('animation', 'pop 1s');
+		// Delaying the following action to allow animation to play out
+		setTimeout(function(){
+				$('.matched').find('.card-face').addClass('matched-face');
+				console.log('Removing picks!');
+				pickedCards.removeClass('picked');
+				console.log('Checking if all cards are matched.');
+				if (allCardsMatched() == true){
+					triggerGameEnd();
+					triggerGameWon();
+				} else {
+					createCardClickEventListener();
+					createTwoCardsPickedEventListener();
+				}
+		}, 1000);
 	});
 }
 
 // Cards Rejected ---------------------------------------------------------------------------------
-
-/**
- * @description: Play rejct animation and remove "picked" class.
- */
-function rejectPickedCards(){
-	console.log('Rejecting picked cards.');
-	const pickedCards = $('.picked');
-	pickedCards.css('animation', 'shake 1s');
-	setTimeout(function(){
-			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
-			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
-			pickedCards.css('animation', '');			
-			console.log('Removing picks!');
-			pickedCards.removeClass('picked');
-		}, 1000);
-}
 
 /**
  * @description: Trigger event listener for the picked cards being rejected
@@ -731,9 +708,21 @@ function createCardsRejectedEventListener(){
 		console.log('Starting processing after picked cards are rejected.')
 		removeCardsRejectedEventListener();
 		removeCardsMatchedEventListener();
-		rejectPickedCards();
-		createCardClickEventListener();
-		createTwoCardsPickedEventListener();
+		// rejectPickedCards();
+		console.log('Rejecting picked cards.');
+		const pickedCards = $('.picked');
+		console.log('Playing reject animation.');
+		pickedCards.css('animation', 'shake 1s');
+		setTimeout(function(){
+			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
+			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
+			// Removing animations to allow replay
+			pickedCards.css('animation', '');			
+			console.log('Removing picks!');
+			pickedCards.removeClass('picked');
+			createCardClickEventListener();
+			createTwoCardsPickedEventListener();
+		}, 1000);
 	});
 }
 
