@@ -1,23 +1,25 @@
-@media screen and (max-height: 770px){
+@media screen and (max-height: 800px){
 	footer {
-		padding: 20px;
+		padding-top: 2.5vh;
+		padding-bottom: 2.5vh;
+	}
+	header {
+		padding-top: 2.5vh;		
+		padding-bottom: 2.5vh;
 	}
 }		
 
-@media screen and (max-height: 740px){
+
+@media screen and (min-height: 1000px){
 	footer {
-		padding: 10px;
+		padding-top: 2vh;
 	}
 	header {
-		padding-top: 10px;
+		padding-bottom: 2vh;
 	}
-}			
+}		
 
-@media screen and (max-width: 550px){
-	.welcome-title{
-		font-size: 36px;
-	}
-	.congratulations-title{
-		font-size: 36px;
-	}		
+@media screen and (max-width: 550px), (max-height: 800px){
+	.title-text{
+		font-size: 36px;	
 }	
