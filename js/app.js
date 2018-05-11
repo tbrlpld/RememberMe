@@ -46,7 +46,7 @@ function buildGame(){
 	// Build basic DOM
 	$('body').append('<div class="game-container"></div>');
 	const gameContainerObj = $('.game-container');
-	gameContainerObj.append('<header><h1>RememberMe!</h1></header>');
+	gameContainerObj.append('<header><h1 class="header-text title-text">RememberMe!</h1></header>');
 	gameContainerObj.append('<main></main>');
 	$('main').append('<div class="main-inner"></div>');
 	const mainInnerObj = $('.main-inner');
@@ -202,7 +202,7 @@ function buildCongratulations(){
 	congratulationsModal.append('<div class="congratulations-content"></div>');
 	const congratulationsContentObj = $('.congratulations-content');
 	congratulationsContentObj.append('<div class="congratulations-above-title">Congratulations</div>');
-	congratulationsContentObj.append('<div class="congratulations-title">YOU WIN!</div>');
+	congratulationsContentObj.append('<div class="congratulations-title title-text">YOU WIN!</div>');
 	congratulationsContentObj.append('<table class="congratulations-stats"></table>');
 	const congratulationsStatsObj = $('.congratulations-stats');
 	congratulationsStatsObj.append('<tr><td>Stars</td><td>' + createStarsString(gameStars, maxStarsRating) + '</td></tr>');
