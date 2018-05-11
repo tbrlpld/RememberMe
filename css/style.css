@@ -19,19 +19,6 @@ a {
   display: inline-block;
 }
 
-.center-vertical-horizontal{
-	margin: 0;
-	position: absolute;
-	/* top and left define the position of the object relative to the parent in
-	dimensions of the parent.*/
-	top: 50%;
-	left: 50%;
-	/* transform translate shifts the element aways from the defined position
-	in dimensions of it self. That means these 50% are 50% of the element sizes
-	them selfs.*/
-	transform: translate(-50%, -50%);
-}
-
 .unselectable {
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -141,21 +128,31 @@ a {
 
 header, main, footer {
 	/*width: 100%;*/
-	flex: 1;
+	/*flex: 1;*/
+	flex: 1 1 10%;
 }
 
 header {
 	background-color: cornflowerblue;
-	/*padding: 50px 20px 5px;*/
+	padding: 20px;
     /*display: -webkit-flex; */
     /*-webkit-align-items: flex-end; */
-    /*display: flex;*/
-    /*align-items: flex-end;*/
+    display: flex;
+    /*flex-direction: column;*/
+    justify-content: flex-start;
+    align-items: flex-end;
+    /*flex-shrink: 0;*/
+    min-height: min-content;
 }
 
-header h1 {
+.header-text {
+	border: yellow dashed;
 	margin: 0;
 	font-size: 30px;
+}
+
+.title-text {
+	font-size: 48px;
 }
 
 main {
@@ -185,12 +182,13 @@ main {
 }
 
 footer {
-	background-color: indigo;
-	/*padding: 20px;*/
+	background-color: lightcoral;
+	padding: 20px;
 	/* Center content / text */
 	/*display: flex;*/
 	/*align-items: center;*/
 	/*justify-content: center;*/
+	text-align: center;
 }
 
 footer span {
