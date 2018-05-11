@@ -23,3 +23,4 @@ This is a unsorted list of resources (outside of Udacity) I used to create the m
 * More on the meta viewport tag (that fixes the iPhone delay): (https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag)
 * Centering elements (vertical and horizontal): (https://www.w3schools.com/csS/tryit.asp?filename=trycss_align_transform) or (https://www.w3schools.com/csS/css_align.asp)
 * Visual guide to flex box properties - a nice overview I think: (https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties)
+* Nice shadow settings (https://codepen.io/justd/pen/yydezN/) --    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);

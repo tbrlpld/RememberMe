@@ -32,7 +32,7 @@ New Code Sections/Order
 
 TODO
 ----
-* Make sure layout looks good on all screen sizes/devices. Large display (vertically) does not look too good right now. Footer is too far away from main. It should be more similar to the header.
+* The footer is now closer to the game but probably a bit too close. Could be a bit further away.
 * Remove the 'Back' text from the cards.
 * Update colors, especially of game area and header.
 * Clean up old comments.
