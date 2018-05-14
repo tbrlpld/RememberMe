@@ -32,7 +32,6 @@ New Code Sections/Order
 
 TODO
 ----
-* The footer is now closer to the game but probably a bit too close. Could be a bit further away.
 * Remove the 'Back' text from the cards.
 * Update colors, especially of game area and header.
 * Clean up old comments.

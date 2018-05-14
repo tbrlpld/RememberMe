@@ -10,6 +10,7 @@
 
 body {
 	margin: 0;
+	overflow-x: hidden; /* To prevent horizontal scroll bars appearing when card animations (on the sides) are playing on narrow screens */
 }
 
 a {
@@ -135,13 +136,9 @@ header, main, footer {
 header {
 	background-color: cornflowerblue;
 	padding: 20px;
-    /*display: -webkit-flex; */
-    /*-webkit-align-items: flex-end; */
     display: flex;
-    /*flex-direction: column;*/
     justify-content: flex-start;
     align-items: flex-end;
-    /*flex-shrink: 0;*/
     min-height: min-content;
 }
 
@@ -183,11 +180,7 @@ main {
 
 footer {
 	background-color: lightcoral;
-	padding: 20px;
-	/* Center content / text */
-	/*display: flex;*/
-	/*align-items: center;*/
-	/*justify-content: center;*/
+	padding: 50px;
 	text-align: center;
 }
 

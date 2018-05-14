@@ -1,3 +1,19 @@
+@media screen and (max-width: 360px){
+	header {
+		justify-content: center;
+	}
+}	
+
+@media screen and (max-height: 720px){
+	.game-container {
+		max-width: 520px;
+	}
+
+	.welcome-content {
+		max-width: 470px;
+	}
+}	
+
 @media screen and (max-height: 800px){
 	footer {
 		padding-top: 2.5vh;
@@ -9,10 +25,9 @@
 	}
 }		
 
-
 @media screen and (min-height: 1000px){
 	footer {
-		padding-top: 2vh;
+		padding-top: 5vh;
 	}
 	header {
 		padding-bottom: 2vh;
