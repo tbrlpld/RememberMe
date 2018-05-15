@@ -407,6 +407,7 @@ function createPlayGameButtonEventListener(){
 	$('.play-game-button').on("click", function(){
 		console.log('"Play Game" button clicked');
 		destroyWelcome();
+		$('.header-text').fadeTo('fast', 1.0); // Fade in header text.
 		// buildGame();
 		triggerGameStart();
 	});
@@ -435,6 +436,7 @@ function createRestartButtonEventListener(){
 		setTimeout(function() {
 			destroyGame();
 			buildGame();
+			$('.header-text').css('opacity', 1.0); // Show header text. It is not shown after the dame is build.
 			triggerGameStart();
 		}, 400);
 	});
@@ -458,6 +460,7 @@ function createPlayAgainButtonEventListener(){
 		destroyCongratulations();
 		destroyGame();
 		buildGame();
+		$('.header-text').css('opacity', 1.0); // Show header text. It is not shown after the dame is build.
 		triggerGameStart();
 	});
 }

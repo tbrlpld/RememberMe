@@ -164,6 +164,8 @@ header {
 .header-text {
 	border: yellow dashed;
 	margin: 0;
+	/*display: none;*/
+	opacity: 0;
 }
 
 main {
@@ -186,8 +188,8 @@ main {
 	background-color: firebrick;
 	width: 100%;
 	min-width: 48px;
-	height: 100%;
 	min-height: 48px;
+	height: 100%;
 	border: 0; 
 	cursor: pointer;		
 }
@@ -291,6 +293,70 @@ footer span {
 }
 
 /*-------------------------------------------------------------------------------------------------*/
+/* Congratulations */
+/*-------------------------------------------------------------------------------------------------*/
+
+.congratulations{
+	border: yellow solid;
+	background-color: rgb(255,255,255); /*Fallback color*/
+	background-color: rgba(255,255,255,0.90);	
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	padding: 20px;
+	opacity: 0;
+}
+
+.congratulations-content{
+	border: red solid;
+	min-width: 280px;
+	max-width: 500px;	
+	/*Center in modal */
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+	background: rgba(200 , 200, 200, 0.5);	
+	border-radius: 5px;
+}
+
+.congratulations-above-title{
+	border: orange solid;
+	/*font-size: medium;*/
+	text-align: left;
+	width: 75%;
+	margin-right: 25%;
+}
+
+.congratulations-title{
+	border: blue solid;
+	display: block;
+}
+
+.congratulations-stats {
+	border: blue solid;
+	margin: 5px auto;
+}
+
+.play-again-button {
+	/*background: none;*/
+	background-color: white;	
+	border: black solid;
+	border-radius: 5px;
+	/*display: block;*/
+	margin: 10px auto;
+	/*width: 100%;*/
+	min-width: 48px;
+	/*height: 100%;*/
+	min-height: 48px;
+	/*border: 0; */
+	cursor: pointer;	
+}
+
+/*-------------------------------------------------------------------------------------------------*/
 /* Cards Animation */
 /*-------------------------------------------------------------------------------------------------*/
 
@@ -373,67 +439,3 @@ footer span {
     z-index: 1;
   }
 }	
-
-/*-------------------------------------------------------------------------------------------------*/
-/* Congratulations */
-/*-------------------------------------------------------------------------------------------------*/
-
-.congratulations{
-	border: yellow solid;
-	background-color: rgb(255,255,255); /*Fallback color*/
-	background-color: rgba(255,255,255,0.90);	
-	z-index: 10;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	display: flex;
-	padding: 20px;
-	opacity: 0;
-}
-
-.congratulations-content{
-	border: red solid;
-	min-width: 280px;
-	max-width: 500px;	
-	/*Center in modal */
-	margin: auto;
-	text-align: center;
-	padding: 10px;
-	background: rgba(200 , 200, 200, 0.5);	
-	border-radius: 5px;
-}
-
-.congratulations-above-title{
-	border: orange solid;
-	/*font-size: medium;*/
-	text-align: left;
-	width: 75%;
-	margin-right: 25%;
-}
-
-.congratulations-title{
-	border: blue solid;
-	display: block;
-}
-
-.congratulations-stats {
-	border: blue solid;
-	margin: 5px auto;
-}
-
-.play-again-button {
-	/*background: none;*/
-	background-color: white;	
-	border: black solid;
-	border-radius: 5px;
-	/*display: block;*/
-	margin: 10px auto;
-	/*width: 100%;*/
-	min-width: 48px;
-	/*height: 100%;*/
-	min-height: 48px;
-	/*border: 0; */
-	cursor: pointer;	
-}
