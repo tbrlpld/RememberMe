@@ -2,10 +2,25 @@
 /* GENERAL */
 /*-------------------------------------------------------------------------------------------------*/
 
+ /*@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');*/
+ /*@import url('Open_Sans/OpenSans-Regular.ttf');*/
+ /*@import url('Open_Sans/OpenSans-Light.ttf');*/
+
+@font-face{
+	font-family: 'Open Sans';
+	src: url('Open_Sans/OpenSans-Regular.ttf');
+}
+
+@font-face{
+	font-family: 'Open Sans';
+	font-weight: 300;
+	src: url('Open_Sans/OpenSans-Light.ttf');
+}
+
 * {
-	font-size: 16px;
 	box-sizing: border-box;
-	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
+    font-family: 'Open Sans', Helvetica, sans-serif;
 }
 
 body {
@@ -14,7 +29,7 @@ body {
 }
 
 a {
-  color: inherit; /* blue colors for links too */
+  color: inherit; /* standard colors for links too */
   text-decoration: inherit; /* no underline */
   font-size: inherit;
   display: inline-block;
@@ -26,6 +41,11 @@ a {
   -ms-user-select: none;
   user-select: none;
 }
+
+.title-text{
+	font-size: 48px;	
+	font-weight: lighter;
+}	
 
 /*-------------------------------------------------------------------------------------------------*/
 /* Welcome */
@@ -73,9 +93,6 @@ a {
 .welcome-title{
 	border: blue solid;
 	display: block;
-	font-weight: bold;
-	/*font-size: larger;*/
-	font-size: 48px;
 }
 
 .welcome-below-title{
@@ -145,11 +162,6 @@ header {
 .header-text {
 	border: yellow dashed;
 	margin: 0;
-	font-size: 30px;
-}
-
-.title-text {
-	font-size: 48px;
 }
 
 main {
@@ -402,9 +414,6 @@ footer span {
 .congratulations-title{
 	border: blue solid;
 	display: block;
-	font-weight: bold;
-	/*font-size: larger;*/
-	font-size: 48px;
 }
 
 .congratulations-stats {
