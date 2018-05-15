@@ -32,12 +32,14 @@ New Code Sections/Order
 
 TODO
 ----
+* Update colors, especially of game area and header. 
 * Remove the 'Back' text from the cards.
-* Update colors, especially of game area and header.
+* Test on mobile devices: iPad and iPhone.
 * Clean up old comments.
 * Make sure every function is at least called once. Remove unneeded functions.
 * Check HTML and CSS in code validators.
 * Reactivate shuffeling.
 * Reset correct limits for star rating and game to be won.
+* Switch to online jQuery and remove local copy.
 * (Optional) Add option in welcome message to select game size (16, 32)
 * Prevent DOM maipulation for matching cards. Currently the matched class could be added to any card in the DOM. I have to think about this a little more. But, what I now realize is that the symbols are visible in the DOM.Not sure if I have to take cre of things like that to pass the class. It is not in the rubric.
