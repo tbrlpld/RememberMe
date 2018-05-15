@@ -21,6 +21,8 @@
 	box-sizing: border-box;
 	font-size: 16px;
     font-family: 'Open Sans', Helvetica, sans-serif;
+    color: rgb(0.87,0.87,0.87); /* Fallback color */
+    color: rgba(0,0,0,0.87);
 }
 
 body {
