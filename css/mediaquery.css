@@ -4,9 +4,9 @@
 	}
 }	
 
-@media screen and (max-height: 720px){
+@media screen and (max-height: 765px){
 	.game-container {
-		max-width: 520px;
+		max-width: 500px;
 	}
 
 	.welcome-content {
@@ -14,7 +14,7 @@
 	}
 }	
 
-@media screen and (max-height: 800px){
+@media screen and (max-height: 850px){
 	footer {
 		padding-top: 2.5vh;
 		padding-bottom: 2.5vh;
