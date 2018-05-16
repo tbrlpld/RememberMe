@@ -52,10 +52,10 @@ function buildGame(){
 	const mainInnerObj = $('.main-inner');
 	mainInnerObj.append('<div class="menu"></div>');
 	const menuObj = $('.menu');
-	menuObj.append('<span id="moves-counter"></span>');
-	menuObj.append('<span id="stars-display"></span>');
-	menuObj.append('<span id="timer"></span>');
-	menuObj.append('<span><button class="restart-button">Restart</button></span>');
+	menuObj.append('<span class="menu-entry" id="moves-counter"></span>');
+	menuObj.append('<span class="menu-entry" id="stars-display"></span>');
+	menuObj.append('<span class="menu-entry" id="timer"></span>');
+	menuObj.append('<span class="menu-entry"><button class="restart-button">Restart</button></span>');
 	mainInnerObj.append('<div class="card-area"></div>');
 	gameContainerObj.append('<footer></footer>');
 	$('footer').append('<span>Created for the Udacity Nanodegree <a target="_blank" href="https://www.udacity.com/course/intro-to-programming-nanodegree--nd000">"Intro to Programming"</a></span>');
@@ -175,7 +175,7 @@ function createCards(){
 			symbolIndex = currentCardNumber - 1;
 			currentSymbol = symbols[symbolIndex];
 			// $('.card-area').append('<div class="card-spacer"><div class="card-content"><div class="card-face">' + currentSymbol + '</div><div class="card-back">Back</div></div></div>');
-			$('.card-area').append('<div class="card-spacer"><div class="card-content card-face">' + currentSymbol + '</div><div class="card-content card-back">Back</div></div></div>');
+			$('.card-area').append('<div class="card-spacer"><div class="card-content card-face">' + currentSymbol + '</div><div class="card-content card-back"></div></div></div>');
 		}
 	}
 }
@@ -197,10 +197,10 @@ function fadeOutCardArea(){
 function buildCongratulations(){
 	// Create congratulations modal
 	console.log("Creating the congratulations modal");
-	$('body').append('<div class="congratulations"></div>');
+	$('body').append('<div class="modal congratulations"></div>');
 	const congratulationsModal = $('.congratulations');
-	congratulationsModal.append('<div class="congratulations-content"></div>');
-	const congratulationsContentObj = $('.congratulations-content');
+	congratulationsModal.append('<div class="modal-content"></div>');
+	const congratulationsContentObj = congratulationsModal.find('.modal-content');
 	congratulationsContentObj.append('<div class="congratulations-above-title">Congratulations</div>');
 	congratulationsContentObj.append('<div class="congratulations-title title-text">YOU WIN!</div>');
 	congratulationsContentObj.append('<table class="congratulations-stats"></table>');

@@ -2,6 +2,11 @@
 	header {
 		justify-content: center;
 	}
+
+	footer {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 }	
 
 @media screen and (max-height: 765px){
@@ -9,8 +14,14 @@
 		max-width: 500px;
 	}
 
-	.welcome-content {
-		max-width: 470px;
+	.modal-content {
+		max-width: 460px;
+	}
+}	
+
+@media screen and (max-width: 550px), (max-height: 800px){
+	.title-text {
+		font-size: 36px;	
 	}
 }	
 
@@ -19,6 +30,7 @@
 		padding-top: 2.5vh;
 		padding-bottom: 2.5vh;
 	}
+
 	header {
 		padding-top: 2.5vh;		
 		padding-bottom: 2.5vh;
@@ -34,7 +46,3 @@
 	}
 }		
 
-@media screen and (max-width: 550px), (max-height: 800px){
-	.title-text{
-		font-size: 36px;	
-}	

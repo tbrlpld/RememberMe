@@ -32,8 +32,6 @@ New Code Sections/Order
 
 TODO
 ----
-* Update colors, especially of game area and header. 
-* Remove the 'Back' text from the cards.
 * Test on mobile devices: iPad and iPhone.
 * Clean up old comments.
 * Make sure every function is at least called once. Remove unneeded functions.
