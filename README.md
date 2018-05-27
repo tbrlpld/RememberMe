@@ -32,7 +32,17 @@ New Code Sections/Order
 
 TODO
 ----
-* Test on mobile devices: iPad and iPhone.
+* Test on other devices: 
+  * iPad (iOS 10.3.3) -- Issue: grid layout of cards does not seem to work 
+  * iPhone -- fine
+  * HTC Desire S (legacy) -- Issue: Nothing happens when "play game" is pushed. Also nothing in the background visible. Probably no JS. Hm JS is enabled. 
+  * Firefox on Linux -- fine
+  * Chromium on Linux -- fine
+  * Safari on macOS -- fine
+  * Firefox on macOS -- fine, development
+  * Chrome on macOS -- fine
+* Issue: When clicking over and over on a crad that is rejected, it can be selected/flipped up before is fully flipped down. The flipping down animation seems to be skipped.
+* Below title text on welcome should get wider on small devices, so it does not get so long.
 * Clean up old comments.
 * Make sure every function is at least called once. Remove unneeded functions.
 * Check HTML and CSS in code validators.
