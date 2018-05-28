@@ -214,7 +214,8 @@ footer span {
 .card-area {
 	/*background-color: burlywood;*/
 	display: grid;
-	grid-template-columns: auto auto auto auto;
+	/*grid-template-columns: auto auto auto auto;*/
+	grid-template-columns: 1fr 1fr 1fr 1fr; 
 	grid-gap: 2px;
 	padding: 1px;
 	margin-top: 10px;
