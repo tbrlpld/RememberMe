@@ -9,6 +9,13 @@
 	}
 }	
 
+@media screen and (max-width: 440px){
+	.welcome-below-title {
+		width: 75%;
+		margin-left: 25%;
+	}
+}	
+
 @media screen and (max-height: 765px){
 	.game-container {
 		max-width: 500px;
