@@ -716,15 +716,23 @@ function createCardsRejectedEventListener(){
 		const pickedCards = $('.picked');
 		console.log('Playing reject animation.');
 		pickedCards.css('animation', 'shake 1s');
+		// Delay for shake animation
 		setTimeout(function(){
+			console.log('Flipping card to not visible.')
 			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
 			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
-			// Removing animations to allow replay
-			pickedCards.css('animation', '');			
-			console.log('Removing picks!');
-			pickedCards.removeClass('picked');
-			createCardClickEventListener();
-			createTwoCardsPickedEventListener();
+			// Delay for flip animations
+			setTimeout(function(){
+				// Removing animations to allow replay
+				pickedCards.css('animation', '');			
+				console.log('Removing picks!');
+				pickedCards.removeClass('picked');
+
+				// Reactivating card event listeners
+				console.log('Reactivating card event listeners');
+				createCardClickEventListener();
+				createTwoCardsPickedEventListener();
+			}, 1500);
 		}, 1000);
 	});
 }
