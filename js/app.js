@@ -4,7 +4,7 @@
 //
 //-------------------------------------------------------------------------------------------------
 
-const maxStarsRating = 3;
+const MAX_STARS_RATING = 3;
 let equalityResponseTimeout
 let gameTimeSeconds = 0;
 let gameMoves = 0;
@@ -39,10 +39,12 @@ function destroyWelcome(){
  */
 function buildGame(){
 	console.log('Building the game.')
+
 	// Set global game variable values
 	gameTimeSeconds = 0;
 	gameMoves = 0;	
 	gameStars = 3;
+
 	// Build basic DOM
 	$('body').append('<div class="game-container"></div>');
 	const gameContainerObj = $('.game-container');
@@ -59,10 +61,11 @@ function buildGame(){
 	mainInnerObj.append('<div class="card-area"></div>');
 	gameContainerObj.append('<footer></footer>');
 	$('footer').append('<span>Created for the Udacity Nanodegree <a target="_blank" href="https://www.udacity.com/course/intro-to-programming-nanodegree--nd000">"Intro to Programming"</a></span>');
+	
 	// Fill DOM
 	writeToTimer(createTimeString(gameTimeSeconds));
 	writeToMovesCounter(createMovesString(gameMoves));
-	writeToStarsDisplay(createStarsString(gameStars, maxStarsRating));	
+	writeToStarsDisplay(createStarsString(gameStars, MAX_STARS_RATING));	
 	createCards();
 	$('.card-area').fadeTo(400, 1.0);
 	createGameStartEventListener();
@@ -129,7 +132,7 @@ function getRandomIntInclusive(min, max) {
  * @description: Shuffle items of array into a random order. Shuffling is based on Dustenfeld algorithm.
  * @param: {array} inputArray - Array to be shuffled.
  * @returns: {array} Input array in a randomly shuffled order.
- * @see: : https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+ * @see: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
  */
 function shuffleArray(inputArray){
 	const maxIndex = inputArray.length - 1;
@@ -174,7 +177,6 @@ function createCards(){
 			currentCardNumber += 1;
 			symbolIndex = currentCardNumber - 1;
 			currentSymbol = symbols[symbolIndex];
-			// $('.card-area').append('<div class="card-spacer"><div class="card-content"><div class="card-face">' + currentSymbol + '</div><div class="card-back">Back</div></div></div>');
 			$('.card-area').append('<div class="card-spacer"><div class="card-content card-face">' + currentSymbol + '</div><div class="card-content card-back"></div></div></div>');
 		}
 	}
@@ -205,7 +207,7 @@ function buildCongratulations(){
 	congratulationsContentObj.append('<div class="congratulations-title title-text">YOU WIN!</div>');
 	congratulationsContentObj.append('<table class="congratulations-stats"></table>');
 	const congratulationsStatsObj = $('.congratulations-stats');
-	congratulationsStatsObj.append('<tr><td>Stars</td><td>' + createStarsString(gameStars, maxStarsRating) + '</td></tr>');
+	congratulationsStatsObj.append('<tr><td>Stars</td><td>' + createStarsString(gameStars, MAX_STARS_RATING) + '</td></tr>');
 	congratulationsStatsObj.append('<tr><td>Moves</td><td>' + gameMoves + '</td></tr>');
 	congratulationsStatsObj.append('<tr><td>Time</td><td>' + createTimeString(gameTimeSeconds) + '</td></tr>');
 	congratulationsContentObj.append('<button type="button" class="play-again-button">&#10226;</button>');
@@ -277,7 +279,6 @@ function startTimer(){
 
 	const timer = setInterval(function(){
 		let now = Date.now();
-		// let deltaSeconds = Math.floor((now - startTime)/1000);
 	 	gameTimeSeconds = Math.floor((now - startTime)/1000);		
 		writeToTimer(createTimeString(gameTimeSeconds));
 	}, 1000);
@@ -340,13 +341,12 @@ function increaseMovesCounter(){
 /**
  * @description: Create string to represent the currrent star rating. Maximum will be represented by hollow/white stars, active rating will be represented by full/black stars. 
  * @param: {int} activeStars - Number of stars (star rating) to be tranformed into the corresponding stars string.
- * @param: {int} maxStarsRating - Maximum number of possible active stars.
+ * @param: {int} maxStars - Maximum number of possible active stars.
  * @returns: {string} Representation string for the current star rating.
  */
 function createStarsString(activeStars, maxStars){
 	const fullStarString = '&#9733;';
 	const hollowStarString = '&#9734;';
-	// let currentStarString = hollowStarString;
 	let starRatingString = '';
 	for (var currentStar = 1; currentStar <= maxStars; currentStar++) {
 		console.log('Current star = ' + currentStar);
@@ -385,7 +385,7 @@ function updateStarRating(){
 	if (currentMovesCount <= maxMovesThreeStarRating){
 		gameStars = 3;
 	}	
-	writeToStarsDisplay(createStarsString(gameStars, maxStarsRating));	
+	writeToStarsDisplay(createStarsString(gameStars, MAX_STARS_RATING));	
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -408,7 +408,6 @@ function createPlayGameButtonEventListener(){
 		console.log('"Play Game" button clicked');
 		destroyWelcome();
 		$('.header-text').fadeTo('fast', 1.0); // Fade in header text.
-		// buildGame();
 		triggerGameStart();
 	});
 }
@@ -436,7 +435,7 @@ function createRestartButtonEventListener(){
 		setTimeout(function() {
 			destroyGame();
 			buildGame();
-			$('.header-text').css('opacity', 1.0); // Show header text. It is not shown after the dame is build.
+			$('.header-text').css('opacity', 1.0); // Show header text. It is not shown after the game is build.
 			triggerGameStart();
 		}, 400);
 	});
@@ -460,7 +459,7 @@ function createPlayAgainButtonEventListener(){
 		destroyCongratulations();
 		destroyGame();
 		buildGame();
-		$('.header-text').css('opacity', 1.0); // Show header text. It is not shown after the dame is build.
+		$('.header-text').css('opacity', 1.0); // Show header text. It is not shown after the game is build.
 		triggerGameStart();
 	});
 }
@@ -476,17 +475,14 @@ function createPlayAgainButtonEventListener(){
  * @returns: {boolean} true if all cards are matched, false otherwise.
  */
 function allCardsMatched() {
-	// console.log('Checking if game is won.')
+	console.log('Checking if all cards are matched.')
 	const numberOfCards = $('.card-content').length;
 	const numberOfMatchedCards = $('.matched').length;
-	// console.log('Cards matched: ' + numberOfMatchedCards);
-	if (numberOfMatchedCards == 4){
-		// $('body').append('<div>YOU WIN!</div>');
-		// console.log('Game is won!!')
-		// triggerGameEnd();
+	if (numberOfMatchedCards == 4){ // Number of all cards
+		console.log('All cards are matched!')
 		return true;
 	} else {
-		// console.log('Game is not won yet.')
+		console.log('Not all cards are matched yet.')
 		return false;
 	}
 }
@@ -502,7 +498,6 @@ function twoCardsPicked(){
 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
 		console.log('Two cards are picked.');
 		return true;
-		// triggerTwoCardsPicked();
 	} else {
 		console.log('Different number than 2 cards are picked.');
 		return false;
@@ -530,11 +525,9 @@ function pickedCardsEqual() {
 
 		if (firstSymbol != undefined && firstSymbol === secondSymbol){
 			console.log('Cards are equal!');
-			// triggerCardsMatched();
 			return true;
 		} else {
 			console.log('Cards are NOT equal!');
-			// triggerCardsRejected();
 			return false;
 		}
 	}
@@ -557,9 +550,6 @@ function pickCard(card){
 			$(card).find('.card-back').css('animation-name', 'flip_back_down');
 			$(card).find('.card-face').css('animation-name', 'flip_face_up');
 			console.log('Card symbol visible.');
-			// $(card).find('.card-symbol').fadeIn(function(){
-			// 	checksAndActionsAfterCardPick();
-			// });
 		} else {
 			console.warn('Card not picked. Card already picked or matched.');
 		}
@@ -661,12 +651,13 @@ function createCardsMatchedEventListener(){
 		console.log('Starting processing after two cards are matched.');
 		removeCardsMatchedEventListener();
 		removeCardsRejectedEventListener();
-		// matchPickedCards();
+
 		console.log('Adding "matched" class to picked cards.');
 		const pickedCards = $('.picked');
 		pickedCards.addClass('matched');
 		console.log('Playing animation for matched cards.');		
 		pickedCards.css('animation', 'pop 1s');
+
 		// Delaying the following action to allow animation to play out
 		setTimeout(function(){
 				$('.matched').find('.card-face').addClass('matched-face');
@@ -711,16 +702,18 @@ function createCardsRejectedEventListener(){
 		console.log('Starting processing after picked cards are rejected.')
 		removeCardsRejectedEventListener();
 		removeCardsMatchedEventListener();
-		// rejectPickedCards();
+
 		console.log('Rejecting picked cards.');
 		const pickedCards = $('.picked');
 		console.log('Playing reject animation.');
 		pickedCards.css('animation', 'shake 1s');
+
 		// Delay for shake animation
 		setTimeout(function(){
 			console.log('Flipping card to not visible.')
 			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
 			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
+
 			// Delay for flip animations
 			setTimeout(function(){
 				// Removing animations to allow replay
@@ -868,12 +861,8 @@ function createGameWonEventListener(){
  * @description: Main function of the application. Needs to be run after the DOM is build initially.
  */
 function main(){
-	// destroyWelcome();
 	createPlayGameButtonEventListener();
 	buildGame();
-	// triggerGameStart();
-	// triggerGameWon();
-	// buildCongratulations();
 }
 
 // This is running the DOM manipulation after the DOM is initially created.
