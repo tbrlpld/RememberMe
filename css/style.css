@@ -2,19 +2,15 @@
 /* GENERAL */
 /*-------------------------------------------------------------------------------------------------*/
 
- /*@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');*/
- /*@import url('Open_Sans/OpenSans-Regular.ttf');*/
- /*@import url('Open_Sans/OpenSans-Light.ttf');*/
-
 @font-face{
 	font-family: 'Open Sans';
-	src: url('Open_Sans/OpenSans-Regular.ttf');
+	src: url(Open_Sans/OpenSans-Regular.ttf);
 }
 
 @font-face{
 	font-family: 'Open Sans';
 	font-weight: 300;
-	src: url('Open_Sans/OpenSans-Light.ttf');
+	src: url(Open_Sans/OpenSans-Light.ttf);
 }
 
 * {
@@ -86,6 +82,7 @@ button {
 	text-align: center;
 }
 
+
 /*-------------------------------------------------------------------------------------------------*/
 /* Welcome */
 /*-------------------------------------------------------------------------------------------------*/
@@ -95,7 +92,6 @@ button {
 }
 
 .welcome-above-title {
-	/*border: orange solid;*/
 	display: block;
 	text-align: left;
 	width: 50%;
@@ -103,19 +99,14 @@ button {
 }
 
 .welcome-title {
-	/*border: blue solid;*/
 	display: block;
 }
 
 .welcome-below-title {
-	/*border: green solid;*/
 	display: block;
 	text-align: right;
 	width: 50%;
 	margin-left: 50%;
-}
-
-.play-game-button {	
 }
 
 
@@ -123,10 +114,7 @@ button {
 /* Game Area */
 /*-------------------------------------------------------------------------------------------------*/
 
-
 .game-container {
-	/*background: gray;*/
-	/*width: calc(80vmin);*/
 	min-width: 280px;
 	max-width: 550px;
 	padding: 0 5px;
@@ -146,13 +134,10 @@ button {
 }
 
 header, main, footer {
-	/*width: 100%;*/
-	/*flex: 1;*/
 	flex: 1 1 10%;
 }
 
 header {
-	/*background-color: cornflowerblue;*/
 	padding: 20px;
     display: flex;
     justify-content: flex-start;
@@ -161,18 +146,11 @@ header {
 }
 
 .header-text {
-	/*border: yellow dashed;*/
 	margin: 0;
-	/*display: none;*/
 	opacity: 0;
 }
 
-main {
-	/*background-color: yellow;*/
-}
-
 .menu {
-	/*background-color: indianred;*/
 	display: flex;
 }
 
@@ -180,24 +158,20 @@ main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 100%
+	width: 100%;
 }
 
 .restart-button {
-	/*background-color: firebrick;*/
-	/*background-color: rgb(240, 240, 240);*/
 	background-color: rgb(230, 230, 230);
 	min-width: 48px;
 	min-height: 48px;
 	width: 100%;
 	height: 100%;
 	margin: 0;	
-	/*border: 0;*/
 	box-shadow: none;
 }
 
 footer {
-	/*background-color: lightcoral;*/
 	padding: 50px;
 	text-align: center;
 }
@@ -207,14 +181,13 @@ footer span {
 	text-align: center;
 }
 
+
 /*-------------------------------------------------------------------------------------------------*/
 /* Cards */
 /*-------------------------------------------------------------------------------------------------*/
 
 .card-area {
-	/*background-color: burlywood;*/
 	display: grid;
-	/*grid-template-columns: auto auto auto auto;*/
 	grid-template-columns: 1fr 1fr 1fr 1fr; 
 	grid-gap: 2px;
 	padding: 1px;
@@ -223,7 +196,6 @@ footer span {
 }
 
 .card-spacer {
-	/*background-color: steelblue;*/
 	width: 100%;
 	position: relative;
 	perspective: 1200px;	
@@ -237,7 +209,6 @@ footer span {
 }
 
 .card-content {
-	/*background-color: cadetblue;*/
 	min-width: 48px;
 	min-height: 48px;
 	cursor: pointer;	
@@ -258,14 +229,7 @@ footer span {
 	animation-fill-mode: forwards;
 }
 
-/*.card-content:hover {
-    box-shadow: 1px 1px 1px 1px #2a7189;
-    transform: scale(1.01);
-    z-index: 1;
-}*/
-
 .card-face {
-	/*background-color: steelblue;*/
 	background-color: rgb(221, 231, 242);
 	backface-visibility: hidden;			
 	-webkit-backface-visibility: hidden;
@@ -282,20 +246,11 @@ footer span {
 	transform: rotateY(0deg);
 }
 
-.picked {
-	/*background-color: yellowgreen;*/
-}
-
-.matched {
-	/*background-color: green;*/
-}
-
 .matched-face {
-	/*border: dashed green;*/
-	/*background-color: green;	*/
 	background-color: rgb(211, 232, 221);
 
 }
+
 
 /*-------------------------------------------------------------------------------------------------*/
 /* Congratulations */
@@ -307,24 +262,19 @@ footer span {
 }
 
 .congratulations-above-title {
-	/*border: orange solid;*/
 	text-align: left;
 	width: 75%;
 	margin-right: 25%;
 }
 
 .congratulations-title {
-	/*border: blue solid;*/
 	display: block;
 }
 
 .congratulations-stats {
-	/*border: blue solid;*/
 	margin: 5px auto;
 }
 
-.play-again-button {
-}
 
 /*-------------------------------------------------------------------------------------------------*/
 /* Cards Animation */
