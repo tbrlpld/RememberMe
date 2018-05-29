@@ -732,7 +732,7 @@ function createCardsRejectedEventListener(){
 				console.log('Reactivating card event listeners');
 				createCardClickEventListener();
 				createTwoCardsPickedEventListener();
-			}, 1500);
+			}, 1300);
 		}, 1000);
 	});
 }
