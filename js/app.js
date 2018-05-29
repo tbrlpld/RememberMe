@@ -263,14 +263,6 @@ function writeToTimer(timerString){
 }
 
 /**
- * @description: Return time string of game timer
- * @returns: {string} Time string of game timer.
- */
-function getGameTime(){
-	return $('#timer').html();
-}
-
-/**
  * @description: Start a timer and display the time since the timer was started. Timer stops when "stopTimer" is triggered on document.
  */
 function startTimer(){
