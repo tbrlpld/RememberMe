@@ -365,8 +365,8 @@ function writeToStarsDisplay(starsString){
  */
 function updateStarRating(){
 	console.log('Updating star rating.')
-	const maxMovesThreeStarRating = 3; //16;
-	const maxMovesTwoStarRating = 5; //24;
+	const maxMovesThreeStarRating = 16;
+	const maxMovesTwoStarRating = 24;
 	const currentMovesCount = gameMoves;
 
 	gameStars = 1;
@@ -467,9 +467,11 @@ function createPlayAgainButtonEventListener(){
  */
 function allCardsMatched() {
 	console.log('Checking if all cards are matched.')
-	const numberOfCards = $('.card-content').length;
+	const numberOfCards = $('.card-spacer').length;
+	console.log('Total Number of cards: ' + numberOfCards);
 	const numberOfMatchedCards = $('.matched').length;
-	if (numberOfMatchedCards == 4){ // Number of all cards
+	console.log('Number of cards matched: ' + numberOfMatchedCards);	
+	if (numberOfMatchedCards == numberOfCards){
 		console.log('All cards are matched!')
 		return true;
 	} else {
