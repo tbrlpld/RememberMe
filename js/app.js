@@ -157,8 +157,7 @@ function shuffleArray(inputArray){
 function getRandomSymbolArray(){
 	const symbols = getArrayOfSymbols();
 	const symbolsDoubled = doubleArrayOfSymbols(symbols);
-	// const symbolsShuffled = shuffleArray(symbolsDoubled);
-	const symbolsShuffled = symbolsDoubled;
+	const symbolsShuffled = shuffleArray(symbolsDoubled);
 	return symbolsShuffled;
 }
 
