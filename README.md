@@ -30,6 +30,14 @@ Restarting the game resets the timer, the moves counter, and the star rating.
 Most importantly, all cards are flipped face down and shuffled again.
 
 
+Installation
+------------
+
+* Download the repository from Github (https://github.com/tibsel/memory_game) as a zip.
+* Unpack the zip on your local drive.
+* Open the `index.html` in a browser of your choice.
+
+
 Dependencies
 ------------
 
@@ -68,6 +76,7 @@ Known Issues
  * Symbol array duplication by concatination, rather than looping. -- That really seems easier.
  * Moves string: You could also use the conditional (ternary) operator to make a word singular or plural which is good to do in my opinion so you can get rid of unnecessary if statements.
  * It is a good practice to remove console.log statements from finished/production apps.
- * Very nice README. I'd also include instructions on how someone could play the game if they downloaded your files (it's more important if the project is on GitHub, or will be on GitHub) - for this project it would be really simple, just opening index.html in a web browser. 
-   But I think it's still important to mention that so they know exactly what to do as sometimes you might have to install some dependencies or otherwise configure your local machine to run some downloaded code.
+ * Very nice README. 
+   ~~I'd also include instructions on how someone could play the game if they downloaded your files (it's more important if the project is on GitHub, or will be on GitHub) - for this project it would be really simple, just opening index.html in a web browser.~~
+   ~~But I think it's still important to mention that so they know exactly what to do as sometimes you might have to install some dependencies or otherwise configure your local machine to run some downloaded code.~~
 
