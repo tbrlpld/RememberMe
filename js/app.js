@@ -292,10 +292,7 @@ function triggerStopTimer(){
  * @returns: {string} String showing moves number and unit.
  */
 function createMovesString(movesNumber){
-	movesString = " Move";
-	if (movesNumber != 1){
-		movesString = movesString + "s";
-	}
+	movesString = (movesNumber == 1) ? " Move" : " Moves";
 	movesString = movesNumber + movesString;
 	// console.log("Moves string = " + movesString);
 	return movesString;
