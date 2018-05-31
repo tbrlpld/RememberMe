@@ -80,7 +80,6 @@ function buildGame(){
 function destroyGame(){
 	// console.log('Destroying the game.');
 	$('.game-container').remove();
-	// destroyCards();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -155,8 +154,8 @@ function shuffleArray(inputArray){
 function getRandomSymbolArray(){
 	const symbols = getArrayOfSymbols();
 	const symbolsDoubled = doubleArrayOfSymbols(symbols);
-	// const symbolsShuffled = shuffleArray(symbolsDoubled);
-	const symbolsShuffled = symbolsDoubled;
+	const symbolsShuffled = shuffleArray(symbolsDoubled);
+	// const symbolsShuffled = symbolsDoubled;
 	return symbolsShuffled;
 }
 
