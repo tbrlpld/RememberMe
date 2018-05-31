@@ -415,7 +415,7 @@ function createRestartButtonEventListener(){
 		// that where triggered before restart button is clicked, being  performed after the
 		// restart button was clicked (in the new game), the timeout has to be cleared. The
 		// function defined in the timeout will not be performed.
-		console.log('Clear timeouts')
+		// console.log('Clear timeouts')
 		clearTimeout(equalityResponseTimeout);
 		// A similar bug exists for the flip back and shake animation.
 		// When the animation is done, the cardClick and twoCardsPicked listeners are activated.
@@ -592,7 +592,7 @@ function createCardClickEventListener(){
  * @description: Trigger event listener for two cards being picked
  */
 function triggerTwoCardsPicked(){
-	console.log('Trigger "twoCardsPicked".');
+	// console.log('Trigger "twoCardsPicked".');
 	$('.card-area').trigger('twoCardsPicked');
 }
 
@@ -600,7 +600,7 @@ function triggerTwoCardsPicked(){
  * @description: Remove event listener for two cards being picked
  */
 function removeTwoCardsPickedEventListener(){
-	console.log('Removing the "twoCardsPicked" event listener.');
+	// console.log('Removing the "twoCardsPicked" event listener.');
 	$('.card-area').off('twoCardsPicked');
 }
 
@@ -608,9 +608,9 @@ function removeTwoCardsPickedEventListener(){
  * @description: Create event listener for two cards being picked
  */
 function createTwoCardsPickedEventListener(){
-	console.log('Creating the "twoCardsPicked" event listener.');
+	// console.log('Creating the "twoCardsPicked" event listener.');
 	$('.card-area').on('twoCardsPicked', function(){
-		console.log('Starting processing after two cards are picked.');
+		// console.log('Starting processing after two cards are picked.');
 		removeCardClickEventListener();
 		removeTwoCardsPickedEventListener();
 
@@ -705,7 +705,7 @@ function removeCardsRejectedEventListener(){
 function createCardsRejectedEventListener(){
 	// console.log('Creating the "cardsRejected" event listener.');
 	$('.card-area').on('cardsRejected', function(){
-		console.log('Starting processing after picked cards are rejected.')
+		// console.log('Starting processing after picked cards are rejected.')
 		removeCardsRejectedEventListener();
 		removeCardsMatchedEventListener();
 
@@ -731,7 +731,7 @@ function createCardsRejectedEventListener(){
 				// console.log('Reactivating card event listeners');
 				createCardClickEventListener();
 				createTwoCardsPickedEventListener();
-				console.log('Rejected Processing done')
+				// console.log('Rejected Processing done')
 			}, 1300);
 		}, 1000);
 	});
