@@ -68,7 +68,7 @@ Udacity Review Feedback
 -----------------------
  * Symbol array duplication by concatination, rather than looping. -- That really seems easier. -- Implemented.
  * Moves string: You could also use the conditional (ternary) operator to make a word singular or plural which is good to do in my opinion so you can get rid of unnecessary if statements. -- Implemented.
- * It is a good practice to remove console.log statements from finished/production apps. -- Implmented.
+ * It is a good practice to remove console.log statements from finished/production apps. -- Implemented.
  * Very nice README. 
    I'd also include instructions on how someone could play the game if they downloaded your files (it's more important if the project is on GitHub, or will be on GitHub) - for this project it would be really simple, just opening index.html in a web browser.
    But I think it's still important to mention that so they know exactly what to do as sometimes you might have to install some dependencies or otherwise configure your local machine to run some downloaded code. -- Implemented.
