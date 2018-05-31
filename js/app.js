@@ -5,7 +5,10 @@
 //-------------------------------------------------------------------------------------------------
 
 const MAX_STARS_RATING = 3;
-let equalityResponseTimeout
+let equalityResponseTimeout;
+let shakeAnimationTimeout;
+let flipBackAnimationTimeout;
+let matchAnimationTimeout;
 let gameTimeSeconds = 0;
 let gameMoves = 0;
 let gameStars = 3;
@@ -26,7 +29,7 @@ let gameStars = 3;
 function destroyWelcome(){
 	const welcomeModal = $('.welcome')
 	welcomeModal.fadeOut(400, function(){
-		welcomeModal.remove();		
+		welcomeModal.remove();
 	});
 }
 
@@ -42,7 +45,7 @@ function buildGame(){
 
 	// Set global game variable values
 	gameTimeSeconds = 0;
-	gameMoves = 0;	
+	gameMoves = 0;
 	gameStars = 3;
 
 	// Build basic DOM
@@ -61,11 +64,11 @@ function buildGame(){
 	mainInnerObj.append('<div class="card-area"></div>');
 	gameContainerObj.append('<footer></footer>');
 	$('footer').append('<span>Created for the Udacity Nanodegree <a target="_blank" href="https://www.udacity.com/course/intro-to-programming-nanodegree--nd000">"Intro to Programming"</a></span>');
-	
+
 	// Fill DOM
 	writeToTimer(createTimeString(gameTimeSeconds));
 	writeToMovesCounter(createMovesString(gameMoves));
-	writeToStarsDisplay(createStarsString(gameStars, MAX_STARS_RATING));	
+	writeToStarsDisplay(createStarsString(gameStars, MAX_STARS_RATING));
 	createCards();
 	$('.card-area').fadeTo(400, 1.0);
 	createGameStartEventListener();
@@ -152,7 +155,8 @@ function shuffleArray(inputArray){
 function getRandomSymbolArray(){
 	const symbols = getArrayOfSymbols();
 	const symbolsDoubled = doubleArrayOfSymbols(symbols);
-	const symbolsShuffled = shuffleArray(symbolsDoubled);
+	// const symbolsShuffled = shuffleArray(symbolsDoubled);
+	const symbolsShuffled = symbolsDoubled;
 	return symbolsShuffled;
 }
 
@@ -265,7 +269,7 @@ function startTimer(){
 
 	const timer = setInterval(function(){
 		let now = Date.now();
-	 	gameTimeSeconds = Math.floor((now - startTime)/1000);		
+	 	gameTimeSeconds = Math.floor((now - startTime)/1000);
 		writeToTimer(createTimeString(gameTimeSeconds));
 	}, 1000);
 
@@ -322,7 +326,7 @@ function increaseMovesCounter(){
 //-------------------------------------------------------------------------------------------------
 
 /**
- * @description: Create string to represent the currrent star rating. Maximum will be represented by hollow/white stars, active rating will be represented by full/black stars. 
+ * @description: Create string to represent the currrent star rating. Maximum will be represented by hollow/white stars, active rating will be represented by full/black stars.
  * @param: {int} activeStars - Number of stars (star rating) to be tranformed into the corresponding stars string.
  * @param: {int} maxStars - Maximum number of possible active stars.
  * @returns: {string} Representation string for the current star rating.
@@ -367,8 +371,8 @@ function updateStarRating(){
 	}
 	if (currentMovesCount <= maxMovesThreeStarRating){
 		gameStars = 3;
-	}	
-	writeToStarsDisplay(createStarsString(gameStars, MAX_STARS_RATING));	
+	}
+	writeToStarsDisplay(createStarsString(gameStars, MAX_STARS_RATING));
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -411,7 +415,22 @@ function createRestartButtonEventListener(){
 		// that where triggered before restart button is clicked, being  performed after the
 		// restart button was clicked (in the new game), the timeout has to be cleared. The
 		// function defined in the timeout will not be performed.
+		console.log('Clear timeouts')
 		clearTimeout(equalityResponseTimeout);
+		// A similar bug exists for the flip back and shake animation.
+		// When the animation is done, the cardClick and twoCardsPicked listeners are activated.
+		// If the restart button is pressed while the timeout is active the listeners are activated
+		// twice.
+		// Once because the timeout finisches and once when the game is started.
+		// The shake animation timeout also needs to be cleared, because it delays the creation of
+		// the flipbackAnimationTimeout ID. This means, if the Restart button if pushed before the
+		// shake animation has finished, the flipBackAnimationTimeout is not created yet and the
+		// global variable does not have the correct value. This means the Restart button event
+		// can not clear the timeout for it.
+		clearTimeout(shakeAnimationTimeout);
+		clearTimeout(flipBackAnimationTimeout);
+		// The same applies for the matchAnimationTimeout
+		clearTimeout(matchAnimationTimeout);
 		// Fading out the card area
 		fadeOutCardArea();
 		// The destruction and recreation of the game needs to be delayed by time it takes to fade out the card area.
@@ -462,7 +481,7 @@ function allCardsMatched() {
 	const numberOfCards = $('.card-spacer').length;
 	// console.log('Total Number of cards: ' + numberOfCards);
 	const numberOfMatchedCards = $('.matched').length;
-	// console.log('Number of cards matched: ' + numberOfMatchedCards);	
+	// console.log('Number of cards matched: ' + numberOfMatchedCards);
 	if (numberOfMatchedCards == numberOfCards){
 		// console.log('All cards are matched!')
 		return true;
@@ -573,7 +592,7 @@ function createCardClickEventListener(){
  * @description: Trigger event listener for two cards being picked
  */
 function triggerTwoCardsPicked(){
-	// console.log('Trigger "twoCardsPicked".');
+	console.log('Trigger "twoCardsPicked".');
 	$('.card-area').trigger('twoCardsPicked');
 }
 
@@ -581,7 +600,7 @@ function triggerTwoCardsPicked(){
  * @description: Remove event listener for two cards being picked
  */
 function removeTwoCardsPickedEventListener(){
-	// console.log('Removing the "twoCardsPicked" event listener.');
+	console.log('Removing the "twoCardsPicked" event listener.');
 	$('.card-area').off('twoCardsPicked');
 }
 
@@ -589,12 +608,14 @@ function removeTwoCardsPickedEventListener(){
  * @description: Create event listener for two cards being picked
  */
 function createTwoCardsPickedEventListener(){
-	// console.log('Creating the "twoCardsPicked" event listener.');
+	console.log('Creating the "twoCardsPicked" event listener.');
 	$('.card-area').on('twoCardsPicked', function(){
-		// console.log('Starting processing after two cards are picked.');
+		console.log('Starting processing after two cards are picked.');
 		removeCardClickEventListener();
 		removeTwoCardsPickedEventListener();
+
 		increaseMovesCounter();
+
 		updateStarRating();
 		createCardsMatchedEventListener();
 		createCardsRejectedEventListener();
@@ -640,11 +661,11 @@ function createCardsMatchedEventListener(){
 		// console.log('Adding "matched" class to picked cards.');
 		const pickedCards = $('.picked');
 		pickedCards.addClass('matched');
-		// console.log('Playing animation for matched cards.');		
+		// console.log('Playing animation for matched cards.');
 		pickedCards.css('animation', 'pop 1s');
 
 		// Delaying the following action to allow animation to play out
-		setTimeout(function(){
+		matchAnimationTimeout = setTimeout(function(){
 				$('.matched').find('.card-face').addClass('matched-face');
 				// console.log('Removing picks!');
 				pickedCards.removeClass('picked');
@@ -684,7 +705,7 @@ function removeCardsRejectedEventListener(){
 function createCardsRejectedEventListener(){
 	// console.log('Creating the "cardsRejected" event listener.');
 	$('.card-area').on('cardsRejected', function(){
-		// console.log('Starting processing after picked cards are rejected.')
+		console.log('Starting processing after picked cards are rejected.')
 		removeCardsRejectedEventListener();
 		removeCardsMatchedEventListener();
 
@@ -694,15 +715,15 @@ function createCardsRejectedEventListener(){
 		pickedCards.css('animation', 'shake 1s');
 
 		// Delay for shake animation
-		setTimeout(function(){
+		shakeAnimationTimeout = setTimeout(function(){
 			// console.log('Flipping card to not visible.')
 			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
-			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
+			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');
 
 			// Delay for flip animations
-			setTimeout(function(){
+			flipBackAnimationTimeout = setTimeout(function(){
 				// Removing animations to allow replay
-				pickedCards.css('animation', '');			
+				pickedCards.css('animation', '');
 				// console.log('Removing picks!');
 				pickedCards.removeClass('picked');
 
@@ -710,6 +731,7 @@ function createCardsRejectedEventListener(){
 				// console.log('Reactivating card event listeners');
 				createCardClickEventListener();
 				createTwoCardsPickedEventListener();
+				console.log('Rejected Processing done')
 			}, 1300);
 		}, 1000);
 	});
@@ -800,6 +822,7 @@ function createGameEndEventListener(){
 		removeRestartButtonEventListener();
 
 		// Disable checks
+		removeTwoCardsPickedEventListener();
 		removeCardsRejectedEventListener();
 		removeCardsMatchedEventListener();
 	});
