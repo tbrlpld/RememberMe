@@ -38,7 +38,7 @@ function destroyWelcome(){
  * @description: Build the game elements.
  */
 function buildGame(){
-	console.log('Building the game.')
+	// console.log('Building the game.')
 
 	// Set global game variable values
 	gameTimeSeconds = 0;
@@ -75,7 +75,7 @@ function buildGame(){
  * @description: Destroy the game elements.
  */
 function destroyGame(){
-	console.log('Destroying the game.');
+	// console.log('Destroying the game.');
 	$('.game-container').remove();
 	// destroyCards();
 }
@@ -98,7 +98,7 @@ function getArrayOfSymbols(){
 				   	 '&#9786;',
 				   	 '&#9822;'
 	];
-	console.log('Symbols = ' + symbols);
+	// console.log('Symbols = ' + symbols);
 	return symbols;
 }
 
@@ -108,12 +108,7 @@ function getArrayOfSymbols(){
  * @returns: {array} Array with each item occurring twice.
  */
 function doubleArrayOfSymbols(symbols){
-	let symbolsDoubled = [];
-	symbols.forEach(function(item){
-		symbolsDoubled.push(item);
-		symbolsDoubled.push(item);
-	});
-	return symbolsDoubled;
+	return symbols.concat(symbols);
 }
 
 /**
@@ -122,7 +117,7 @@ function doubleArrayOfSymbols(symbols){
  * @param: {number} max - end of range to create the integer from.
  * @see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
  */
-function getRandomIntInclusive(min, max) {
+function getRandomIntInclusive(min, max){
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
@@ -197,7 +192,7 @@ function fadeOutCardArea(){
  */
 function buildCongratulations(){
 	// Create congratulations modal
-	console.log("Creating the congratulations modal");
+	// console.log("Creating the congratulations modal");
 	$('body').append('<div class="modal congratulations"></div>');
 	const congratulationsModal = $('.congratulations');
 	congratulationsModal.append('<div class="modal-content"></div>');
@@ -212,7 +207,7 @@ function buildCongratulations(){
 	congratulationsContentObj.append('<button type="button" class="play-again-button">&#10226;</button>');
 	// Fading in the opacity of the created congratulation modal
 	congratulationsModal.fadeTo(400, 1.0, function (){
-		console.log('Congratulation faded in.')
+		// console.log('Congratulation faded in.')
 		createPlayAgainButtonEventListener();
 	});
 }
@@ -221,7 +216,7 @@ function buildCongratulations(){
  * @description: Destroy the congratulations modal.
  */
 function destroyCongratulations(){
-	console.log("Destroying the congratulations");
+	// console.log("Destroying the congratulations");
 	const congratulationsModal = $('body').find('.congratulations');
 	congratulationsModal.fadeOut(400, function(){
 		congratulationsModal.remove();
@@ -302,7 +297,7 @@ function createMovesString(movesNumber){
 		movesString = movesString + "s";
 	}
 	movesString = movesNumber + movesString;
-	console.log("Moves string = " + movesString);
+	// console.log("Moves string = " + movesString);
 	return movesString;
 }
 
@@ -311,7 +306,7 @@ function createMovesString(movesNumber){
  * @param: {string} movesString - String to be displayed in the moves counter.
  */
 function writeToMovesCounter(movesString){
-	console.log('Setting moves counter display to = ' + movesString);
+	// console.log('Setting moves counter display to = ' + movesString);
 	$('#moves-counter').text(movesString);
 }
 
@@ -319,9 +314,9 @@ function writeToMovesCounter(movesString){
  * @description: Increase moves by 1 and updates the displayed counter.
  */
 function increaseMovesCounter(){
-	console.log('Increasing moves count.');
+	// console.log('Increasing moves count.');
 	gameMoves += 1;
-	console.log('New number of moves = ' + gameMoves);
+	// console.log('New number of moves = ' + gameMoves);
 	writeToMovesCounter(createMovesString(gameMoves));
 }
 
@@ -340,14 +335,14 @@ function createStarsString(activeStars, maxStars){
 	const hollowStarString = '&#9734;';
 	let starRatingString = '';
 	for (var currentStar = 1; currentStar <= maxStars; currentStar++) {
-		console.log('Current star = ' + currentStar);
+		// console.log('Current star = ' + currentStar);
 		let currentStarString = hollowStarString;
 		if (currentStar <= activeStars){
 			currentStarString = fullStarString;
 		}
 		starRatingString = starRatingString + currentStarString;
 	}
-	console.log('Star rating string = ' + starRatingString);
+	// console.log('Star rating string = ' + starRatingString);
 	return starRatingString;
 }
 
@@ -356,7 +351,7 @@ function createStarsString(activeStars, maxStars){
  * @param: {string} movesString - String to be displayed in the moves counter.
  */
 function writeToStarsDisplay(starsString){
-	console.log('Setting stars display to = ' + starsString);
+	// console.log('Setting stars display to = ' + starsString);
 	$('#stars-display').html(starsString);
 }
 
@@ -364,7 +359,7 @@ function writeToStarsDisplay(starsString){
  * @description: Update star rating based on current star rating and number of moves. The updated star rating is written into the stars display.
  */
 function updateStarRating(){
-	console.log('Updating star rating.')
+	// console.log('Updating star rating.')
 	const maxMovesThreeStarRating = 16;
 	const maxMovesTwoStarRating = 24;
 	const currentMovesCount = gameMoves;
@@ -396,7 +391,7 @@ function updateStarRating(){
  */
 function createPlayGameButtonEventListener(){
 	$('.play-game-button').on("click", function(){
-		console.log('"Play Game" button clicked');
+		// console.log('"Play Game" button clicked');
 		destroyWelcome();
 		$('.header-text').fadeTo('fast', 1.0); // Fade in header text.
 		triggerGameStart();
@@ -410,7 +405,7 @@ function createPlayGameButtonEventListener(){
  */
 function createRestartButtonEventListener(){
 	$('.restart-button').on("click", function(){
-		console.log('"Restart" button clicked');
+		// console.log('"Restart" button clicked');
 		triggerGameEnd();
 		// Game has been ended and con not be won anymore.
 		removeGameWonEventListener();
@@ -446,7 +441,7 @@ function removeRestartButtonEventListener(){
  */
 function createPlayAgainButtonEventListener(){
 	$('.play-again-button').on("click", function(){
-		console.log('"Play Again" button clicked');
+		// console.log('"Play Again" button clicked');
 		destroyCongratulations();
 		destroyGame();
 		buildGame();
@@ -466,16 +461,16 @@ function createPlayAgainButtonEventListener(){
  * @returns: {boolean} true if all cards are matched, false otherwise.
  */
 function allCardsMatched() {
-	console.log('Checking if all cards are matched.')
+	// console.log('Checking if all cards are matched.')
 	const numberOfCards = $('.card-spacer').length;
-	console.log('Total Number of cards: ' + numberOfCards);
+	// console.log('Total Number of cards: ' + numberOfCards);
 	const numberOfMatchedCards = $('.matched').length;
-	console.log('Number of cards matched: ' + numberOfMatchedCards);	
+	// console.log('Number of cards matched: ' + numberOfMatchedCards);	
 	if (numberOfMatchedCards == numberOfCards){
-		console.log('All cards are matched!')
+		// console.log('All cards are matched!')
 		return true;
 	} else {
-		console.log('Not all cards are matched yet.')
+		// console.log('Not all cards are matched yet.')
 		return false;
 	}
 }
@@ -485,14 +480,14 @@ function allCardsMatched() {
  * @returns: {boolean} true two cards picked, false otherwise.
  */
 function twoCardsPicked(){
-	console.log('Checking if two cards are picked.');
+	// console.log('Checking if two cards are picked.');
 	const targetNumberOfPicksPerMove = 2;
 	let numberOfPickedCards = $('.picked').length;
 	if (numberOfPickedCards == targetNumberOfPicksPerMove){
-		console.log('Two cards are picked.');
+		// console.log('Two cards are picked.');
 		return true;
 	} else {
-		console.log('Different number than 2 cards are picked.');
+		// console.log('Different number than 2 cards are picked.');
 		return false;
 	}
 }
@@ -502,25 +497,25 @@ function twoCardsPicked(){
  * @returns: {boolean} true if picked cards are equal, false otherwise.
  */
 function pickedCardsEqual() {
-	console.log('Checking equality of picked cards.');
+	// console.log('Checking equality of picked cards.');
 	// The equality should ony be checked for two cards. Therefore, double checking that two cards are picked.
 	if (twoCardsPicked() == true){
 		const pickedCards = $('.picked');
-		console.log('The picked cards are the following:');
-		console.log(pickedCards);
+		// console.log('The picked cards are the following:');
+		// console.log(pickedCards);
 
 		const pickedCardsSymbols = pickedCards.find('.card-face');
 
 		const firstSymbol = pickedCardsSymbols.first().html();
-		console.log('First symbol = ' + firstSymbol);
+		// console.log('First symbol = ' + firstSymbol);
 		const secondSymbol = pickedCardsSymbols.last().html();
-		console.log('Second symbol = ' + secondSymbol);
+		// console.log('Second symbol = ' + secondSymbol);
 
 		if (firstSymbol != undefined && firstSymbol === secondSymbol){
-			console.log('Cards are equal!');
+			// console.log('Cards are equal!');
 			return true;
 		} else {
-			console.log('Cards are NOT equal!');
+			// console.log('Cards are NOT equal!');
 			return false;
 		}
 	}
@@ -539,10 +534,10 @@ function pickCard(card){
 		// A picked or matched card can not be selected again (or be unselected).
 		if ($(card).hasClass('picked') == false && $(card).hasClass('matched') == false){
 			$(card).addClass('picked');
-			console.log('Card picked.');
+			// console.log('Card picked.');
 			$(card).find('.card-back').css('animation-name', 'flip_back_down');
 			$(card).find('.card-face').css('animation-name', 'flip_face_up');
-			console.log('Card symbol visible.');
+			// console.log('Card symbol visible.');
 		} else {
 			console.warn('Card not picked. Card already picked or matched.');
 		}
@@ -557,7 +552,7 @@ function pickCard(card){
  * @description: Remove event lister for click on any card.
  */
 function removeCardClickEventListener(){
-	console.log('Removing the "cardClick" event listener.');
+	// console.log('Removing the "cardClick" event listener.');
 	$('.card-spacer').off("click");
 }
 
@@ -565,9 +560,9 @@ function removeCardClickEventListener(){
  * @description: Create event lister for click on any card.
  */
 function createCardClickEventListener(){
-	console.log('Creating the "cardClick" event listener.');
+	// console.log('Creating the "cardClick" event listener.');
 	$('.card-spacer').on("click", function(){
-		console.log('Card was clicked.');
+		// console.log('Card was clicked.');
 		pickCard(this);
 		if (twoCardsPicked() == true){
 			triggerTwoCardsPicked();
@@ -581,7 +576,7 @@ function createCardClickEventListener(){
  * @description: Trigger event listener for two cards being picked
  */
 function triggerTwoCardsPicked(){
-	console.log('Trigger "twoCardsPicked".');
+	// console.log('Trigger "twoCardsPicked".');
 	$('.card-area').trigger('twoCardsPicked');
 }
 
@@ -589,7 +584,7 @@ function triggerTwoCardsPicked(){
  * @description: Remove event listener for two cards being picked
  */
 function removeTwoCardsPickedEventListener(){
-	console.log('Removing the "twoCardsPicked" event listener.');
+	// console.log('Removing the "twoCardsPicked" event listener.');
 	$('.card-area').off('twoCardsPicked');
 }
 
@@ -597,16 +592,16 @@ function removeTwoCardsPickedEventListener(){
  * @description: Create event listener for two cards being picked
  */
 function createTwoCardsPickedEventListener(){
-	console.log('Creating the "twoCardsPicked" event listener.');
+	// console.log('Creating the "twoCardsPicked" event listener.');
 	$('.card-area').on('twoCardsPicked', function(){
-		console.log('Starting processing after two cards are picked.');
+		// console.log('Starting processing after two cards are picked.');
 		removeCardClickEventListener();
 		removeTwoCardsPickedEventListener();
 		increaseMovesCounter();
 		updateStarRating();
 		createCardsMatchedEventListener();
 		createCardsRejectedEventListener();
-		console.log('Delaying the check of the card equality for visibility.');
+		// console.log('Delaying the check of the card equality for visibility.');
 		equalityResponseTimeout = setTimeout(function(){
 			if (pickedCardsEqual() == true){
 				triggerCardsMatched();
@@ -623,7 +618,7 @@ function createTwoCardsPickedEventListener(){
  * @description: Trigger event listener for the picked cards being matched
  */
 function triggerCardsMatched(){
-	console.log('Trigger "cardsMatched".');
+	// console.log('Trigger "cardsMatched".');
 	$('.card-area').trigger('cardsMatched');
 }
 
@@ -631,7 +626,7 @@ function triggerCardsMatched(){
  * @description: Remove event listener for the picked cards being matched
  */
 function removeCardsMatchedEventListener(){
-	console.log('Removing the "cardsMatched" event listener.');
+	// console.log('Removing the "cardsMatched" event listener.');
 	$('.card-area').off('cardsMatched');
 }
 
@@ -639,24 +634,24 @@ function removeCardsMatchedEventListener(){
  * @description: Create event listener for the picked cards being matched
  */
 function createCardsMatchedEventListener(){
-	console.log('Creating the "cardsMatched" event listener.');
+	// console.log('Creating the "cardsMatched" event listener.');
 	$('.card-area').on('cardsMatched', function(){
-		console.log('Starting processing after two cards are matched.');
+		// console.log('Starting processing after two cards are matched.');
 		removeCardsMatchedEventListener();
 		removeCardsRejectedEventListener();
 
-		console.log('Adding "matched" class to picked cards.');
+		// console.log('Adding "matched" class to picked cards.');
 		const pickedCards = $('.picked');
 		pickedCards.addClass('matched');
-		console.log('Playing animation for matched cards.');		
+		// console.log('Playing animation for matched cards.');		
 		pickedCards.css('animation', 'pop 1s');
 
 		// Delaying the following action to allow animation to play out
 		setTimeout(function(){
 				$('.matched').find('.card-face').addClass('matched-face');
-				console.log('Removing picks!');
+				// console.log('Removing picks!');
 				pickedCards.removeClass('picked');
-				console.log('Checking if all cards are matched.');
+				// console.log('Checking if all cards are matched.');
 				if (allCardsMatched() == true){
 					triggerGameEnd();
 					triggerGameWon();
@@ -674,7 +669,7 @@ function createCardsMatchedEventListener(){
  * @description: Trigger event listener for the picked cards being rejected
  */
 function triggerCardsRejected(){
-	console.log('Trigger "cardsRejected".');
+	// console.log('Trigger "cardsRejected".');
 	$('.card-area').trigger('cardsRejected');
 }
 
@@ -682,7 +677,7 @@ function triggerCardsRejected(){
  * @description: Remove event listener for the picked cards being rejected
  */
 function removeCardsRejectedEventListener(){
-	console.log('Removing the "cardsRejected" event listener.');
+	// console.log('Removing the "cardsRejected" event listener.');
 	$('.card-area').off('cardsRejected');
 }
 
@@ -690,20 +685,20 @@ function removeCardsRejectedEventListener(){
  * @description: Create event listener for the picked cards being rejected
  */
 function createCardsRejectedEventListener(){
-	console.log('Creating the "cardsRejected" event listener.');
+	// console.log('Creating the "cardsRejected" event listener.');
 	$('.card-area').on('cardsRejected', function(){
-		console.log('Starting processing after picked cards are rejected.')
+		// console.log('Starting processing after picked cards are rejected.')
 		removeCardsRejectedEventListener();
 		removeCardsMatchedEventListener();
 
-		console.log('Rejecting picked cards.');
+		// console.log('Rejecting picked cards.');
 		const pickedCards = $('.picked');
-		console.log('Playing reject animation.');
+		// console.log('Playing reject animation.');
 		pickedCards.css('animation', 'shake 1s');
 
 		// Delay for shake animation
 		setTimeout(function(){
-			console.log('Flipping card to not visible.')
+			// console.log('Flipping card to not visible.')
 			pickedCards.find('.card-back').css('animation-name', 'flip_back_up');
 			pickedCards.find('.card-face').css('animation-name', 'flip_face_down');	
 
@@ -711,11 +706,11 @@ function createCardsRejectedEventListener(){
 			setTimeout(function(){
 				// Removing animations to allow replay
 				pickedCards.css('animation', '');			
-				console.log('Removing picks!');
+				// console.log('Removing picks!');
 				pickedCards.removeClass('picked');
 
 				// Reactivating card event listeners
-				console.log('Reactivating card event listeners');
+				// console.log('Reactivating card event listeners');
 				createCardClickEventListener();
 				createTwoCardsPickedEventListener();
 			}, 1300);
@@ -733,7 +728,7 @@ function createCardsRejectedEventListener(){
  * @description: Trigger event listener for the game end
  */
 function triggerGameStart(){
-	console.log('Trigger "gameStart".');
+	// console.log('Trigger "gameStart".');
 	$(document).trigger('gameStart');
 }
 
@@ -741,7 +736,7 @@ function triggerGameStart(){
  * @description: Remove event listener for the game end
  */
 function removeGameStartEventListener(){
-	console.log('Removing the "gameStart" event listener.');
+	// console.log('Removing the "gameStart" event listener.');
 	$(document).off('gameStart');
 }
 
@@ -749,9 +744,9 @@ function removeGameStartEventListener(){
  * @description: Create event listener for the game start
  */
 function createGameStartEventListener(){
-	console.log('Creating the "gameStart" event listener.');
+	// console.log('Creating the "gameStart" event listener.');
 	$(document).on('gameStart', function(){
-		console.log('Game started!');
+		// console.log('Game started!');
 		// Game is already started. It can not be started again.
 		removeGameStartEventListener();
 
@@ -778,7 +773,7 @@ function createGameStartEventListener(){
  * @description: Trigger event listener for the game end
  */
 function triggerGameEnd(){
-	console.log('Trigger "gameEnd".');
+	// console.log('Trigger "gameEnd".');
 	$(document).trigger('gameEnd');
 }
 
@@ -786,7 +781,7 @@ function triggerGameEnd(){
  * @description: Remove event listener for the game end
  */
 function removeGameEndEventListener(){
-	console.log('Removing the "gameEnd" event listener.');
+	// console.log('Removing the "gameEnd" event listener.');
 	$(document).off('gameEnd');
 }
 
@@ -794,9 +789,9 @@ function removeGameEndEventListener(){
  * @description: Create event listener for the game end
  */
 function createGameEndEventListener(){
-	console.log('Creating the "gameEnd" event listener.');
+	// console.log('Creating the "gameEnd" event listener.');
 	$(document).on('gameEnd', function(){
-		console.log('Game ended!');
+		// console.log('Game ended!');
 		// Disable game end. Game is already ended and can not be ended again.
 		removeGameEndEventListener();
 
@@ -819,7 +814,7 @@ function createGameEndEventListener(){
  * @description: Trigger event listener for the game being won
  */
 function triggerGameWon(){
-	console.log('Trigger "gameWon".');
+	// console.log('Trigger "gameWon".');
 	$(document).trigger('gameWon');
 }
 
@@ -827,7 +822,7 @@ function triggerGameWon(){
  * @description: Remove event listener for the game being won
  */
 function removeGameWonEventListener(){
-	console.log('Removing the "gameWon" event listener.');
+	// console.log('Removing the "gameWon" event listener.');
 	$(document).off('gameWon');
 }
 
@@ -835,9 +830,9 @@ function removeGameWonEventListener(){
  * @description: Create event listener for the game being won
  */
 function createGameWonEventListener(){
-	console.log('Creating the "gameWon" event listener.');
+	// console.log('Creating the "gameWon" event listener.');
 	$(document).on('gameWon', function(){
-		console.log('Game won!');
+		// console.log('Game won!');
 		// Game is already won. It can not be won again
 		removeGameWonEventListener();
 		buildCongratulations();
