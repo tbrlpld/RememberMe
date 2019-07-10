@@ -1,6 +1,6 @@
 RememberMe
 ==========
-
+ 
 A memory game web application. 
 This web application was created as the final project for the Udacity Nanodegree 'Intro to Programming'.
 
