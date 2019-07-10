@@ -19,7 +19,7 @@ Once all cards are matched the user has won the game.
 
 Clicking two cards counts as one move. 
 The number of moves required to solve the memory game determines the star rating.
-Everything upto 16 moves counts as a three star rating, from 17 to 24 a two star rating is given.
+Everything up to 16 moves counts as a three star rating, from 17 to 24 a two star rating is given.
 Everything above counts as a one star rating. 
 
 Also, a timer is running -- visible to the user.
@@ -33,7 +33,7 @@ Most importantly, all cards are flipped face down and shuffled again.
 Installation
 ------------
 
-* Download the repository from Github (https://github.com/tibsel/memory_game) as a zip.
+* Download the repository from Github (https://github.com/tbrlpld/RememberMe) as a zip.
 * Unpack the zip on your local drive.
 * Open the `index.html` in a browser of your choice.
 
@@ -54,11 +54,11 @@ Known Issues
 ------------
 
 * On the HTC Desire S (considered a legacy device): 
-  When the game is loaded on the propitary browser, only the welcome modal is shown.
+  When the game is loaded on the proprietary browser, only the welcome modal is shown.
   The game is not visible in the background as in other browsers.
-  Also, when "play game" is pushed the welcome modal does not dissapear.
-* DOM maipulation possible.
-  In the current way the game is created, it is possible to check for matching symbols by using the browsers delopment features.
+  Also, when "play game" is pushed the welcome modal does not disappear.
+* DOM manipulation possible.
+  In the current way the game is created, it is possible to check for matching symbols by using the browsers development features.
   Also, the matching of cards is determined by adding a CSS class to the card elements (spacers).
   This can also be done with the browsers developer tools.
   To prevent these interactions it would be necessary to create a proper back end application which handles the game logic and stores the status of the game.
@@ -66,7 +66,7 @@ Known Issues
 
 Udacity Review Feedback
 -----------------------
- * Symbol array duplication by concatination, rather than looping. -- That really seems easier. -- Implemented.
+ * Symbol array duplication by concatenation, rather than looping. -- That really does seem easier. -- Implemented.
  * Moves string: You could also use the conditional (ternary) operator to make a word singular or plural which is good to do in my opinion so you can get rid of unnecessary if statements. -- Implemented.
  * It is a good practice to remove console.log statements from finished/production apps. -- Implemented.
  * Very nice README. 
